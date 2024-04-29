@@ -1,0 +1,10 @@
+.main-page-container {
+  width: 100%;
+  display: flex;
+}
+
+#header-container {
+  display: flex;
+  gap: 35px;
+  margin: auto;
+}
