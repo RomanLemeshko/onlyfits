@@ -11,6 +11,10 @@ import MorningRoutinePage from './components/morningRoutinePage/MorningRoutinePa
 import WorkoutPage from './components/workOutPage/WorkoutPage';
 import CalculatorPage from './components/calculatorPage/CalculatorPage';
 import DayMealPage from './components/dayMealMage/DayMealPage';
+import Recipes from './components/recipePage/Recipe';
+import Recipe from './components/recipePage/Recipe';
+import WorkoutExercisePage from './components/exercisePage/WorkOutExercisePage';
+import MorningRoutineExcetcisePage from './components/exercisePage/MorningRoutineExcetcisePage';
 
 export const router = createBrowserRouter([
   { path: '/', element: <MainPage /> },
@@ -29,6 +33,8 @@ export const router = createBrowserRouter([
     element: <MorningRoutinePage />,
   },
   { path: '/view-profile/day-plan/workout', element: <WorkoutPage /> },
-  { path: '/view-profile/cal-calculator', element:<CalculatorPage/> },
-  {path:'/view-profile/day-plan/:eat', element:<DayMealPage/>}
+  { path: '/view-profile/cal-calculator', element: <CalculatorPage /> },
+  { path: '/view-profile/day-plan/eat/:id', element: <Recipe /> },
+  {path:'/view-profile/day-plan/workout/start/', element:<WorkoutExercisePage/>},
+  {path:'/view-profile/day-plan/morning-routine/start/', element:<MorningRoutineExcetcisePage/>}
 ]);
