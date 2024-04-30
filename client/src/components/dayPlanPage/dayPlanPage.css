@@ -21,3 +21,18 @@ button{
   margin-top: 10px;
   width: 500px;
 }
+
+a{
+  text-decoration: none
+}
+
+.meal-container{
+  margin: 10px;
+  border:solid gray 2px;
+  border-radius: 10px;
+  width: 500px;
+}
+
+h2, h3{
+  margin: 5px;
+}

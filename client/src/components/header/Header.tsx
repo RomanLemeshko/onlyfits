@@ -13,8 +13,9 @@ const Header = () => {
   });
 
   return (
+    
     <div className='main-page-container'>
-      <>
+      <div>
         {user ? (
           <>
             <ul id="header-container">
@@ -53,7 +54,7 @@ const Header = () => {
             </li>
           </ul>
         )}
-      </>
+      </div>
     </div>
   );
 };
