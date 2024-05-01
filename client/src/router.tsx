@@ -14,10 +14,11 @@ import Recipe from './components/recipePage/Recipe';
 import WorkoutExercisePage from './components/exercisePage/WorkOutExercisePage';
 import MorningRoutineExcetcisePage from './components/exercisePage/MorningRoutineExcetcisePage';
 
+
 export const router = createBrowserRouter([
   { path: '/', element: <MainPage /> },
 
-  { path: '/registry', element: <RegistrationPage /> },
+  { path: '/register', element: <RegistrationPage /> },
 
   { path: '/login', element: <LoginPage /> },
   { path: '/view-profile', element: <ProfilePage /> },
