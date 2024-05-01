@@ -15,8 +15,10 @@ type RootState = {
 
 const Header = () => {
 
+
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const user = useSelector((state: RootState) => state.auth.user);
+
 
   return (
     <div className='main-page-container'>

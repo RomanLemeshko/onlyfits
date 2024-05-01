@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store/hooks'; 
 import { login } from '../../store/auth/authSlice';
 
-const LoginComponent = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useAppDispatch(); 
@@ -18,6 +18,7 @@ const LoginComponent = () => {
     }
   };
 
+
   return (
     <div>
       <h1>Login</h1>
@@ -28,4 +29,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default LoginPage;

@@ -10,8 +10,6 @@ import DayPlanPage from './components/dayPlanPage/DayPlanPage';
 import MorningRoutinePage from './components/morningRoutinePage/MorningRoutinePage';
 import WorkoutPage from './components/workOutPage/WorkoutPage';
 import CalculatorPage from './components/calculatorPage/CalculatorPage';
-import DayMealPage from './components/dayMealMage/DayMealPage';
-import Recipes from './components/recipePage/Recipe';
 import Recipe from './components/recipePage/Recipe';
 import WorkoutExercisePage from './components/exercisePage/WorkOutExercisePage';
 import MorningRoutineExcetcisePage from './components/exercisePage/MorningRoutineExcetcisePage';
