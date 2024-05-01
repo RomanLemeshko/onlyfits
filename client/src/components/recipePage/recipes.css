@@ -1,0 +1,8 @@
+#recipe-container{
+  margin: auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: solid gray 2px;
+}

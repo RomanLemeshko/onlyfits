@@ -1,0 +1,23 @@
+#eachday-workout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  margin: auto;
+}
+
+#timer-container {
+  margin: 20px;
+  display: flex;
+  gap: 20px;
+ 
+}
+
+.time-duration{
+  font-size: small;
+  width: 50px; /* You can adjust the width and height to change the size of the circle */
+  height: 50px;
+  padding: 20px;
+  border-radius: 50%;
+  border: solid gray 2px;
+}
