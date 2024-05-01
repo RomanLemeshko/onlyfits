@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './header.css';
 
@@ -7,7 +7,7 @@ type User = {
   name: string;
 };
 const Header = () => {
-  const [user, setUser] = useState<User>({
+  const [user] = useState<User>({
     id: 1,
     name: 'Sergei',
   });
