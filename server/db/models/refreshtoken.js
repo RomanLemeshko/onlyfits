@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       userId: DataTypes.INTEGER,
       token: DataTypes.STRING,
-      isValid: DataTypes.BOOLEAN,
+      isValid: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
       expiryDate: DataTypes.DATE,
     },
     {

@@ -18,6 +18,7 @@ module.exports = {
       },
       isValid: {
         type: Sequelize.BOOLEAN,
+        defaultValue: true,
       },
       expiryDate: {
         type: Sequelize.DATE,

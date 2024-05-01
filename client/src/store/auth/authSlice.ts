@@ -6,13 +6,18 @@ interface AuthState {
   accessToken: string | null;
   loading: boolean;
   error: string | null;
+  user: {
+    id: number;
+    name: string;
+  } | null;
 }
 
 const initialState: AuthState = {
   isLoggedIn: false,
   accessToken: null,
   loading: false,
-  error: null
+  error: null,
+  user: null
 };
 
 // Асинхронный экшн для регистрации новых пользователей
@@ -34,7 +39,7 @@ export const login = createAsyncThunk(
   async (userData: { email: string; password: string }, { rejectWithValue }) => {
     try {
       const response = await axios.post('http://localhost:3000/auth/login', userData);
-      return response.data.accessToken;
+      return { accessToken: response.data.accessToken, user: response.data.user };
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Login failed');
     }
@@ -91,9 +96,10 @@ const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.loading = true;
       })
-      .addCase(login.fulfilled, (state, action: PayloadAction<string>) => {
+      .addCase(login.fulfilled, (state, action: PayloadAction<{ accessToken: string; user: { id: number; name: string } }>) => {
         state.isLoggedIn = true;
-        state.accessToken = action.payload;
+        state.accessToken = action.payload.accessToken;
+        state.user = action.payload.user;
         state.error = null;
         state.loading = false;
       })

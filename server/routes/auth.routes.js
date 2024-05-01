@@ -4,11 +4,14 @@ const { User, RefreshToken } = require('../db/models');
 const { getTokens } = require('../middleware/jwt');
 const router = express.Router();
 
+const TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000;
+
 // Регистрация пользователя
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
+  console.log(req.body);
   try {
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       username,
       email,
@@ -18,6 +21,7 @@ router.post('/register', async (req, res) => {
       .status(201)
       .send({ message: 'User created successfully', userId: newUser.id });
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .send({ message: 'Error registering user', error: error.message });
@@ -29,23 +33,28 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
-    if (!user || !bcrypt.compareSync(password, user.password)) {
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).send({ message: 'Invalid credentials' });
     }
     const tokens = getTokens(user.username);
     await RefreshToken.create({
       token: tokens.refreshToken,
       userId: user.id,
-      expiryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      expiryDate: new Date(Date.now() + TOKEN_EXPIRATION),
     });
-
     res.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: TOKEN_EXPIRATION,
     });
-    res.send({ accessToken: tokens.accessToken, userId: user.id });
+    res.send({
+      accessToken: tokens.accessToken,
+      user: {
+        id: user.id,
+        name: user.username,
+      },
+    });
   } catch (error) {
     res.status(500).send({ message: 'Login failed', error: error.message });
   }
@@ -64,19 +73,8 @@ router.post('/refresh', async (req, res) => {
         .send({ message: 'Invalid or expired refresh token' });
     }
     const user = await User.findByPk(refreshTokenRecord.userId);
-    const tokens = getTokens(user.username);
-    refreshTokenRecord.update({
-      token: tokens.refreshToken,
-      expiryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-    });
-
-    res.cookie('refreshToken', tokens.refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-    res.send({ accessToken: tokens.accessToken });
+    const newAccessToken = getTokens(user.username).accessToken;
+    res.send({ accessToken: newAccessToken });
   } catch (error) {
     res
       .status(500)

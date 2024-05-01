@@ -1,0 +1,51 @@
+#profile-page-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center
+
+}
+
+
+#all-picked-program-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.picked-program-container {
+  margin: auto;
+  border-radius: 10px;
+  border: solid gray 2px;
+  width: 300px;
+}
+
+#calendar-container {
+  width: 500px;
+  height: 400px;
+  text-align: center;
+  border-radius: 8px;
+  border: solid gray 2px;
+}
+
+
+table{
+  width: 480px;
+  height: 380px;
+}
+
+
+.button{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 10px;
+  width: 500px;
+}
