@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Определение структуры состояния аутентификации
 interface AuthState {
   isLoggedIn: boolean;
   accessToken: string | null;
@@ -12,6 +13,7 @@ interface AuthState {
   } | null;
 }
 
+// Установка начального состояния для slice аутентификации
 const initialState: AuthState = {
   isLoggedIn: false,
   accessToken: null,
@@ -20,7 +22,7 @@ const initialState: AuthState = {
   user: null
 };
 
-// Асинхронный экшн для регистрации новых пользователей
+// Асинхронное действие для регистрации нового пользователя
 export const register = createAsyncThunk(
   'auth/register',
   async (userData: { username: string; email: string; password: string }, { rejectWithValue }) => {
@@ -28,46 +30,54 @@ export const register = createAsyncThunk(
       const response = await axios.post('http://localhost:3000/auth/register', userData);
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Registration failed');
+      return rejectWithValue(error.response?.data?.message || 'Ошибка регистрации');
     }
   }
 );
 
-// Асинхронный экшн для входа пользователя
+// Асинхронное действие для входа пользователя
 export const login = createAsyncThunk(
   'auth/login',
   async (userData: { email: string; password: string }, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', userData);
+      const response = await axios.post('http://localhost:3000/auth/login', userData, { withCredentials: true });
+      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
       return { accessToken: response.data.accessToken, user: response.data.user };
     } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Login failed');
+      return rejectWithValue(error.response?.data?.message || 'Ошибка входа');
     }
   }
 );
 
-// Асинхронный экшн для обновления токена
+// Асинхронное действие для обновления access токена
 export const refreshAccessToken = createAsyncThunk(
   'auth/refresh',
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.post('http://localhost:3000/auth/refresh', {}, { withCredentials: true });
+      if (response.status === 200) {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+      }
       return response.data.accessToken;
     } catch (error: any) {
-      return rejectWithValue('Session expired, please login again');
+      return rejectWithValue('Сессия истекла, пожалуйста, войдите снова');
     }
   }
 );
 
-// Асинхронный экшн для выхода пользователя
+// Асинхронное действие для выхода пользователя
 export const logout = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
       await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('user');
       return null;
     } catch (error: any) {
-      return rejectWithValue('Logout failed');
+      return rejectWithValue('Ошибка выхода');
     }
   }
 );
@@ -75,15 +85,23 @@ export const logout = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    // Действие для установки пользователя в стейт
+    setUser(state, action: PayloadAction<{ accessToken: string, user: any }>) {
+      state.isLoggedIn = true;
+      state.accessToken = action.payload.accessToken;
+      state.user = action.payload.user;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(register.pending, (state) => {
         state.loading = true;
       })
-      .addCase(register.fulfilled, (state, action: PayloadAction<string>) => {
+      .addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
         state.isLoggedIn = true;
-        state.accessToken = action.payload;
+        state.accessToken = action.payload.accessToken;
+        state.user = action.payload.user;
         state.error = null;
         state.loading = false;
       })
@@ -135,4 +153,8 @@ const authSlice = createSlice({
   }
 });
 
+// Экспорт действий для использования в компонентах
+export const { setUser } = authSlice.actions;
+
+// Экспорт редьюсера для интеграции в хранилище
 export default authSlice.reducer;
