@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import MainPage from './components/mainPage/MainPage';
 import RegistrationPage from './components/registrationPage/RegistrationPage';
 import LoginPage from './components/loginPage/LoginPage';
@@ -14,26 +14,24 @@ import Recipe from './components/recipePage/Recipe';
 import WorkoutExercisePage from './components/exercisePage/WorkOutExercisePage';
 import MorningRoutineExcetcisePage from './components/exercisePage/MorningRoutineExcetcisePage';
 
+const RouterComponent = () => (
+  <Routes>
+    <Route path="/" element={<MainPage />} />
+    <Route path="/register" element={<RegistrationPage />} />
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/view-profile" element={<ProfilePage />} />
+    <Route path="/view-programms" element={<ProgramsPage />} />
+    <Route path="program/:id" element={<CertainProgramPage />} />
+    <Route path="/view-profile/program/:id" element={<CertainProgramPage />} />
+    <Route path="/view-profile/cal-calculator" element={<Calculator />} />
+    <Route path="/view-profile/day-plan" element={<DayPlanPage />} />
+    <Route path="/view-profile/day-plan/morning-routine" element={<MorningRoutinePage />} />
+    <Route path="/view-profile/day-plan/workout" element={<WorkoutPage />} />
+    <Route path="/view-profile/cal-calculator" element={<CalculatorPage />} />
+    <Route path="/view-profile/day-plan/eat/:id" element={<Recipe />} />
+    <Route path="/view-profile/day-plan/workout/start/" element={<WorkoutExercisePage />} />
+    <Route path="/view-profile/day-plan/morning-routine/start/" element={<MorningRoutineExcetcisePage />} />
+  </Routes>
+);
 
-export const router = createBrowserRouter([
-  { path: '/', element: <MainPage /> },
-
-  { path: '/register', element: <RegistrationPage /> },
-
-  { path: '/login', element: <LoginPage /> },
-  { path: '/view-profile', element: <ProfilePage /> },
-  { path: '/view-programms', element: <ProgramsPage /> },
-  { path: 'program/:id', element: <CertainProgramPage /> },
-  { path: '/view-profile/program/:id', element: <CertainProgramPage /> },
-  { path: '/view-profile/cal-calculator', element: <Calculator /> },
-  { path: '/view-profile/day-plan', element: <DayPlanPage /> },
-  {
-    path: '/view-profile/day-plan/morning-routine',
-    element: <MorningRoutinePage />,
-  },
-  { path: '/view-profile/day-plan/workout', element: <WorkoutPage /> },
-  { path: '/view-profile/cal-calculator', element: <CalculatorPage /> },
-  { path: '/view-profile/day-plan/eat/:id', element: <Recipe /> },
-  {path:'/view-profile/day-plan/workout/start/', element:<WorkoutExercisePage/>},
-  {path:'/view-profile/day-plan/morning-routine/start/', element:<MorningRoutineExcetcisePage/>}
-]);
+export default RouterComponent;

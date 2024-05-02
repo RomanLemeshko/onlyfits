@@ -74,7 +74,10 @@ router.post('/refresh', async (req, res) => {
     }
     const user = await User.findByPk(refreshTokenRecord.userId);
     const newAccessToken = getTokens(user.username).accessToken;
-    res.send({ accessToken: newAccessToken });
+    res.send({
+      accessToken: newAccessToken,
+      user: { id: user.id, name: user.username },
+    });
   } catch (error) {
     res
       .status(500)
