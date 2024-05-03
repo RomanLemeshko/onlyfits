@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import {
   getAllProgramsThunky,
-  programFilterByLevel,
 } from '../../store/allProgramSlice/allProgramsSlice';
 import { AppDispatch, RootState } from '../../store';
 
@@ -80,9 +79,18 @@ const MainPage = () => {
       localStorage.setItem('programs', JSON.stringify(progs));
     } else {
       const newStorageData = progs.filter((eachProgram) => {
-        return eachProgram.program_level === programLevel;
+        // return eachProgram.program_level === programLevel;
+        if (programLevel === 'all') {
+          return eachProgram.program_type === programType;
+        } else if (programType === 'all') {
+          return eachProgram.program_level === programLevel;
+        } else {
+          return (
+            eachProgram.program_level === programLevel &&
+            eachProgram.program_type === programType
+          );
+        }
       });
-      console.log('FILTERED: ', newStorageData);
       setLocalStorageContent(JSON.stringify(newStorageData));
       localStorage.setItem('programs', JSON.stringify(newStorageData));
     }
@@ -91,9 +99,8 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(getAllProgramsThunky())
       .unwrap()
-      .then((data) =>
-        localStorage.setItem('programs', JSON.stringify(data))
-      ).catch((err) => console.log(err));
+      .then((data) => localStorage.setItem('programs', JSON.stringify(data)))
+      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -131,18 +138,20 @@ const MainPage = () => {
       </div>
 
       <div id="programs-container">
-        {!!localStorage.getItem('programs') && JSON.parse(localStorage.getItem('programs')).map(
-          (eachProgram: ProgramType) => (
-            <div key={eachProgram.id} className="eachProgram">
-              <div>
-                <Link to={`program/${eachProgram.id}`}>
-                  <h3>{eachProgram.program_title}</h3>
-                  <h4>{eachProgram.program_level}</h4>
-                </Link>
+        {!!localStorage.getItem('programs') &&
+          JSON.parse(localStorage.getItem('programs')).map(
+            (eachProgram: ProgramType) => (
+              <div key={eachProgram.id} className="eachProgram">
+                <div>
+                  <Link to={`program/${eachProgram.id}`}>
+                    <h3>Название: {eachProgram.program_title}</h3>
+                    <h4>Тип: {eachProgram.program_type}</h4>
+                    <h4>Уровень: {eachProgram.program_level}</h4>
+                  </Link>
+                </div>
               </div>
-            </div>
-          )
-        )}
+            )
+          )}
       </div>
     </div>
   );
