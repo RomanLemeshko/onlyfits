@@ -2,10 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import authSlice from "./auth/authSlice";
 import logger from "redux-logger";
+import allProgramsSlice from "./allProgramSlice/allProgramsSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authSlice,
+        allPrograms: allProgramsSlice
+
+        
+
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...(process.env.NODE_ENV !=='production' ? [logger] : []))
 })

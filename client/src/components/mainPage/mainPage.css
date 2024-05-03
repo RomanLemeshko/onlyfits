@@ -12,3 +12,8 @@
   border: solid gray 2px;
   width: 300px;
 }
+
+#programs-filters-container{
+  display: flex;
+  gap: 30px;
+}

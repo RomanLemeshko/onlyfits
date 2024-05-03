@@ -26,7 +26,7 @@ module.exports = {
         program_title: 'impalla',
         program_type: 'streching',
         program_rating: 3,
-        program_level: "profesional",
+        program_level: "professional",
         training_days: 30,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -50,7 +50,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        program_title: 'panter',
+        program_title: 'pantera',
         program_type: 'streching',
         program_rating: 7,
         program_level: "medium",
