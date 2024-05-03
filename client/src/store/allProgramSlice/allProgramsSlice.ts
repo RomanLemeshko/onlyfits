@@ -19,14 +19,14 @@ const initialState: InitialState[] = [];
 
 //thunk to add data from db to store initially
 export const getAllProgramsThunky = createAsyncThunk(
-  'allProg', //! it is just thunk name< could be any
+  'allProg', //! it is just thunk name, could be any
   async () => {
     try {
       const allPrograms = await axios.get(
         'http://localhost:3000/api/getAllPrograms',
         { withCredentials: true }
       );
-
+      console.log("THUNK: ", allPrograms.data)
       return allPrograms.data; //! do not forget about seriliazation
     } catch (error) {
       console.log('ОШИБКА ПРИ ПОЛУЧЕНИИ ВСЕХ ПРОГРАММ ', error);
@@ -51,9 +51,11 @@ const allProgramsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getAllProgramsThunky.fulfilled, (state, action) => {
+      console.log("EXTRA: ", state, action)
       return action.payload;
     });
   },
+ 
 });
 
 export const { programFilterByLevel } = allProgramsSlice.actions;

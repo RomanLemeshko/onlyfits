@@ -8,7 +8,7 @@ import {
   programFilterByLevel,
 } from '../../store/allProgramSlice/allProgramsSlice';
 import { AppDispatch, RootState } from '../../store';
-// import  {RootState}  from '../../store/allProgramSlice/allProgramsSlice';
+
 export type ProgramType = {
   id: number;
   program_type: string;
@@ -63,11 +63,12 @@ export type ProgramType = {
 // ];
 
 const MainPage = () => {
-  const [programType, setProgramType] = useState<string>('');
-  const [programLevel, setProgramLevel] = useState<string>('');
+  const [programType, setProgramType] = useState<string>('all');
+  const [programLevel, setProgramLevel] = useState<string>('all');
   const progs = useSelector((state: RootState) => state.allPrograms);
+  const [localStorageContent, setLocalStorageContent] = useState([]);
+
   const dispatch: AppDispatch = useDispatch();
-  console.log(programType);
 
   const progFilterHandler = () => {
     if (
@@ -76,26 +77,25 @@ const MainPage = () => {
       (programType.length === 0 && programLevel.length === 0)
     ) {
       dispatch(getAllProgramsThunky());
+      localStorage.setItem('programs', JSON.stringify(progs));
     } else {
-      dispatch(
-        programFilterByLevel(
-          // programLevel
-            {
-            filterByType: programType,
-            filterByLevel: programLevel,
-          }
-        )
-      );
-      // dispatch(getAllProgramsThunky());
+      const newStorageData = progs.filter((eachProgram) => {
+        return eachProgram.program_level === programLevel;
+      });
+      console.log('FILTERED: ', newStorageData);
+      setLocalStorageContent(JSON.stringify(newStorageData));
+      localStorage.setItem('programs', JSON.stringify(newStorageData));
     }
   };
-  console.log('STATE AFTER FILTER: ', progs);
 
   useEffect(() => {
-    dispatch(getAllProgramsThunky());
+    dispatch(getAllProgramsThunky())
+      .unwrap()
+      .then((data) =>
+        localStorage.setItem('programs', JSON.stringify(data))
+      ).catch((err) => console.log(err));
   }, []);
 
-  console.log('PROGRAM TYPE: ', programType);
   return (
     <div>
       <Header />
@@ -114,7 +114,7 @@ const MainPage = () => {
         </div>
 
         <div className="filter-container">
-          <label htmlFor="filterDropdown">Уровень сложноти:</label>
+          <label htmlFor="filterDropdown">Уровень сложности:</label>
           <select
             id="filterDropdown"
             onChange={(e) => setProgramLevel(e.target.value)}
@@ -131,16 +131,18 @@ const MainPage = () => {
       </div>
 
       <div id="programs-container">
-        {progs.map((eachProgram) => (
-          <div key={eachProgram.id} className="eachProgram">
-            <div>
-              <Link to={`program/${eachProgram.id}`}>
-                <h3>{eachProgram.program_title}</h3>
-                <h4>{eachProgram.program_level}</h4>
-              </Link>
+        {!!localStorage.getItem('programs') && JSON.parse(localStorage.getItem('programs')).map(
+          (eachProgram: ProgramType) => (
+            <div key={eachProgram.id} className="eachProgram">
+              <div>
+                <Link to={`program/${eachProgram.id}`}>
+                  <h3>{eachProgram.program_title}</h3>
+                  <h4>{eachProgram.program_level}</h4>
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
     </div>
   );
