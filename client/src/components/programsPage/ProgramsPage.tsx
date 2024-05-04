@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
 import Header from '../header/Header';
 import { ProgramType } from '../mainPage/MainPage';
 import { Link } from 'react-router-dom';
+import { RootState } from '../../store/store';
 const arrPicked: ProgramType[] = [
   {
     id: 1,

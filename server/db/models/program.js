@@ -9,6 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Exercise, { foreignKey: 'program_id' });
+
+
+      this.belongsToMany(models.User, {
+        foreignKey: "program_id",
+        through: "User_Programs",
+        as: "Programs_middle",
+      });
+
     }
   }
   Program.init(
