@@ -1,74 +1,72 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
-// Создание экземпляра axios с базовыми настройками
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/auth', // Базовый URL для всех запросов
-  withCredentials: true // Отправлять куки с запросами на другие домены
+  baseURL: 'http://localhost:3000/auth',
+  withCredentials: true
 });
 
-let isRefreshing = false; // Флаг, показывающий, идет ли в данный момент обновление токена
-let failedQueue = []; // Очередь запросов, которые необходимо повторить после обновления токена
-
-// Функция для обработки очереди запросов после обновления токена
-const processQueue = (error, token = null) => {
-  failedQueue.forEach(prom => {
-    if (error) {
-      prom.reject(error); // Отклоняем промис, если была ошибка
-    } else {
-      prom.resolve(token); // Разрешаем промис с новым токеном
-    }
-  });
-  failedQueue = []; // Очищаем очередь после обработки
+type QueueEntry = {
+  resolve: (token: string | null) => void;
+  reject: (error: AxiosError | null) => void;
 };
 
-// Добавление перехватчика запросов
+let isRefreshing = false;
+let failedQueue: QueueEntry[] = [];
+
+const processQueue = (error: AxiosError | null, token: string | null = null) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
+
 axiosInstance.interceptors.request.use(config => {
-  const token = localStorage.getItem('accessToken'); // Получение токена из localStorage
+  const token = localStorage.getItem('accessToken');
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`; // Добавление токена в заголовки
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
-}, error => Promise.reject(error)); // Возвращаем ошибку, если она произошла
+}, error => Promise.reject(error));
 
-// Добавление перехватчика ответов
 axiosInstance.interceptors.response.use(response => response, async error => {
   const originalRequest = error.config;
-  // Проверка на ошибку авторизации и наличие флага повторного запроса
   if (error.response && error.response.status === 401 && !originalRequest._retry) {
     if (isRefreshing) {
-      // Если токен уже обновляется, добавляем запрос в очередь
       return new Promise((resolve, reject) => {
         failedQueue.push({ resolve, reject });
       }).then(token => {
         originalRequest.headers['Authorization'] = 'Bearer ' + token;
-        return axios(originalRequest); // Повторный запрос с новым токеном
+        return axios(originalRequest);
       }).catch(err => Promise.reject(err));
     }
 
-    originalRequest._retry = true; // Устанавливаем флаг повторного запроса
-    isRefreshing = true; // Устанавливаем флаг обновления токена
+    originalRequest._retry = true;
+    isRefreshing = true;
 
-    // Обновление токена
     return new Promise((resolve, reject) => {
       axios.post('http://localhost:3000/auth/refresh', {
-        refreshToken: localStorage.getItem('refreshToken') // Отправляем refresh токен на сервер
+        refreshToken: localStorage.getItem('refreshToken')
       }).then(response => {
         if (response.status === 200) {
-          localStorage.setItem('accessToken', response.data.accessToken); // Обновляем access токен в localStorage
+          localStorage.setItem('accessToken', response.data.accessToken);
           axiosInstance.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.accessToken;
-          processQueue(null, response.data.accessToken); // Обработка всех ожидаемых запросов с новым токеном
-          resolve(axios(originalRequest)); // Повторный запрос с новым токеном
+          processQueue(null, response.data.accessToken);
+          resolve(axios(originalRequest));
         }
       }).catch(err => {
-        processQueue(err, null); // Обработка ошибок для ожидающих запросов
+        processQueue(err, null);
         reject(err);
       }).finally(() => {
-        isRefreshing = false; // Снимаем флаг обновления токена
+        isRefreshing = false;
       });
     });
   }
 
-  return Promise.reject(error); // Возвращаем ошибку, если условие не выполнено
+  return Promise.reject(error);
 });
 
 export default axiosInstance;
