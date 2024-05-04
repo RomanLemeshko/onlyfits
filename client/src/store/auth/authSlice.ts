@@ -1,19 +1,19 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk, SerializedError } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Определение структуры состояния аутентификации
+interface User {
+  id: number;
+  name: string;
+}
+
 interface AuthState {
   isLoggedIn: boolean;
   accessToken: string | null;
   loading: boolean;
   error: string | null;
-  user: {
-    id: number;
-    name: string;
-  } | null;
+  user: User | null;
 }
 
-// Установка начального состояния для slice аутентификации
 const initialState: AuthState = {
   isLoggedIn: false,
   accessToken: null,
@@ -22,62 +22,88 @@ const initialState: AuthState = {
   user: null
 };
 
-// Асинхронное действие для регистрации нового пользователя
-export const register = createAsyncThunk(
+interface RegisterPayload {
+  username: string;
+  email: string;
+  password: string;
+}
+
+interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+interface AuthResponse {
+  accessToken: string;
+  user: User;
+}
+
+interface AuthError {
+  message: string;
+}
+
+export const register = createAsyncThunk<AuthResponse, RegisterPayload, { rejectValue: AuthError }>(
   'auth/register',
-  async (userData: { username: string; email: string; password: string }, { rejectWithValue }) => {
+  async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/register', userData);
+      const response = await axios.post<AuthResponse>('http://localhost:3000/auth/register', userData);
       return response.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Ошибка регистрации');
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue({ message: error.response.data.message || "Ошибка регистрации" });
+      }
+      return rejectWithValue({ message: "Сетевая ошибка при регистрации" });
     }
   }
 );
 
-// Асинхронное действие для входа пользователя
-export const login = createAsyncThunk(
+export const login = createAsyncThunk<AuthResponse, LoginPayload, { rejectValue: AuthError }>(
   'auth/login',
-  async (userData: { email: string; password: string }, { rejectWithValue }) => {
+  async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', userData, { withCredentials: true });
+      const response = await axios.post<AuthResponse>('http://localhost:3000/auth/login', userData, { withCredentials: true });
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      return { accessToken: response.data.accessToken, user: response.data.user };
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Ошибка входа');
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue({ message: error.response.data.message || "Ошибка входа" });
+      }
+      return rejectWithValue({ message: "Сетевая ошибка при входе" });
     }
   }
 );
 
-// Асинхронное действие для обновления access токена
-export const refreshAccessToken = createAsyncThunk(
+export const refreshAccessToken = createAsyncThunk<string, void, { rejectValue: AuthError }>(
   'auth/refresh',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/refresh', {}, { withCredentials: true });
-      if (response.status === 200) {
-        localStorage.setItem('accessToken', response.data.accessToken);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-      }
+      const response = await axios.post<AuthResponse>('http://localhost:3000/auth/refresh', {}, { withCredentials: true });
+      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
       return response.data.accessToken;
-    } catch (error: any) {
-      return rejectWithValue('Сессия истекла, пожалуйста, войдите снова');
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue({ message: error.response.data.message || "Ошибка обновления токена" });
+      }
+      return rejectWithValue({ message: "Сетевая ошибка при обновлении токена" });
     }
   }
 );
 
-// Асинхронное действие для выхода пользователя
-export const logout = createAsyncThunk(
+export const logout = createAsyncThunk<void, void, { rejectValue: AuthError }>(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
       await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
       localStorage.removeItem('accessToken');
       localStorage.removeItem('user');
-      return null;
-    } catch (error: any) {
-      return rejectWithValue('Ошибка выхода');
+      return;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        return rejectWithValue({ message: error.response.data.message || "Ошибка выхода" });
+      }
+      return rejectWithValue({ message: "Сетевая ошибка при выходе" });
     }
   }
 );
@@ -86,8 +112,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // Действие для установки пользователя в стейт
-    setUser(state, action: PayloadAction<{ accessToken: string, user: any }>) {
+    setUser(state, action: PayloadAction<AuthResponse>) {
       state.isLoggedIn = true;
       state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
@@ -98,15 +123,15 @@ const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.loading = true;
       })
-      .addCase(register.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(register.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
         state.isLoggedIn = true;
         state.accessToken = action.payload.accessToken;
         state.user = action.payload.user;
         state.error = null;
         state.loading = false;
       })
-      .addCase(register.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
+      .addCase(register.rejected, (state, action: PayloadAction<AuthError | undefined, string, never, SerializedError>) => {
+        state.error = action.payload?.message || "Неизвестная ошибка регистрации";
         state.loading = false;
         state.isLoggedIn = false;
         state.accessToken = null;
@@ -114,15 +139,15 @@ const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.loading = true;
       })
-      .addCase(login.fulfilled, (state, action: PayloadAction<{ accessToken: string; user: { id: number; name: string } }>) => {
+      .addCase(login.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
         state.isLoggedIn = true;
         state.accessToken = action.payload.accessToken;
         state.user = action.payload.user;
         state.error = null;
         state.loading = false;
       })
-      .addCase(login.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
+      .addCase(login.rejected, (state, action: PayloadAction<AuthError | undefined, string, never, SerializedError>) => {
+        state.error = action.payload?.message || "Неизвестная ошибка входа";
         state.loading = false;
         state.isLoggedIn = false;
         state.accessToken = null;
@@ -136,8 +161,8 @@ const authSlice = createSlice({
         state.error = null;
         state.loading = false;
       })
-      .addCase(refreshAccessToken.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
+      .addCase(refreshAccessToken.rejected, (state, action: PayloadAction<AuthError | undefined, string, never, SerializedError>) => {
+        state.error = action.payload?.message || "Неизвестная ошибка обновления токена";
         state.loading = false;
         state.isLoggedIn = false;
         state.accessToken = null;
@@ -147,14 +172,12 @@ const authSlice = createSlice({
         state.accessToken = null;
         state.error = null;
       })
-      .addCase(logout.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
+      .addCase(logout.rejected, (state, action: PayloadAction<AuthError | undefined, string, never, SerializedError>) => {
+        state.error = action.payload?.message || "Неизвестная ошибка выхода";
       });
   }
 });
 
-// Экспорт действий для использования в компонентах
 export const { setUser } = authSlice.actions;
 
-// Экспорт редьюсера для интеграции в хранилище
 export default authSlice.reducer;
