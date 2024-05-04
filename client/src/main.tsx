@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { setUser, refreshAccessToken } from './store/auth/authSlice';
 import RouterComponent from './router';
-import { useAppDispatch, useAppSelector } from './store/hooks';
+import { useAppDispatch } from './store/hooks';
 import './index.css';
 
 export const App = () => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
-  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
-
+  
   useEffect(() => {
     const initAuth = async () => {
       const accessToken = localStorage.getItem('accessToken');
