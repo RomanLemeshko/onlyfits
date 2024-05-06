@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasMany(models.RefreshToken, { foreignKey: 'userId' });
+
+      this.belongsToMany(models.Program, {
+        foreignKey: 'user_id',
+        through: 'User_Programs',
+        as: 'users',
+      });
     }
   }
   User.init(

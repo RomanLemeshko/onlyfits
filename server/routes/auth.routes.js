@@ -63,6 +63,9 @@ router.post('/login', async (req, res) => {
 // Обновление токена
 router.post('/refresh', async (req, res) => {
   const { refreshToken } = req.cookies;
+  if (!refreshToken) {
+    return res.status(401).send({message: 'No refresh token provided'})
+  }
   try {
     const refreshTokenRecord = await RefreshToken.findOne({
       where: { token: refreshToken, isValid: true },

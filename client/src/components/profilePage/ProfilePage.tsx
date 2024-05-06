@@ -6,31 +6,15 @@ import { useState } from 'react';
 import { Button, Modal } from 'antd';
 import CalculatorPage from '../calculatorPage/CalculatorPage';
 import { CalculatorContextProvider } from '../context/CalculatorContext';
-const arrPicked: ProgramType[] = [
-  {
-    id: 1,
-    type: 'cardio',
-    title: 'god of cardio',
-    duration: '6 months',
-    level: 'hard',
-  },
-  {
-    id: 2,
-    type: 'strength',
-    title: 'god of strength',
-    duration: '2 months',
-    level: 'easy peasy',
-  },
-  {
-    id: 3,
-    type: 'complex',
-    title: 'god of complex',
-    duration: '3 months',
-    level: 'intermediate',
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import { useEffect } from 'react';
+import { getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
 
-
+const ProfilePage = () => {
+  const progs = useSelector((state: RootState) => state.userPrograms);
+  const user = useSelector((state: RootState) => state.auth);
+  const dispatch: AppDispatch = useDispatch();
 
 const ProfilePage = () => {
 
@@ -45,23 +29,26 @@ const handleCancel = () => {
   setIsModalOpen(false);
 };
 
+  useEffect(() => {
+    dispatch(getUserProgramsThunky(Number(user?.user?.id)));
+  }, []);
+
+
   return (
     <CalculatorContextProvider>
     <div id="profile-page-container">
       <Header />
       <div id="all-picked-program-container">
-        {arrPicked.length > 0 ? (
-          arrPicked.map((eachProgram: ProgramType) => (
+        {!!progs && progs.length > 0 ? 
+         ( progs.map((eachProgram: ProgramType) => (
             <div className="picked-program-container">
               <Link to={`/view-profile/program/${eachProgram.id}`}>
-                <h3>{eachProgram.type}</h3>
-                <h4>{eachProgram.title}</h4>
+                <h3>{eachProgram.program_title}</h3>
+                <h4>{eachProgram.program_type}</h4>
               </Link>
             </div>
-          ))
-        ) : (
-          <>Пока утебя нет подобранных программ...</>
-        )}
+          )))
+        : (<>Пока у тебя нет подобранных программ...</>)}
       </div>
 
       <h2>Мое расписание</h2>
