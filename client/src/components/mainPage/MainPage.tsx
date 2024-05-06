@@ -3,68 +3,27 @@ import Header from '../header/Header';
 import './mainPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import {
-  getAllProgramsThunky,
-} from '../../store/allProgramSlice/allProgramsSlice';
+import { getAllProgramsThunky } from '../../store/allProgramSlice/allProgramsSlice';
 import { AppDispatch, RootState } from '../../store';
+import {
+  addUserProgramsThunky,
+  getUserProgramsThunky,
+} from '../../store/myProgramSlice/userProgramSlice';
 
 export type ProgramType = {
   id: number;
   program_type: string;
   program_title: string;
-  training_days: string;
+  training_days: number;
   program_level: string;
   program_rating: number;
 };
-// export const arr: ProgramType [] = [
-//   {
-//     id: 1,
-//     type: 'cardio',
-//     title: 'god of cardio',
-//     duration: "6 months",
-//     level: "hard"
-//   },
-//   {
-//     id: 2,
-//     type: 'strength',
-//     title: 'god of strength',
-//     duration: "2 months",
-//     level: "easy peasy"
-//   },
-//   {
-//     id: 3,
-//     type: 'complex',
-//     title: 'god of complex',
-//     duration: "3 months",
-//     level: "intermediate"
-//   },
-//   {
-//     id: 4,
-//     type: 'recover',
-//     title: 'god of recover',
-//     duration: "4 months",
-//     level: "hard"
-//   },
-//   {
-//     id: 5,
-//     type: 'functional',
-//     title: 'god of functional',
-//     duration: "5 months",
-//     level: "easy peasy"
-//   },
-//   {
-//     id: 6,
-//     type: 'prepear',
-//     title: 'god of prepear',
-//     duration: "6 months",
-//     level: "intermediate"
-//   },
-// ];
 
 const MainPage = () => {
   const [programType, setProgramType] = useState<string>('all');
   const [programLevel, setProgramLevel] = useState<string>('all');
   const progs = useSelector((state: RootState) => state.allPrograms);
+  const user = useSelector((state: RootState) => state.auth);
   const [localStorageContent, setLocalStorageContent] = useState([]);
 
   const dispatch: AppDispatch = useDispatch();
@@ -96,11 +55,14 @@ const MainPage = () => {
     }
   };
 
+ 
   useEffect(() => {
     dispatch(getAllProgramsThunky())
       .unwrap()
       .then((data) => localStorage.setItem('programs', JSON.stringify(data)))
       .catch((err) => console.log(err));
+    //! to get and fil out user programs
+    dispatch(getUserProgramsThunky(Number(user?.user?.id)));
   }, []);
 
   return (
@@ -149,6 +111,19 @@ const MainPage = () => {
                     <h4>Уровень: {eachProgram.program_level}</h4>
                   </Link>
                 </div>
+                <button
+                  className="add-prog-bth"
+                  onClick={() =>
+                    dispatch(
+                      addUserProgramsThunky({
+                        user_id: Number(user?.user?.id),
+                        program_id: Number(eachProgram.id),
+                      })
+                    )
+                  }
+                >
+                  add program
+                </button>
               </div>
             )
           )}

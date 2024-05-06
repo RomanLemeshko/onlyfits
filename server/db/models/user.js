@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsToMany(models.Program, {
         foreignKey: 'user_id',
         through: 'User_Programs',
-        as: 'Users_middle',
+        as: 'users',
       });
     }
   }

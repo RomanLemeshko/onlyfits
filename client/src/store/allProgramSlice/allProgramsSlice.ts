@@ -26,7 +26,6 @@ export const getAllProgramsThunky = createAsyncThunk(
         'http://localhost:3000/api/getAllPrograms',
         { withCredentials: true }
       );
-      console.log("THUNK: ", allPrograms.data)
       return allPrograms.data; //! do not forget about seriliazation
     } catch (error) {
       console.log('ОШИБКА ПРИ ПОЛУЧЕНИИ ВСЕХ ПРОГРАММ ', error);
@@ -38,9 +37,7 @@ const allProgramsSlice = createSlice({
   name: 'allPrograms', //! current slice name
   initialState,
   reducers: {
-    // programFilterByType: (state, action: PayloadAction<string>) =>{
-    //   return state.filter((eachProgram) => eachProgram.program_type === action.payload)
-    // },
+  
     programFilterByLevel: (state, action: PayloadAction<Filter>) => {
       return state.filter(
         (eachProgram) =>
@@ -51,7 +48,7 @@ const allProgramsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getAllProgramsThunky.fulfilled, (state, action) => {
-      console.log("EXTRA: ", state, action)
+      // console.log("EXTRA: ", state, action)
       return action.payload;
     });
   },

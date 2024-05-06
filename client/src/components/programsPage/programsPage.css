@@ -1,0 +1,14 @@
+#all-picked-program-container{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-around;
+
+}
+
+.picked-program-container{
+  margin: auto;
+  border-radius: 10px;
+  border: solid gray 2px;
+  width: 300px;
+}
