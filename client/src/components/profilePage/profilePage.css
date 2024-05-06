@@ -47,5 +47,52 @@ table{
   cursor: pointer;
   margin-left: 5px;
   margin-top: 10px;
-  width: 500px;
+  width: 400px;
+}
+
+.calculator {
+  display: flex; 
+  justify-content: center; 
+  flex-direction: column; 
+  text-align: center;
+}
+
+.ant-btn {
+  width: 200px;
+}
+
+.modal-style {
+  background-color: rgb(243,244,239);
+  color: rgb(13, 20, 28);
+}
+
+.modal-style .ant-modal-content {
+  background-color: rgb(243,244,239);
+  color: rgb(13, 20, 28);
+}
+
+.modal-style .ant-modal-header {
+  background-color: rgb(243,244,239);
+  color: rgb(13, 20, 28);
+}
+
+.modal-style .ant-modal-footer {
+  background-color: rgb(243,244,239);
+  color: rgb(13, 20, 28);
+}
+
+.ant-modal-footer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.ant-btn-default {
+  width: 250px;
+}
+
+.ant-btn-primary {
+  width: 250px;
+  background-color: rgb(13, 20, 28);
+  color: rgb(243,244,239);
 }

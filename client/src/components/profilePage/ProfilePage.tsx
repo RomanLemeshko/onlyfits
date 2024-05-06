@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import './profilePage.css';
 import { ProgramType } from '../mainPage/MainPage';
+import { useState } from 'react';
+import { Button, Modal } from 'antd';
+import CalculatorPage from '../calculatorPage/CalculatorPage';
+import { CalculatorContextProvider } from '../context/CalculatorContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { useEffect } from 'react';
@@ -12,11 +16,26 @@ const ProfilePage = () => {
   const user = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
 
+const ProfilePage = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+const showModal = () => {
+  setIsModalOpen(true);
+};
+const handleOk = () => {
+  setIsModalOpen(false);
+};
+const handleCancel = () => {
+  setIsModalOpen(false);
+};
+
   useEffect(() => {
     dispatch(getUserProgramsThunky(Number(user?.user?.id)));
   }, []);
 
+
   return (
+    <CalculatorContextProvider>
     <div id="profile-page-container">
       <Header />
       <div id="all-picked-program-container">
@@ -221,11 +240,22 @@ const ProfilePage = () => {
         </table>
       </div>
 
-      <button className="button" type="button">
-        {' '}
-        <Link to="/view-profile/cal-calculator">Калькулятор калорий</Link>
-      </button>
+      {/* <button className="button" type="button"> <Link to="/view-profile/cal-calculator">Калькулятор калорий
+      </Link></button> */}
+
+      <Button type="primary" onClick={showModal}>
+      Калькулятор калорий
+      </Button>
+      <Modal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        className="modal-style"
+      >
+        <CalculatorPage />
+      </Modal>
     </div>
+    </CalculatorContextProvider>
   );
 };
 
