@@ -1,50 +1,35 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../header/Header';
-import { ProgramType } from '../mainPage/MainPage';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../store/store';
-const arrPicked: ProgramType[] = [
-  {
-    id: 1,
-    type: 'cardio',
-    title: 'god of cardio',
-    duration: "6 months",
-    level: "hard"
-  },
-  {
-    id: 2,
-    type: 'strength',
-    title: 'god of strength',
-    duration: "2 months",
-    level: "easy peasy"
-  },
-  {
-    id: 3,
-    type: 'complex',
-    title: 'god of complex',
-    duration: "3 months",
-    level: "intermediate"
-  },
-];
-const ProgramsPage = () => {
+import { AppDispatch, RootState } from '../../store';
+import './programsPage.css'
+import { useEffect } from 'react';
+import { getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
+
+
+const ProgramsPage = (): JSX.Element => {
+  const progs = useSelector((state: RootState) => state.userPrograms);
+  const dispatch: AppDispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    dispatch(getUserProgramsThunky(Number(user?.user?.id)));
+  }, []);
+
   return (
     <div>
-        <Header />
+      <Header />
       <div id="all-picked-program-container">
-        {arrPicked.length > 0 ? (
-          arrPicked.map((eachProgram: ProgramType) => (
+        {!!progs &&
+          progs.map((eachProgram) => (
             <div className="picked-program-container">
               <Link to={`/view-profile/program/${eachProgram.id}`}>
-                <h3>{eachProgram.type}</h3>
-                <h4>{eachProgram.title}</h4>
+                <h3> {eachProgram.program_level} </h3>
+                <h4>{eachProgram.program_type} </h4>
               </Link>
             </div>
-          ))
-        ) : (
-          <>Пока утебя нет подобранных программ...</>
-        )}
+          ))}
       </div>
-      
     </div>
   );
 };
