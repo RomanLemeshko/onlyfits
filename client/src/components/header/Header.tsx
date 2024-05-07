@@ -6,8 +6,8 @@ import './header.css';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const user = useSelector((state) => state.auth.user);
+  const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);
+  const user = useSelector((state: any) => state.auth.user);
 
   const handleLogout = async () => {
     try {
