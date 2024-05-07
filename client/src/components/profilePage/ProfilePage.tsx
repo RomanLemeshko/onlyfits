@@ -47,6 +47,11 @@ const handleCancel = () => {
         </div>
 
         <h2>Мое расписание</h2>
+
+
+
+
+        
         <div id="calendar-container">
         CALENDAR
         <table>
