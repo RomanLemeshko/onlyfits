@@ -4,7 +4,7 @@ import { logout } from '../../store/auth/authSlice';
 import './header.css';
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state: any) => state.auth.isLoggedIn);
   const user = useSelector((state: any) => state.auth.user);

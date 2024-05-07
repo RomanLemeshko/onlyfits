@@ -24,7 +24,7 @@ const MainPage = () => {
   const [programLevel, setProgramLevel] = useState<string>('all');
   const progs = useSelector((state: RootState) => state.allPrograms);
   const user = useSelector((state: RootState) => state.auth);
-  const [, setLocalStorageContent] = useState([]);
+  const [, setLocalStorageContent] = useState<string>("");
 
   const dispatch: AppDispatch = useDispatch();
 

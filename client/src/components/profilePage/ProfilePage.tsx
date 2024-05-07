@@ -17,6 +17,7 @@ const ProfilePage = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 const showModal = () => {
   setIsModalOpen(true);
 };
