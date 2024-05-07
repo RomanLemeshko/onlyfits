@@ -57,7 +57,7 @@ const myProgramSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getUserProgramsThunky.fulfilled, (state, action) => {
+    builder.addCase(getUserProgramsThunky.fulfilled, (_, action) => {
       return action.payload;
     });
     builder.addCase(addUserProgramsThunky.fulfilled, (state, action) => {
