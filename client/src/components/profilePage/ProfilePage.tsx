@@ -2,57 +2,55 @@ import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import './profilePage.css';
 import { ProgramType } from '../mainPage/MainPage';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Modal } from 'antd';
 import CalculatorPage from '../calculatorPage/CalculatorPage';
 import { CalculatorContextProvider } from '../context/CalculatorContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { useEffect } from 'react';
 import { getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
 
 const ProfilePage = () => {
   const progs = useSelector((state: RootState) => state.userPrograms);
   const user = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
-
-const ProfilePage = () => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-const showModal = () => {
-  setIsModalOpen(true);
-};
-const handleOk = () => {
-  setIsModalOpen(false);
-};
-const handleCancel = () => {
-  setIsModalOpen(false);
-};
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     dispatch(getUserProgramsThunky(Number(user?.user?.id)));
-  }, []);
-
+  }, [dispatch, user?.user?.id]);
 
   return (
     <CalculatorContextProvider>
-    <div id="profile-page-container">
-      <Header />
-      <div id="all-picked-program-container">
-        {!!progs && progs.length > 0 ? 
-         ( progs.map((eachProgram: ProgramType) => (
-            <div className="picked-program-container">
-              <Link to={`/view-profile/program/${eachProgram.id}`}>
-                <h3>{eachProgram.program_title}</h3>
-                <h4>{eachProgram.program_type}</h4>
-              </Link>
-            </div>
-          )))
-        : (<>Пока у тебя нет подобранных программ...</>)}
-      </div>
+      <div id="profile-page-container">
+        <Header />
+        <div id="all-picked-program-container">
+          {!!progs && progs.length > 0 ?
+            (progs.map((eachProgram: ProgramType) => (
+              <div className="picked-program-container" key={eachProgram.id}>
+                <Link to={`/view-profile/program/${eachProgram.id}`}>
+                  <h3>{eachProgram.program_title}</h3>
+                  <h4>{eachProgram.program_type}</h4>
+                </Link>
+              </div>
+            )))
+            : (<>Пока у тебя нет подобранных программ...</>)}
+        </div>
 
-      <h2>Мое расписание</h2>
-      <div id="calendar-container">
+        <h2>Мое расписание</h2>
+        <div id="calendar-container">
         CALENDAR
         <table>
           <thead>
@@ -243,18 +241,18 @@ const handleCancel = () => {
       {/* <button className="button" type="button"> <Link to="/view-profile/cal-calculator">Калькулятор калорий
       </Link></button> */}
 
-      <Button type="primary" onClick={showModal}>
-      Калькулятор калорий
-      </Button>
-      <Modal
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        className="modal-style"
-      >
-        <CalculatorPage />
-      </Modal>
-    </div>
+<Button type="primary" onClick={showModal}>
+          Калькулятор калорий
+        </Button>
+        <Modal
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          className="modal-style"
+        >
+          <CalculatorPage />
+        </Modal>
+      </div>
     </CalculatorContextProvider>
   );
 };
