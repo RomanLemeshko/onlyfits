@@ -2,14 +2,13 @@ import { useParams } from "react-router-dom";
 import './certainProgramPage.css'
 import {  useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { ProgramType } from "../mainPage/MainPage";
 // import {arr} from '../mainPage/MainPage'
 
 const CertainProgramPage = () => {
 const {id} = useParams()
 const progs = useSelector((state:RootState)=> state.allPrograms)
 
-const certainProg: ProgramType | undefined = progs.find((each) =>{ return each.id === Number(id)})
+const certainProg= progs.find((each) =>{ return each.id === Number(id)})
 
 // const certainProgram:ProgramType =arr[Number(id)-1]
 

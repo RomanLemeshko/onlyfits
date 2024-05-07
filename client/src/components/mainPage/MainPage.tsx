@@ -24,7 +24,7 @@ const MainPage = () => {
   const [programLevel, setProgramLevel] = useState<string>('all');
   const progs = useSelector((state: RootState) => state.allPrograms);
   const user = useSelector((state: RootState) => state.auth);
-  const [localStorageContent, setLocalStorageContent] = useState([]);
+  const [, setLocalStorageContent] = useState<string>('');
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -55,7 +55,6 @@ const MainPage = () => {
     }
   };
 
- 
   useEffect(() => {
     dispatch(getAllProgramsThunky())
       .unwrap()
@@ -64,6 +63,17 @@ const MainPage = () => {
     //! to get and fil out user programs
     dispatch(getUserProgramsThunky(Number(user?.user?.id)));
   }, []);
+
+
+  //! to check if locanStorage not null
+  const checkValue = (): ProgramType[] => {
+    const programsString = localStorage.getItem('programs');
+    if (programsString !== null) {
+      return JSON.parse(programsString);
+    } else {
+      return [];
+    }
+  };
 
   return (
     <div>
@@ -100,33 +110,32 @@ const MainPage = () => {
       </div>
 
       <div id="programs-container">
-        {!!localStorage.getItem('programs') &&
-          JSON.parse(localStorage.getItem('programs')).map(
-            (eachProgram: ProgramType) => (
-              <div key={eachProgram.id} className="eachProgram">
-                <div>
-                  <Link to={`program/${eachProgram.id}`}>
-                    <h3>Название: {eachProgram.program_title}</h3>
-                    <h4>Тип: {eachProgram.program_type}</h4>
-                    <h4>Уровень: {eachProgram.program_level}</h4>
-                  </Link>
-                </div>
-                <button
-                  className="add-prog-bth"
-                  onClick={() =>
-                    dispatch(
-                      addUserProgramsThunky({
-                        user_id: Number(user?.user?.id),
-                        program_id: Number(eachProgram.id),
-                      })
-                    )
-                  }
-                >
-                  add program
-                </button>
+        {/* {!!localStorage.getItem('programs') && */}
+        {!!checkValue() &&
+          checkValue().map((eachProgram: ProgramType) => (
+            <div key={eachProgram.id} className="eachProgram">
+              <div>
+                <Link to={`program/${eachProgram.id}`}>
+                  <h3>Название: {eachProgram.program_title}</h3>
+                  <h4>Тип: {eachProgram.program_type}</h4>
+                  <h4>Уровень: {eachProgram.program_level}</h4>
+                </Link>
               </div>
-            )
-          )}
+              <button
+                className="add-prog-bth"
+                onClick={() =>
+                  dispatch(
+                    addUserProgramsThunky({
+                      user_id: Number(user?.user?.id),
+                      program_id: Number(eachProgram.id),
+                    })
+                  )
+                }
+              >
+                add program
+              </button>
+            </div>
+          ))}
       </div>
     </div>
   );

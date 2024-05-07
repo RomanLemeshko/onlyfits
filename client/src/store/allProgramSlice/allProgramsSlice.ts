@@ -6,7 +6,7 @@ export interface InitialState {
   program_title: string;
   program_type: string;
   program_level: string;
-  program_raiting: number;
+  program_rating: number;
   training_days: number;
 }
 
