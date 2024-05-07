@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Select, Space } from 'antd';
 import { CalculatorContext } from '../../context/CalculatorContext';
 

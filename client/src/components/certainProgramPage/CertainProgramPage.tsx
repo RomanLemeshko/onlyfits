@@ -10,6 +10,7 @@ const progs = useSelector((state:RootState)=> state.allPrograms)
 
 const certainProg= progs.find((each) =>{ return each.id === Number(id)})
 
+
 // const certainProgram:ProgramType =arr[Number(id)-1]
 
 

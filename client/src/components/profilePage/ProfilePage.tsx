@@ -15,18 +15,15 @@ const ProfilePage = () => {
   const user = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+const showModal = () => {
+  setIsModalOpen(true);
+};
+const handleOk = () => {
+  setIsModalOpen(false);
+};
+const handleCancel = () => {
+  setIsModalOpen(false);
+};
 
   useEffect(() => {
     dispatch(getUserProgramsThunky(Number(user?.user?.id)));

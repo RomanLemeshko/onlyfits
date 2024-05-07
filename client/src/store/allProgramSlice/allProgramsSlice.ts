@@ -47,7 +47,7 @@ const allProgramsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllProgramsThunky.fulfilled, (state, action) => {
+    builder.addCase(getAllProgramsThunky.fulfilled, (_, action) => {
       // console.log("EXTRA: ", state, action)
       return action.payload;
     });

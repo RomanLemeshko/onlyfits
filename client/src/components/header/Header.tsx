@@ -10,6 +10,7 @@ const Header = () => {
   const isLoggedIn = useSelector((state:RootState) => state.auth.isLoggedIn);
   const user = useSelector((state: RootState) => state.auth.user);
 
+
   const handleLogout = async () => {
     try {
       await dispatch(logout()).unwrap();
