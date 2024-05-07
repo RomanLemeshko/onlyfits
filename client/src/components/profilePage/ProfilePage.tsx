@@ -15,8 +15,6 @@ const ProfilePage = () => {
   const user = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 const showModal = () => {
   setIsModalOpen(true);
 };
