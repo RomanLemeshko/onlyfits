@@ -9,6 +9,7 @@ import { CalculatorContextProvider } from '../context/CalculatorContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
+import CalendarPage from '../calendarPage/CalendarPage';
 
 const ProfilePage = () => {
   const progs = useSelector((state: RootState) => state.userPrograms);
@@ -47,12 +48,12 @@ const handleCancel = () => {
         </div>
 
         <h2>Мое расписание</h2>
-
+            <CalendarPage/>
 
 
 
         
-        <div id="calendar-container">
+        {/* <div id="calendar-container">
         CALENDAR
         <table>
           <thead>
@@ -238,7 +239,7 @@ const handleCancel = () => {
             </tr>
           </tbody>
         </table>
-      </div>
+      </div> */}
 
       {/* <button className="button" type="button"> <Link to="/view-profile/cal-calculator">Калькулятор калорий
       </Link></button> */}
