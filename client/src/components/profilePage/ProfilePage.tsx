@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [programToWork, setProgramToWork] = useState<string>('');
-  const [scheduleToWork, setScheduleToWork] = useState<string>('three');
+  const [scheduleToWork, setScheduleToWork] = useState<string>('four');
 
   const programForMonthHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newProgId = event.target.value;
@@ -34,9 +34,6 @@ const ProfilePage = () => {
     setScheduleToWork(newSchedule);
     dispatch(getUserSchedule(newSchedule));
   };
-
-  console.log('SHEDULE', scheduleToWork);
-  console.log('PROG NAME TO WORK ', programToWork);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -73,11 +70,11 @@ const ProfilePage = () => {
               <input
                 type="radio"
                 name="schedule"
-                value="three"
-                checked={scheduleToWork === 'three'}
+                value="four"
+                checked={scheduleToWork === 'four'}
                 onChange={scheduleHandler}
               />
-              Three
+              Four
             </label>
           </div>
         </div>
@@ -107,7 +104,7 @@ const ProfilePage = () => {
         </div>
 
         <h2>Мое расписание</h2>
-        <CalendarPage work={programToWork} />
+        <CalendarPage />
 
         <Button type="primary" onClick={showModal}>
           Калькулятор калорий

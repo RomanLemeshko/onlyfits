@@ -11,7 +11,7 @@ const userProgIdForMonth = createSlice({
   initialState,
   reducers: {
     getUserProgIdForMonth: (state, action) => {
-      return { ...state, schedule: action.payload };
+      return { ...state, progId: action.payload };
     },
   },
 });

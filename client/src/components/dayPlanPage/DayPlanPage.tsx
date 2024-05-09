@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './dayPlanPage.css';
 import Header from '../header/Header';
+import { DayPlan } from '../calendarDayComponent/CalendarDayComponent';
 
 export type RecipeType = {
   id: number;
@@ -41,9 +42,25 @@ export const mealArr = [
   },
 ];
 
-const DayPlanPage = ({ data, isModalOpen, setIsModalOpen, close }) => {
+const DayPlanPage = ({ data,  close }:{data:DayPlan | null; close: () =>void }) => {
 
-    console.log('DATA SET', data);
+    //!ISMAIL YOU CAN USE DATA PROP WHICH DELIVER DATA LIKE BELOW:
+
+  /*
+  interface ExerciseData{
+  program_id:number,
+  exercise_title:string,
+  duration: number;
+  rest_time: number
+
+}
+export interface DayPlan {
+morning:ExerciseData[],
+evening:ExerciseData[]
+
+}
+  */
+console.log('DATA SET', data);
 
   return (
     <div>

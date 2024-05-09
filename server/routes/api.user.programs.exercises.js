@@ -21,7 +21,7 @@ router.get('/get-user-programs-exercises', async (req, res) => {
     // console.log(allExcersises[1].length);
     // console.log(allExcersises[2].length);
 
-    console.log(allExcersises);
+    // console.log(allExcersises);
 
     res.status(200).json(allExcersises);
   } catch (error) {
