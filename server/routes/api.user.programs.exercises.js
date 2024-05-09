@@ -12,15 +12,16 @@ router.get('/get-user-programs-exercises', async (req, res) => {
     for (let each of prog_ids) {
       const allProg = await db.Exercise.findAll({
         where: { program_id: Number(each) },
+        attributes: ['program_id', 'exercise_title', 'duration', 'rest_time'],
       });
-       parsed = JSON.parse(JSON.stringify(allProg));
+      parsed = JSON.parse(JSON.stringify(allProg));
       allExcersises.push(parsed);
     }
     // console.log(allExcersises[0].length);
     // console.log(allExcersises[1].length);
     // console.log(allExcersises[2].length);
 
-    // console.log(allExcersises);
+    console.log(allExcersises);
 
     res.status(200).json(allExcersises);
   } catch (error) {
