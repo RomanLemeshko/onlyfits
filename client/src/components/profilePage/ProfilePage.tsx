@@ -28,7 +28,7 @@ const handleCancel = () => {
 
   useEffect(() => {
     dispatch(getUserProgramsThunky(Number(user?.user?.id)));
-  }, [dispatch, user?.user?.id]);
+  }, []);
 
   return (
     <CalculatorContextProvider>

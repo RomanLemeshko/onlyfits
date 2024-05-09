@@ -4,12 +4,14 @@ import authSlice from './auth/authSlice';
 import logger from 'redux-logger';
 import allProgramsSlice from './allProgramSlice/allProgramsSlice';
 import myProgramSlice from './myProgramSlice/userProgramSlice';
+import userProgsExcercises from './userProgsExcersicesSlice/userProgsExercises';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     allPrograms: allProgramsSlice,
     userPrograms: myProgramSlice,
+    userProgsExercises: userProgsExcercises,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

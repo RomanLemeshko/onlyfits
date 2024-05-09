@@ -1,29 +1,56 @@
 import { Day, DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ru } from 'date-fns/locale';
 import { format } from 'date-fns';
 import CalendarDayComponent from '../calendarDayComponent/CalendarDayComponent';
 import ModalForDailyExcercises from '../modalForDailyExcercisesPage/ModalForDailyExcercises';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import { Prog_Ids, getUserProgramsExercisesThunky } from '../../store/userProgsExcersicesSlice/userProgsExercises';
+
+interface programsIds{
+  program_id:number
+}
+
 
 const CalendarPage = () => {
   const today = new Date();
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(today);
+  const dispatch: AppDispatch = useDispatch();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const userPrograms = useSelector((state: RootState) => state.userPrograms);
+  const userProgsExcersises = useSelector((state:RootState)=> state.userProgsExercises)
 
-  const showModal = () => {
-    setIsModalOpen(true);
-   
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const [excercises, setExcercises] = useState([]);
+  
+  const getUserProgramsId = ()  =>  {
+    const progIds = userPrograms.map((eachProgData) => {
+      return eachProgData.id ;
+    });
+    return progIds;
   };
 
-  const handleDayClick = (day: Date) => setSelectedDay(day);
+  console.log("!!!!!!: ", getUserProgramsId());
+  useEffect(() => {
+   dispatch(getUserProgramsExercisesThunky(getUserProgramsId()))
+
+  }, []);
+
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // const showModal = () => {
+  //   setIsModalOpen(true);
+
+  // };
+  // const handleOk = () => {
+  //   setIsModalOpen(false);
+  // };
+  // const handleCancel = () => {
+  //   setIsModalOpen(false);
+  // };
+
+  // const handleDayClick = (day: Date) => setSelectedDay(day);
 
   const footer = selectedDay ? (
     <p> {selectedDay.toDateString()}</p>
@@ -40,24 +67,19 @@ const CalendarPage = () => {
         pagedNavigation
         selected={selectedDay}
         // onSelect={showModal}
-        onDayClick={showModal}
+        // onDayClick={showModal}
         locale={ru}
         footer={footer}
-        components={{Day:  CalendarDayComponent }}
-         />
-         
-   
-     
-  </>
-  )
-}
+        components={{ Day: CalendarDayComponent }}
+      />
+    </>
+  );
+};
 
 export default CalendarPage;
 
-
-
- //  Day?: (props: DayProps) => JSX.Element | null;
-  /*
+//  Day?: (props: DayProps) => JSX.Element | null;
+/*
 export function Day(props: DayProps): JSX.Element {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dayRender = useDayRender(props.date, props.displayMonth, buttonRef);
@@ -96,14 +118,9 @@ export default function App() {
 
 */
 
+// Disable Sundays and Saturdays
 
-
-
-
-    // Disable Sundays and Saturdays
-
-        // components={{ Day: CalendarDayComponent  }}
-
+// components={{ Day: CalendarDayComponent  }}
 
 /*
  // will match Sundays
