@@ -30,7 +30,7 @@ const RouterComponent = () => (
         <Route path="program/:id" element={<CertainProgramPage />} />
         <Route path="/view-profile/program/:id" element={<CertainProgramPage />} />
         <Route path="/view-profile/cal-calculator" element={<Calculator />} />
-        <Route path="/view-profile/day-plan" element={<DayPlanPage />} />
+        <Route path="/view-profile/day-plan" element={<DayPlanPage data={null} />} />
         <Route path="/view-profile/day-plan/morning-routine" element={<MorningRoutinePage />} />
         <Route path="/view-profile/day-plan/workout" element={<WorkoutPage />} />
         <Route path="/view-profile/cal-calculator" element={<CalculatorPage />} />
