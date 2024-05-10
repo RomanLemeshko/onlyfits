@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         through: 'User_Programs',
         as: 'users',
       });
+
+      this.hasMany(models.Macros, {foreignKey: 'user_id'});
     }
   }
   User.init(

@@ -97,6 +97,9 @@ table{
   color: rgb(243,244,239);
 }
 
+.ant-modal-content {
+  box-shadow: none;
+}
 
 .program-radio{
   display: flex;
@@ -105,5 +108,4 @@ table{
 #exercise-schedule{
   display: flex;
   gap:130px
-
 }
