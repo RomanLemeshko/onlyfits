@@ -27,7 +27,6 @@ export const getUserProgramsThunky = createAsyncThunk(
           withCredentials: true,
         }
       );
-      console.log('THUNK: ', user_id);
       return allPrograms.data; //! do not forget about seriliazation
     } catch (error) {
       console.log('ОШИБКА ПРИ ПОЛУЧЕНИИ ПРОГРАММ ПОЛЬЗОВАТЕЛЯ', error);
