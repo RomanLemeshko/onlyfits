@@ -5,7 +5,7 @@ import './header.css';
 import { AppDispatch, RootState } from '../../store';
 
 const Header = () => {
-  const dispatch:AppDispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state:RootState) => state.auth.isLoggedIn);
   const user = useSelector((state: RootState) => state.auth.user);
