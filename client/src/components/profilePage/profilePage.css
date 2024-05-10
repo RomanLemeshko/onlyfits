@@ -96,3 +96,7 @@ table{
   background-color: rgb(13, 20, 28);
   color: rgb(243,244,239);
 }
+
+.ant-modal-content {
+  box-shadow: none;
+}
