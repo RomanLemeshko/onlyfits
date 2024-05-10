@@ -1,3 +1,4 @@
+import { Modal } from 'antd';
 import { useRef, useState } from 'react';
 import { Button, DayProps, useDayRender } from 'react-day-picker';
 import DayPlanPage from '../dayPlanPage/DayPlanPage';
@@ -55,9 +56,16 @@ function CalendarDayComponent(props: DayProps) {
     }
   };
 
+  // console.log("TEST: ", randomExercises());
+
   const showModal = () => {
     setIsModalOpen(true);
   };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -78,11 +86,9 @@ function CalendarDayComponent(props: DayProps) {
         {...dayRender.buttonProps}
         onClick={showModal}
       />
-      {isModalOpen ? (
-        <DayPlanPage data={randomExercises()} close={handleCancel} />
-      ) : (
-        <></>
-      )}
+      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+      <DayPlanPage data={randomExercises()} />
+      </Modal>
     </div>
   );
 }

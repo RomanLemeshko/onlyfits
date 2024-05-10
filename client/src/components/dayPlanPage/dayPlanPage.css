@@ -1,10 +1,11 @@
-#day-plan-container{
+/* #day-plan-container{
   margin: auto;
   width: 1000px;
   display: flex;
   flex-direction: column;
   align-items:center
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -29,6 +30,8 @@ button{
   margin-top: 10px;
   width: 500px;
 } */
+=======
+>>>>>>> 5175571755ec96742dbcf5f56dcf5fd869c38c27
 
 a{
   text-decoration: none
@@ -68,4 +71,4 @@ h2, h3{
  max-width: 100%;
  
  
- }
+ } */

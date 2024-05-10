@@ -42,7 +42,7 @@ export const mealArr = [
   },
 ];
 
-const DayPlanPage = ({ data,  close }:{data:DayPlan | null; close: () =>void }) => {
+const DayPlanPage = ({ data }:{data:DayPlan | null }) => {
 
     //!ISMAIL YOU CAN USE DATA PROP WHICH DELIVER DATA LIKE BELOW:
 
@@ -88,7 +88,6 @@ console.log('DATA SET', data);
             </div>
           ))}
         </div>
-        <button onClick={close}> CLOSE </button>
       </div>
       
     </div>
