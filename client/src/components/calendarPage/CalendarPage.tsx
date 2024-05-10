@@ -9,7 +9,7 @@ import { getUserProgramsExercisesThunky } from '../../store/userProgsExcersicesS
 
 const CalendarPage = () => {
   const today = new Date();
-  const [selectedDay, setSelectedDay] = useState<Date | undefined>(today);
+  const [selectedDay, ] = useState<Date | undefined>(today);
   const dispatch: AppDispatch = useDispatch();
 
   const userPrograms = useSelector((state: RootState) => state.userPrograms);

@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import './dayPlanPage.css';
-import Header from '../header/Header';
 import { DayPlan } from '../calendarDayComponent/CalendarDayComponent';
+
+interface dataType {
+  data: DayPlan | null 
+}
 
 export type RecipeType = {
   id: number;
@@ -42,7 +45,7 @@ export const mealArr = [
   },
 ];
 
-const DayPlanPage = ({ data }:{data:DayPlan | null }) => {
+const DayPlanPage = ({ data }:dataType) => {
 
     //!ISMAIL YOU CAN USE DATA PROP WHICH DELIVER DATA LIKE BELOW:
 

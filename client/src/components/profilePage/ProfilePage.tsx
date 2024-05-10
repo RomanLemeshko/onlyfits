@@ -14,12 +14,21 @@ import CalendarPage from '../calendarPage/CalendarPage';
 import { getUserSchedule } from '../../store/userScheduleSlice/userSchedule';
 import { getUserProgIdForMonth } from '../../store/userProgIdForMonth/userProgIdForMonth';
 
+interface MacrosType {
+    user_id: number,
+    purpose: string,
+    kilocalories: number,
+    proteins: number,
+    fats: number,
+    carbohydrates: number,
+}
+
 const ProfilePage = () => {
   const progs = useSelector((state: RootState) => state.userPrograms);
   const user = useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [latestMacros, setLatestMacros] = useState(null);
+  const [latestMacros, setLatestMacros] = useState<MacrosType | null>(null);
 
   useEffect(() => {
     const getLatestMacros = async () => {
