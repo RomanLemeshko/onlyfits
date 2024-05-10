@@ -30,10 +30,10 @@ const CalculatorPage = ({ updateCaloriesData }) => {
     setStep(event.target.value);
   }
 
-  const [kilocalories, setKilocalories] = useState(0);
-  const [proteins, setProteins] = useState(0);
-  const [carbohydrates, setCarbohydrates] = useState(0);
-  const [fats, setFats] = useState(0);
+  const [kilocalories, setKilocalories] = useState<number>(0);
+  const [proteins, setProteins] = useState<number>(0);
+  const [carbohydrates, setCarbohydrates] = useState<number>(0);
+  const [fats, setFats] = useState<number>(0);
 
   useEffect(() => {
     const result = calculateCalories(gender, purpose, weight, height, age, step, functionalTraining, strengthTraining, activeHobbies);
@@ -52,7 +52,7 @@ const CalculatorPage = ({ updateCaloriesData }) => {
     setFats(Math.round(result*0.3/9));
   }, [gender, purpose, weight, height, age, step, functionalTraining, strengthTraining, activeHobbies]);
 
-  function calculateCalories (gender, purpose, weight, height, age, step, functionalTraining, strengthTraining, activeHobbies) {
+  function calculateCalories (gender: string, purpose: string, weight: string, height: string, age: string, step: string, functionalTraining: number, strengthTraining: number, activeHobbies: number) {
     
     // Константы для расчета калорий
     const menCoefficient = 5;
@@ -62,9 +62,9 @@ const CalculatorPage = ({ updateCaloriesData }) => {
     // Рассчитываем базовый метаболизм в зависимости от пола
     let bmr;
     if (gender === "Мужчина") {
-        bmr = (menCoefficient * weight) + (6.25 * height) - (5 * age) + 5;
+        bmr = (menCoefficient * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) + 5;
     } else if (gender === "Женщина") {
-        bmr = (womenCoefficient * weight) + (6.25 * height) - (5 * age) - 161;
+        bmr = (womenCoefficient * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) - 161;
     } else {
         return "Неверно указан пол";
     }
@@ -86,7 +86,7 @@ const CalculatorPage = ({ updateCaloriesData }) => {
     }
 
     // Дополнительные калории на основе количества шагов и тренировок
-    totalCalories += (step * 0.05); // Прибавляем 0.05 калорий за каждый шаг
+    totalCalories += (Number(step) * 0.05); // Прибавляем 0.05 калорий за каждый шаг
     totalCalories += (functionalTraining * 80); // Прибавляем 80 калорий за каждую функциональную тренировку
     totalCalories += (strengthTraining * 80); // Прибавляем 80 калорий за каждую силовую тренировку
     totalCalories += (activeHobbies * 50); // Прибавляем 50 калорий за каждое активное хобби

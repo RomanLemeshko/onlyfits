@@ -5,6 +5,7 @@ const authRoutes = require('./routes/auth.routes');
 const allProgramAndFilter = require('./routes/api.program')
 const allUserProgAddDeleteprog = require('./routes/api.user.programs')
 const userMacros = require('./routes/api.user.macros')
+const allUserProgExcersises = require('./routes/api.user.programs.exercises')
 const cors = require('cors');
 const app = express();
 const morgan = require('morgan');
@@ -26,6 +27,7 @@ app.use('/auth', authRoutes);
 app.use('/api', allProgramAndFilter)
 app.use('/api', allUserProgAddDeleteprog)
 app.use('/api', userMacros)
+app.use('/api', allUserProgExcersises)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

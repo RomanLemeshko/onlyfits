@@ -35,7 +35,7 @@ table{
 
 
 .button{
-  display: inline-block;
+  /* display: inline-block;
   padding: 10px 20px;
   background-color: #4caf50;
   color: white;
@@ -47,7 +47,7 @@ table{
   cursor: pointer;
   margin-left: 5px;
   margin-top: 10px;
-  width: 400px;
+  width: 400px; */
 }
 
 .calculator {
@@ -99,4 +99,13 @@ table{
 
 .ant-modal-content {
   box-shadow: none;
+}
+
+.program-radio{
+  display: flex;
+}
+
+#exercise-schedule{
+  display: flex;
+  gap:130px
 }
