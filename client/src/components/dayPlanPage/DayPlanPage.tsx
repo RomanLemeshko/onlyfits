@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './dayPlanPage.css';
-import Header from '../header/Header';
 import { DayPlan } from '../calendarDayComponent/CalendarDayComponent';
+
+interface dataType {
+  data: DayPlan | null 
+}
 
 export type RecipeType = {
   id: number;
@@ -43,8 +46,10 @@ export const mealArr = [
   },
 ];
 
+
 const DayPlanPage = React.memo(({ data }:{data:DayPlan | null }) => {
   console.log('DATA SET', data);
+
 
   return (
     <div>
