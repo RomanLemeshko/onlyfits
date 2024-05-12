@@ -3,8 +3,12 @@ const router = express.Router();
 const db = require('../db/models');
 
 router.get('/get-user-programs', async (req, res) => {
+  const { user_id } = req.query;
+  if (!user_id) {
+    return res.status(400).json({ error: 'User ID is required' });
+  }
+
   try {
-    const { user_id } = req.query;
     const allProg = await db.Program.findAll({
       include: [
         {
@@ -18,6 +22,7 @@ router.get('/get-user-programs', async (req, res) => {
     res.status(200).json(parsed);
   } catch (error) {
     console.log('ОШИБКА ПОЛУЧЕНИЯ ВСЕХ ПРОГРАММ ПОЛЬЗОВАТЕЛЯ СЕРВЕР', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 

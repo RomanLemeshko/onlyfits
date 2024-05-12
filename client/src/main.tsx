@@ -21,15 +21,12 @@ export const App = () => {
         try {
           const user = JSON.parse(userJson);
           dispatch(setUser({ accessToken, user }));
+          await dispatch(refreshAccessToken()).unwrap()
         } catch (e) {
           console.error('Error parsing user data:', e);
           localStorage.removeItem('user');
           localStorage.removeItem('accessToken');
         }
-      }
-
-      if (accessToken) {
-        await dispatch(refreshAccessToken()).unwrap();
       }
       setLoading(false);
     };
