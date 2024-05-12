@@ -6,7 +6,7 @@ import SelectPurpose from './SelectPurpose/SelectPurpose';
 import SliderNumber from './SliderNumber/SliderNumber';
 import './calculatorPage.css';
 
-const CalculatorPage = ({ updateCaloriesData }) => {
+const CalculatorPage = ({ updateCaloriesData }:any ) => {
   const { gender, purpose, functionalTraining, strengthTraining, activeHobbies } = useContext(CalculatorContext);
 
   const [weight, setWeight] = useState('');
