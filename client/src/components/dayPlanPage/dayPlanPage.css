@@ -5,33 +5,6 @@
   flex-direction: column;
   align-items:center
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-/* button{
-=======
-=======
->>>>>>> 15465f779acab548b336259ff64ec7eae83dc522
-/* 
-button{
->>>>>>> c90ec219e68d07f2cb9372324f086fa95ada9f96
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 5px;
-  margin-top: 10px;
-  width: 500px;
-} */
-=======
->>>>>>> 5175571755ec96742dbcf5f56dcf5fd869c38c27
 
 a{
   text-decoration: none

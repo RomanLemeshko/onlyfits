@@ -66,7 +66,7 @@ const CalculatorPage = ({ updateCaloriesData }) => {
     } else if (gender === "Женщина") {
         bmr = (womenCoefficient * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) - 161;
     } else {
-        return "Неверно указан пол";
+        return 0;
     }
 
     // Рассчитываем общий калорийный расход с учетом активности
@@ -82,7 +82,7 @@ const CalculatorPage = ({ updateCaloriesData }) => {
             totalCalories = bmr * activityFactor + 200; // Для набора массы добавляем 300 ккал
             break;
         default:
-            return "Неверно указана цель";
+            return 0;
     }
 
     // Дополнительные калории на основе количества шагов и тренировок

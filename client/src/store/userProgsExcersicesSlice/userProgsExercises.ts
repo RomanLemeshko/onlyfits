@@ -18,7 +18,7 @@ export const getUserProgramsExercisesThunky = createAsyncThunk(
     console.log('!!!: ', prog_ids);
     try {
       const allProgramsExercises = await axios.get(
-        'http://localhost:3000/api/get-user-programs-exercises',
+        `${import.meta.env.VITE_HOST_URL}/api/get-user-programs-exercises`,
         {
           params: { prog_ids },
           withCredentials: true,

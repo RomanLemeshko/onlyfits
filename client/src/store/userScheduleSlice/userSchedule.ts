@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface UserShedule {
+export interface UserSсhedule {
   schedule: string;
 }
 
-const initialState: UserShedule = { schedule: '' };
+const initialState: UserSсhedule = { schedule: '' };
 
 const userSchedule = createSlice({
   name: 'userSchedule',

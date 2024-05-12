@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './dayPlanPage.css';
 import Header from '../header/Header';
@@ -42,25 +43,8 @@ export const mealArr = [
   },
 ];
 
-const DayPlanPage = ({ data }:{data:DayPlan | null }) => {
-
-    //!ISMAIL YOU CAN USE DATA PROP WHICH DELIVER DATA LIKE BELOW:
-
-  /*
-  interface ExerciseData{
-  program_id:number,
-  exercise_title:string,
-  duration: number;
-  rest_time: number
-
-}
-export interface DayPlan {
-morning:ExerciseData[],
-evening:ExerciseData[]
-
-}
-  */
-console.log('DATA SET', data);
+const DayPlanPage = React.memo(({ data }:{data:DayPlan | null }) => {
+  console.log('DATA SET', data);
 
   return (
     <div>
@@ -92,6 +76,6 @@ console.log('DATA SET', data);
       
     </div>
   );
-};
+});
 
 export default DayPlanPage;

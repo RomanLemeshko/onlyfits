@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import './profilePage.css';
-import { ProgramType } from '../mainPage/MainPage';
 import { useState, useEffect } from 'react';
 import { Button, Modal } from 'antd';
 import CalculatorPage from '../calculatorPage/CalculatorPage';
@@ -14,32 +13,36 @@ import CalendarPage from '../calendarPage/CalendarPage';
 import { getUserSchedule } from '../../store/userScheduleSlice/userSchedule';
 import { getUserProgIdForMonth } from '../../store/userProgIdForMonth/userProgIdForMonth';
 
+interface MacrosType {
+    user_id: number;
+    purpose: string;
+    kilocalories: number;
+    proteins: number;
+    fats: number;
+    carbohydrates: number;
+}
+
 const ProfilePage = () => {
-  const progs = useSelector((state: RootState) => state.userPrograms);
-  const user = useSelector((state: RootState) => state.auth);
-  const dispatch: AppDispatch = useDispatch();
+  const progs = useSelector((state: RootState) => state.userPrograms.programs); // Убедитесь, что вы обращаетесь к правильному свойству
+  const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch<AppDispatch>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [latestMacros, setLatestMacros] = useState(null);
+  const [latestMacros, setLatestMacros] = useState<MacrosType | null>(null);
 
   useEffect(() => {
     const getLatestMacros = async () => {
       try {
-        if (!user || !user.user) return; // Проверка на наличие пользователя
-        const response = await axios.get(
-          'http://localhost:3000/api/get-latest-user-macros',
-          {
-            params: {
-              user_id: user.user.id, // Передаем ID текущего пользователя
-            },
-          }
-        );
+        if (!user || !user.id) return;
+        const response = await axios.get(`${import.meta.env.VITE_HOST_URL}/api/get-latest-user-macros`, {
+          params: { user_id: user.id },
+        });
         setLatestMacros(response.data);
       } catch (error) {
         console.error('Ошибка при получении последних макросов:', error);
       }
     };
-
-    if (user && user.user) {
+  
+    if (user && user.id) {
       getLatestMacros();
     }
   }, [user, isModalOpen]);
@@ -52,8 +55,7 @@ const ProfilePage = () => {
     purpose: '',
   });
 
-  // Функция для обновления состояния при получении новых данных от CalculatorPage
-  const updateCaloriesData = (data: any) => {
+  const updateCaloriesData = (data: MacrosType) => {
     setCaloriesData(data);
   };
 
@@ -63,35 +65,25 @@ const ProfilePage = () => {
 
   const handleOk = async () => {
     setIsModalOpen(false);
-
     try {
-      const response = await axios.post(
-        'http://localhost:3000/api/add-user-macros',
-        {
-          kilocalories: caloriesData.kilocalories,
-          proteins: caloriesData.proteins,
-          fats: caloriesData.fats,
-          carbohydrates: caloriesData.carbohydrates,
-          purpose: caloriesData.purpose,
-          user,
-        }
-      );
-
-      console.log('ДАННЫЕ КБЖУ УСПЕШНО ЗАПИСАНЫ', response.data);
+      const response = await axios.post(`${import.meta.env.VITE_HOST_URL}/api/add-user-macros`, {
+        ...caloriesData,
+        user_id: user?.id
+      });
+      console.log('Данные КБЖУ успешно записаны:', response.data);
     } catch (error) {
-      console.log('ОШИБКА ПРИ ЗАПИСИ КБЖУ ПОЛЬЗОВАТЕЛЯ');
+      console.error('Ошибка при записи КБЖУ пользователя', error);
     }
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   const [programToWork, setProgramToWork] = useState<string>('');
   const [scheduleToWork, setScheduleToWork] = useState<string>('two');
 
-  const programForMonthHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const programForMonthHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newProgId = event.target.value;
     setProgramToWork(newProgId);
     dispatch(getUserProgIdForMonth(newProgId));
@@ -104,93 +96,79 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    dispatch(getUserProgramsThunky(Number(user?.user?.id)));
-  }, []);
+    if (user && user.id) {
+      dispatch(getUserProgramsThunky(user.id));
+    }
+  }, [dispatch, user]);
 
   return (
     <CalculatorContextProvider>
       <div id="profile-page-container">
-          <Header />
-          <div>
-            {latestMacros ? (
-              <>
-                <p>Текущая цель: {latestMacros.purpose}</p>
-                <p>Требуемые показатели макроэлементов:</p>
-                <div className="calculatorPage__result">
-                  <div>
-                    <h3>{`${latestMacros.kilocalories} ккал`}</h3>
-                  </div>
-                  <div className="calculatorPage__macros">
-                    <div>
-                      <p>Белки</p>
-                      <p>{`${latestMacros.proteins} гр.`}</p>
-                    </div>
-                    <div>
-                      <p>Жиры</p>
-                      <p>{`${latestMacros.fats} гр.`}</p>
-                    </div>
-                    <div>
-                      <p>Углеводы</p>
-                      <p>{`${latestMacros.carbohydrates} гр.`}</p>
-                    </div>
-                  </div>
+        <Header />
+        <div>
+          {latestMacros ? (
+            <>
+              <p>Текущая цель: {latestMacros.purpose}</p>
+              <p>Требуемые показатели макроэлементов:</p>
+              <div className="calculatorPage__result">
+                <h3>{`${latestMacros.kilocalories} ккал`}</h3>
+                <div className="calculatorPage__macros">
+                  <p>Белки: {`${latestMacros.proteins} гр`}</p>
+                  <p>Жиры: {`${latestMacros.fats} гр`}</p>
+                  <p>Углеводы: {`${latestMacros.carbohydrates} гр`}</p>
                 </div>
-              </>
-            ) : (
-              <p>Вы еще не рассчитали свою цель</p>
-            )}
-          </div>
-          <h3>Выбери расписание занятий:</h3>
-          <div id="exercise-schedule">
-            <label htmlFor="schedule">
-              <input
-                type="radio"
-                name="schedule"
-                value="two"
-                checked={scheduleToWork === 'two'}
-                onChange={scheduleHandler}
-              />
-              Two
-            </label>
-            <label htmlFor="schedule">
-              <input
-                type="radio"
-                name="schedule"
-                value="four"
-                checked={scheduleToWork === 'four'}
-                onChange={scheduleHandler}
-              />
-              Four
-            </label>
-          </div>
-
-        <div id="all-picked-program-container">
-          {!!progs && progs.length > 0 ? (
-            progs.map((eachProgram: ProgramType) => (
-              <div className="program-radio">
-                <div className="picked-program-container" key={eachProgram.id}>
-                  <Link to={`/view-profile/program/${eachProgram.id}`}>
-                    <h3>{eachProgram.program_title}</h3>
-                    <h4>{eachProgram.program_type}</h4>
-                  </Link>
-                </div>
-                <input
-                  checked={programToWork === eachProgram.id.toString()}
-                  onChange={programForMonthHandler}
-                  type="radio"
-                  name="program"
-                  value={eachProgram.id}
-                />
               </div>
-            ))
+            </>
           ) : (
-            <>Пока у тебя нет подобранных программ...</>
+            <p>Вы еще не рассчитали свою цель.</p>
           )}
         </div>
-
+        <h3>Выберите расписание занятий:</h3>
+        <div id="exercise-schedule">
+          <label htmlFor="schedule">
+            <input
+              type="radio"
+              name="schedule"
+              value="two"
+              checked={scheduleToWork === 'two'}
+              onChange={scheduleHandler}
+            /> Two
+          </label>
+          <label htmlFor="schedule">
+            <input
+              type="radio"
+              name="schedule"
+              value="four"
+              checked={scheduleToWork === 'four'}
+              onChange={scheduleHandler}
+            /> Four
+          </label>
+        </div>
+        <div id="all-picked-program-container">
+  {progs && progs.length > 0 ? (
+    progs.map((eachProgram) => (
+      <div className="program-radio" key={eachProgram.id}>
+        <div className="picked-program-container">
+          <Link to={`/view-profile/program/${eachProgram.id}`}>
+            <h3>{eachProgram.program_title}</h3>
+            <h4>{eachProgram.program_type}</h4>
+          </Link>
+        </div>
+        <input
+          type="radio"
+          name="program"
+          value={eachProgram.id}
+          checked={programToWork === eachProgram.id.toString()}
+          onChange={programForMonthHandler}
+        />
+      </div>
+    ))
+  ) : (
+    <p>Пока у тебя нет подобранных программ...</p>
+  )}
+</div>
         <h2>Мое расписание</h2>
         <CalendarPage />
-
         <Button type="primary" onClick={showModal}>
           Калькулятор калорий
         </Button>
