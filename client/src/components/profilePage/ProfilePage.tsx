@@ -23,7 +23,7 @@ interface MacrosType {
 }
 
 const ProfilePage = () => {
-  const progs = useSelector((state: RootState) => state.userPrograms.programs); // Убедитесь, что вы обращаетесь к правильному свойству
+  const progs = useSelector((state: RootState) => state.userPrograms.programs);
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
   const [isModalOpen, setIsModalOpen] = useState(false);
