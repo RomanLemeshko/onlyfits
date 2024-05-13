@@ -15,7 +15,7 @@ const initialState: excercisesProg[][] = [];
 export const getUserProgramsExercisesThunky = createAsyncThunk(
   'userProgExercises', //! it is just thunk name, could be any
   async (prog_ids: Prog_Ids) => {
-    console.log('!!!: ', prog_ids);
+    console.log('SEREGA BRO: ', prog_ids);
     try {
       const allProgramsExercises = await axios.get(
         `${import.meta.env.VITE_HOST_URL}/api/get-user-programs-exercises`,
