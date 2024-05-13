@@ -42,7 +42,8 @@ export const mealArr = [
   },
 ];
 
-const DayPlanPage = ({ data }:{data:DayPlan | null }) => {
+
+const DayPlanPage = ({ data }:{data: DayPlan | null }) => {
 
     //!ISMAIL YOU CAN USE DATA PROP WHICH DELIVER DATA LIKE BELOW:
 

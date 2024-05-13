@@ -13,7 +13,7 @@ interface ExerciseData {
 }
 
 export interface DayPlan {
-  morning: ExerciseData[];
+  morning: ExerciseData[],
   evening: ExerciseData[];
 }
 

@@ -175,7 +175,7 @@ const ProfilePage = () => {
                   </Link>
                 </div>
                 <input
-                  checked={programToWork === eachProgram.id.toString()}
+                  checked={programToWork === eachProgram?.id.toString()}
                   onChange={programForMonthHandler}
                   type="radio"
                   name="program"
