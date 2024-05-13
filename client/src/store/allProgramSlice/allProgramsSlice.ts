@@ -1,7 +1,7 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export interface InitialState {
+interface Program {
   id: number;
   program_title: string;
   program_type: string;
@@ -10,51 +10,52 @@ export interface InitialState {
   training_days: number;
 }
 
-interface Filter {
-  filterByType: string;
-  filterByLevel: string;
+interface ProgramsState {
+  programs: Program[];
+  filteredPrograms: Program[];
 }
 
-const initialState: InitialState[] = [];
+const initialState: ProgramsState = {
+  programs: [],
+  filteredPrograms: []
+};
 
-//thunk to add data from db to store initially
 export const getAllProgramsThunky = createAsyncThunk(
-  'allProg', //! it is just thunk name, could be any
+  'allPrograms/getAllPrograms',
   async () => {
     try {
-      const allPrograms = await axios.get(
-        'http://localhost:3000/api/getAllPrograms',
-        { withCredentials: true }
-      );
-      return allPrograms.data; //! do not forget about seriliazation
+      const response = await axios.get(`${import.meta.env.VITE_HOST_URL}/api/getAllPrograms`, { withCredentials: true });
+      return response.data;
     } catch (error) {
-      console.log('ОШИБКА ПРИ ПОЛУЧЕНИИ ВСЕХ ПРОГРАММ ', error);
+      console.error('ОШИБКА ПРИ ПОЛУЧЕНИИ ВСЕХ ПРОГРАММ', error);
+      return [];
     }
   }
 );
 
 const allProgramsSlice = createSlice({
-  name: 'allPrograms', //! current slice name
+  name: 'allPrograms',
   initialState,
   reducers: {
-  
-    programFilterByLevel: (state, action: PayloadAction<Filter>) => {
-      return state.filter(
-        (eachProgram) =>
-          eachProgram.program_level === action.payload.filterByLevel &&
-          eachProgram.program_type === action.payload.filterByType
-      );
+    setFilteredPrograms: (state, action: PayloadAction<{ type: string; level: string }>) => {
+      state.filteredPrograms = state.programs.filter(program => {
+        const matchesType = action.payload.type === 'all' || program.program_type === action.payload.type;
+        const matchesLevel = action.payload.level === 'all' || program.program_level === action.payload.level;
+        return matchesType && matchesLevel;
+      });
     },
+    resetFilters: (state) => {
+      state.filteredPrograms = state.programs; // Reset to original list
+    }
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllProgramsThunky.fulfilled, (_, action) => {
-      // console.log("EXTRA: ", state, action)
-      return action.payload;
+    builder.addCase(getAllProgramsThunky.fulfilled, (state, action) => {
+      state.programs = action.payload;
+      state.filteredPrograms = action.payload; // Initialize filtered programs
     });
-  },
- 
+  }
 });
 
-export const { programFilterByLevel } = allProgramsSlice.actions;
+export const { setFilteredPrograms, resetFilters } = allProgramsSlice.actions;
 
 export default allProgramsSlice.reducer;

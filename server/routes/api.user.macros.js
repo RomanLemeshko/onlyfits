@@ -4,13 +4,15 @@ const db = require('../db/models');
 
 router.post('/add-user-macros', async (req, res) => {
   try {
-    const { kilocalories, proteins, fats, carbohydrates, purpose, user } =
-      req.body;
-    const user_id = user.user?.id;
+    const { kilocalories, proteins, fats, carbohydrates, purpose, user_id } = req.body; // Используйте user_id напрямую из тела запроса
 
-    // const check = await db.Macros.findOne({where:{user_id}})
-    // if(!check){
-    await db.Macros.create({
+    // Проверка на существование user_id в запросе
+    if (!user_id) {
+      return res.status(400).json({ message: "user_id is required" });
+    }
+
+    // Создание записи макросов в базе данных
+    const newMacro = await db.Macros.create({
       user_id,
       purpose,
       kilocalories,
@@ -18,13 +20,11 @@ router.post('/add-user-macros', async (req, res) => {
       fats,
       carbohydrates,
     });
-    res.sendStatus(201);
-    // } else {
-    //   res.status(409).json({message:"macros already added"})
 
-    // }
+    res.status(201).json(newMacro); // Возвращаем созданный объект
   } catch (error) {
-    console.log('ОШИБКА ДОБАВЛЕНИИ КБЖУ ПОЛЬЗОВАТЕЛЯ НА СЕРВЕРЕ', error);
+    console.error('ОШИБКА ДОБАВЛЕНИЯ КБЖУ ПОЛЬЗОВАТЕЛЯ НА СЕРВЕРЕ', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 

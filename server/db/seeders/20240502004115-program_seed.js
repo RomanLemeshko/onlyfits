@@ -24,7 +24,7 @@ module.exports = {
       },
       {
         program_title: 'impalla',
-        program_type: 'streching',
+        program_type: 'stretching',
         program_rating: 3,
         program_level: "professional",
         training_days: 30,
@@ -51,7 +51,7 @@ module.exports = {
       },
       {
         program_title: 'pantera',
-        program_type: 'streching',
+        program_type: 'stretching',
         program_rating: 7,
         program_level: "medium",
         training_days: 30,

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface UserProgId {
-  progId: string;
+  progId: number;
 }
 
-const initialState: UserProgId = { progId: '' };
+const initialState: UserProgId = { progId: 0 };
 
 const userProgIdForMonth = createSlice({
   name: 'userProgIdForMonth',
@@ -15,7 +15,6 @@ const userProgIdForMonth = createSlice({
     },
   },
 });
-
 export const { getUserProgIdForMonth } = userProgIdForMonth.actions;
 
 export default userProgIdForMonth.reducer;

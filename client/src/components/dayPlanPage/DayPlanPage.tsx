@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './dayPlanPage.css';
 import { DayPlan } from '../calendarDayComponent/CalendarDayComponent';
@@ -45,25 +46,10 @@ export const mealArr = [
   },
 ];
 
-const DayPlanPage = ({ data }:dataType) => {
 
-    //!ISMAIL YOU CAN USE DATA PROP WHICH DELIVER DATA LIKE BELOW:
+const DayPlanPage = React.memo(({ data }:{data:DayPlan | null }) => {
+  console.log('DATA SET', data);
 
-  /*
-  interface ExerciseData{
-  program_id:number,
-  exercise_title:string,
-  duration: number;
-  rest_time: number
-
-}
-export interface DayPlan {
-morning:ExerciseData[],
-evening:ExerciseData[]
-
-}
-  */
-console.log('DATA SET', data);
 
   return (
     <div>
@@ -95,6 +81,6 @@ console.log('DATA SET', data);
       
     </div>
   );
-};
+});
 
 export default DayPlanPage;

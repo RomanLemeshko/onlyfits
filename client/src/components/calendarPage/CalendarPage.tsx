@@ -3,34 +3,32 @@ import 'react-day-picker/dist/style.css';
 import { useEffect, useState } from 'react';
 import { ru } from 'date-fns/locale';
 import CalendarDayComponent from '../calendarDayComponent/CalendarDayComponent';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../store';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../store';
 import { getUserProgramsExercisesThunky } from '../../store/userProgsExcersicesSlice/userProgsExercises';
 
 const CalendarPage = () => {
   const today = new Date();
-  const [selectedDay, ] = useState<Date | undefined>(today);
-  const dispatch: AppDispatch = useDispatch();
+  const [selectedDay, setSelectedDay] = useState<Date | undefined>(today);
+  const dispatch = useAppDispatch();
 
-  const userPrograms = useSelector((state: RootState) => state.userPrograms);
-  const userShedule = useSelector((state: RootState) => state.userShedule);
-
-  const getUserProgramsId = () => {
-    const progIds = userPrograms.map((eachProgData) => {
-      return eachProgData.id;
-    });
-    return progIds;
-  };
+  const userPrograms = useSelector((state: RootState) => state.userPrograms.programs);
+  const userSchedule = useSelector((state: RootState) => state.userSсhedule);
 
   useEffect(() => {
-    dispatch(getUserProgramsExercisesThunky(getUserProgramsId()));
-  }, []);
+    const progIds = userPrograms.map(eachProgData => eachProgData.id);
+    if (progIds.length > 0) {
+      dispatch(getUserProgramsExercisesThunky(progIds));
+    }
+  }, [dispatch, userPrograms]);
 
   const footer = selectedDay ? (
-    <p> {selectedDay.toDateString()}</p>
+    <p>{selectedDay.toDateString()}</p>
   ) : (
     <p>Please pick a day.</p>
   );
+
+  const daysToDisable = userSchedule.schedule === 'four' ? [2, 4, 6] : [0, 2, 3, 4, 6];
 
   return (
     <>
@@ -40,11 +38,8 @@ const CalendarPage = () => {
         required
         pagedNavigation
         selected={selectedDay}
-        disabled={
-          userShedule.schedule === 'four'
-            ? { dayOfWeek: [2, 4, 6] }
-            : { dayOfWeek: [0, 2, 3, 4, 6] }
-        }
+        onDayClick={setSelectedDay}
+        disabled={day => daysToDisable.includes(day.getDay())}
         locale={ru}
         footer={footer}
         components={{ Day: CalendarDayComponent }}

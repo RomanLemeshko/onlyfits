@@ -1,25 +1,25 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { fetchExercisesByNames } from '../../api/exercises/exerciseService';
 
-const MorningRoutinePage = () => {
+const EveningRoutinePage = () => {
   const [exercises, setExercises] = useState([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30); // Время для упражнения
+  const [timeLeft, setTimeLeft] = useState(30); // Время для упражнений
   const [isPaused, setIsPaused] = useState(false);
-  const [isResting, setIsResting] = useState(false); // Новое состояние для отслеживания периода отдыха
+  const [isResting, setIsResting] = useState(false); // Состояние для отслеживания периода отдыха
   const timerRef = useRef(null);
 
   useEffect(() => {
     const dailyExercises = JSON.parse(localStorage.getItem('dailyExercises'));
-    const morningExercises = dailyExercises ? dailyExercises.morning : [];
+    const eveningExercises = dailyExercises ? dailyExercises.evening : [];
 
     const loadExercises = async () => {
-      const names = morningExercises.map(ex => ex.exercise_title);
+      const names = eveningExercises.map(ex => ex.exercise_title);
       const loadedExercises = await fetchExercisesByNames(names);
-      setExercises(loadedExercises);
+      setExercises(loadedExercises.slice(0, 6));
     };
 
-    if (morningExercises.length > 0) {
+    if (eveningExercises.length > 0) {
       loadExercises();
     }
   }, []);
@@ -39,24 +39,22 @@ const MorningRoutinePage = () => {
           return prevTime - 1;
         } else {
           if (isResting) {
-            // Если был период отдыха, переходим к следующему упражнению
             switchExercise();
           } else {
-            // Начинаем период отдыха
             startRestingPeriod();
           }
-          return isResting ? 30 : 20; // Время отдыха 20 секунд, упражнения 30 секунд
+          return isResting ? 30 : 20; // Время отдыха 20 секунд, упражнений 30 секунд
         }
       });
     }, 1000);
   };
 
   const startRestingPeriod = () => {
-    setIsResting(true); // Включаем режим отдыха
+    setIsResting(true);
   };
 
   const switchExercise = () => {
-    setIsResting(false); // Выключаем режим отдыха
+    setIsResting(false);
     const nextIndex = currentExerciseIndex < exercises.length - 1 ? currentExerciseIndex + 1 : 0;
     setCurrentExerciseIndex(nextIndex);
   };
@@ -72,7 +70,7 @@ const MorningRoutinePage = () => {
 
   return (
     <div>
-      <h2>Утренняя тренировка</h2>
+      <h2>Вечерняя тренировка</h2>
       {!isResting && exercises.length > 0 && (
         <div>
           <h3>{exercises[currentExerciseIndex].name}</h3>
@@ -88,4 +86,4 @@ const MorningRoutinePage = () => {
   );
 };
 
-export default MorningRoutinePage;
+export default EveningRoutinePage;
