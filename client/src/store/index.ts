@@ -4,7 +4,7 @@ import authSlice from './auth/authSlice';
 import logger from 'redux-logger';
 import allProgramsSlice from './allProgramSlice/allProgramsSlice';
 import myProgramSlice from './myProgramSlice/userProgramSlice';
-import userProgsExcercises from './userProgsExcersicesSlice/userProgsExercises';
+import userProgsExercises from './userProgsExcersicesSlice/userProgsExercises';
 import userSchedule from './userScheduleSlice/userSchedule';
 import userProgIdForMonth from './userProgIdForMonth/userProgIdForMonth';
 
@@ -13,8 +13,8 @@ export const store = configureStore({
     auth: authSlice,
     allPrograms: allProgramsSlice,
     userPrograms: myProgramSlice,
-    userProgsExercises: userProgsExcercises,
-    userShedule: userSchedule,
+    userProgsExercises: userProgsExercises,
+    userSсhedule: userSchedule,
     userProgIdForMonth: userProgIdForMonth
   },
   middleware: (getDefaultMiddleware) =>

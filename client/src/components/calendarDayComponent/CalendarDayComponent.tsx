@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo} from 'react';
 import { Button, DayProps, useDayRender } from 'react-day-picker';
 import DayPlanPage from '../dayPlanPage/DayPlanPage';
 import { useSelector } from 'react-redux';
@@ -28,8 +28,8 @@ function CalendarDayComponent(props: DayProps) {
     (state: RootState) => state.userProgIdForMonth
   );
 
-  const randomExercises = (): DayPlan | null => {
-    if (userProgIdForMonth.progId.length > 0) {
+  const exercisesData = useMemo(() => {
+    if (userProgIdForMonth.progId > 0) {
       const relevantExecises = [];
       for (const eachProgram of excercises) {
         for (const each of eachProgram) {
@@ -40,23 +40,20 @@ function CalendarDayComponent(props: DayProps) {
           }
         }
       }
-      //! now we need pick randomly 12 excercises and split it in two groups: morning and evening
       const random = [];
       for (let i = 0; i < 12; i++) {
         const number = Math.floor(Math.random() * relevantExecises.length);
-        const exersiseData = relevantExecises[number];
-        random.push(exersiseData);
-        // console.log('ASSOL: ', random);
+        const exerciseData = relevantExecises[number];
+        random.push(exerciseData);
       }
       const morningExercises = random.slice(0, 6);
       const eveningExercises = random.slice(6, 12);
+      localStorage.setItem('dailyExercises', JSON.stringify({morning: morningExercises, evening: eveningExercises}))
       return { morning: morningExercises, evening: eveningExercises };
     } else {
       return null;
     }
-  };
-
-  // console.log("TEST: ", randomExercises());
+  }, [userProgIdForMonth.progId, excercises]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -87,7 +84,7 @@ function CalendarDayComponent(props: DayProps) {
         onClick={showModal}
       />
       <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-      <DayPlanPage data={randomExercises()} />
+        <DayPlanPage data={exercisesData} />
       </Modal>
     </div>
   );

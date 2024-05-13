@@ -3,7 +3,7 @@ import { Button, Card, Progress, Carousel, Typography } from 'antd';
 import { fetchExercisesByNames } from '../../api/exercises/exerciseService';
 const { Title, Text } = Typography;
 
-const MorningRoutinePage = () => {
+const EveningRoutinePage = () => {
   const [exercises, setExercises] = useState([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(30);
@@ -16,12 +16,12 @@ const MorningRoutinePage = () => {
   useEffect(() => {
     const dailyExercises = JSON.parse(localStorage.getItem('dailyExercises'));
     const loadExercises = async () => {
-      const names = dailyExercises.morning.slice(0, 6).map(ex => ex.exercise_title);
+      const names = dailyExercises.evening.slice(0, 6).map(ex => ex.exercise_title);
       const loadedExercises = await fetchExercisesByNames(names);
       setExercises(loadedExercises);
     };
 
-    if (dailyExercises.morning.length > 0) {
+    if (dailyExercises.evening.length > 0) {
       loadExercises();
     }
   }, []);
@@ -119,4 +119,4 @@ const MorningRoutinePage = () => {
   );
 };
 
-export default MorningRoutinePage;
+export default EveningRoutinePage;

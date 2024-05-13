@@ -1,5 +1,5 @@
 import './morningRoutineExcerscise.css'
-const MorningRoutineExcetcisePage = () => {
+const MorningRoutineExercisePage = () => {
   return (
       <div id="eachday-morning-routine-container">
       <h1>REAR DECLINE BRIDGE</h1>
@@ -15,4 +15,4 @@ const MorningRoutineExcetcisePage = () => {
   );
 };
 
-export default MorningRoutineExcetcisePage;
+export default MorningRoutineExercisePage;

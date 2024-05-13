@@ -12,11 +12,11 @@ const CertainProgramPage = lazy(() => import('./components/certainProgramPage/Ce
 const Calculator = lazy(() => import('./components/calculatorPage/CalculatorPage'));
 const DayPlanPage = lazy(() => import('./components/dayPlanPage/DayPlanPage'));
 const MorningRoutinePage = lazy(() => import('./components/morningRoutinePage/MorningRoutinePage'));
-const WorkoutPage = lazy(() => import('./components/workOutPage/WorkoutPage'));
+const EveningRoutinePage = lazy(() => import('./components/workOutPage/EveningRoutinePage'));
 const CalculatorPage = lazy(() => import('./components/calculatorPage/CalculatorPage'));
 const Recipe = lazy(() => import('./components/recipePage/Recipe'));
 const WorkoutExercisePage = lazy(() => import('./components/exercisePage/WorkOutExercisePage'));
-const MorningRoutineExcetcisePage = lazy(() => import('./components/exercisePage/MorningRoutineExcetcisePage'));
+const MorningRoutineExercisePage = lazy(() => import('./components/exercisePage/MorningRoutineExercisePage'));
 
 const RouterComponent = () => (
   <Suspense fallback={null}>
@@ -30,13 +30,13 @@ const RouterComponent = () => (
         <Route path="program/:id" element={<CertainProgramPage />} />
         <Route path="/view-profile/program/:id" element={<CertainProgramPage />} />
         <Route path="/view-profile/cal-calculator" element={<Calculator />} />
-        <Route path="/view-profile/day-plan" element={<DayPlanPage />} />
+        <Route path="/view-profile/day-plan" element={<DayPlanPage data={null} />} />
         <Route path="/view-profile/day-plan/morning-routine" element={<MorningRoutinePage />} />
-        <Route path="/view-profile/day-plan/workout" element={<WorkoutPage />} />
+        <Route path="/view-profile/day-plan/workout" element={<EveningRoutinePage />} />
         <Route path="/view-profile/cal-calculator" element={<CalculatorPage />} />
         <Route path="/view-profile/day-plan/eat/:id" element={<Recipe />} />
         <Route path="/view-profile/day-plan/workout/start/" element={<WorkoutExercisePage />} />
-        <Route path="/view-profile/day-plan/morning-routine/start/" element={<MorningRoutineExcetcisePage />} />
+        <Route path="/view-profile/day-plan/morning-routine/start/" element={<MorningRoutineExercisePage />} />
       </Route>
     </Routes>
   </Suspense>

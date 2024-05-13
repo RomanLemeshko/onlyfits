@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/auth',
+  baseURL: `${import.meta.env.VITE_HOST_URL}/auth`,
   withCredentials: true
 });
 
@@ -48,7 +48,7 @@ axiosInstance.interceptors.response.use(response => response, async error => {
     isRefreshing = true;
 
     return new Promise((resolve, reject) => {
-      axios.post('http://localhost:3000/auth/refresh', {
+      axios.post(`${import.meta.env.VITE_HOST_URL}/auth/refresh`, {
         refreshToken: localStorage.getItem('refreshToken')
       }).then(response => {
         if (response.status === 200) {

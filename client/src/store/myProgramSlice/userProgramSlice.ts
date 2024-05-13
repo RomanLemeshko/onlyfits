@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export interface InitialState {
+interface Program {
   id: number;
   program_title: string;
   program_type: string;
@@ -10,43 +10,43 @@ export interface InitialState {
   training_days: number;
 }
 
-export interface Data {
-  user_id: number;
-  program_id: number;
+interface InitialState {
+  programs: Program[];
+  error?: string;
 }
-const initialState: InitialState[] = [];
+
+const initialState: InitialState = {
+  programs: [],
+  error: undefined
+};
 
 export const getUserProgramsThunky = createAsyncThunk(
-  'allUserProg', //! it is just thunk name, could be any
-  async (user_id: number) => {
+  'allUserProg',
+  async (user_id: number, { rejectWithValue }) => {
     try {
-      const allPrograms = await axios.get(
-        'http://localhost:3000/api/get-user-programs',
-        {
-          params: { user_id },
-          withCredentials: true,
-        }
+      const response = await axios.get(
+        `${import.meta.env.VITE_HOST_URL}/api/get-user-programs`,
+        { params: { user_id }, withCredentials: true }
       );
-      return allPrograms.data; //! do not forget about seriliazation
+      return response.data;
     } catch (error) {
-      console.log('ОШИБКА ПРИ ПОЛУЧЕНИИ ПРОГРАММ ПОЛЬЗОВАТЕЛЯ', error);
+      return rejectWithValue('ОШИБКА ПРИ ПОЛУЧЕНИИ ПРОГРАММ ПОЛЬЗОВАТЕЛЯ');
     }
   }
 );
 
 export const addUserProgramsThunky = createAsyncThunk(
-  'addUserProg', //! it is just thunk name, could be any
-  async (data: Data) => {
+  'addUserProg',
+  async (data: { user_id: number; program_id: number }, { rejectWithValue }) => {
     try {
-      const allPrograms = await axios.post(
-        'http://localhost:3000/api/add-user-program',
+      const response = await axios.post(
+        `${import.meta.env.VITE_HOST_URL}/api/add-user-program`,
         data,
         { withCredentials: true }
       );
-      // console.log("THUNK: ", allPrograms.data)
-      return allPrograms.data; //! do not forget about seriliazation
+      return response.data;
     } catch (error) {
-      console.log('ОШИБКА ПРИ ДОБВЛЕНИИ ПРОГРАММ ПОЛЬЗОВАТЕЛЯ', error);
+      return rejectWithValue('ОШИБКА ПРИ ДОБАВЛЕНИИ ПРОГРАММ ПОЛЬЗОВАТЕЛЯ');
     }
   }
 );
@@ -56,11 +56,17 @@ const myProgramSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getUserProgramsThunky.fulfilled, (_, action) => {
-      return action.payload;
+    builder.addCase(getUserProgramsThunky.fulfilled, (state, action) => {
+      state.programs = action.payload;
+    });
+    builder.addCase(getUserProgramsThunky.rejected, (state, action) => {
+      state.error = action.payload as string;
     });
     builder.addCase(addUserProgramsThunky.fulfilled, (state, action) => {
-      return [...state, action.payload];
+      state.programs = [...state.programs, action.payload];
+    });
+    builder.addCase(addUserProgramsThunky.rejected, (state, action) => {
+      state.error = action.payload as string;
     });
   },
 });

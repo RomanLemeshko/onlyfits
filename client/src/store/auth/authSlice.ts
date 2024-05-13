@@ -46,7 +46,7 @@ export const register = createAsyncThunk<AuthResponse, RegisterPayload, { reject
   'auth/register',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post<AuthResponse>('http://localhost:3000/auth/register', userData);
+      const response = await axios.post<AuthResponse>(`${import.meta.env.VITE_HOST_URL}/auth/register`, userData);
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -61,7 +61,7 @@ export const login = createAsyncThunk<AuthResponse, LoginPayload, { rejectValue:
   'auth/login',
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post<AuthResponse>('http://localhost:3000/auth/login', userData, { withCredentials: true });
+      const response = await axios.post<AuthResponse>(`${import.meta.env.VITE_HOST_URL}/auth/login`, userData, { withCredentials: true });
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       return response.data;
@@ -78,7 +78,7 @@ export const refreshAccessToken = createAsyncThunk<string, void, { rejectValue: 
   'auth/refresh',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.post<AuthResponse>('http://localhost:3000/auth/refresh', {}, { withCredentials: true });
+      const response = await axios.post<AuthResponse>(`${import.meta.env.VITE_HOST_URL}/auth/refresh`, {}, { withCredentials: true });
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       return response.data.accessToken;
@@ -95,7 +95,7 @@ export const logout = createAsyncThunk<void, void, { rejectValue: AuthError }>(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post('http://localhost:3000/auth/logout', {}, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_HOST_URL}/auth/logout`, {}, { withCredentials: true });
       localStorage.removeItem('accessToken');
       localStorage.removeItem('user');
       return;
