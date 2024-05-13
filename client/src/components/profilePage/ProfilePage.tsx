@@ -175,8 +175,9 @@ const ProfilePage = () => {
 
         <div id="all-picked-program-container">
           {!!progs && progs.length > 0 ? (
-            progs.map((eachProgram: ProgramType) => (
-              <div className="program-radio">
+            progs.map((eachProgram: ProgramType) => {
+              console.log("eachProgram", eachProgram, eachProgram.id.toString());
+              return (<div className="program-radio">
                 <div className="picked-program-container" key={eachProgram.id}>
                   <Link to={`/view-profile/program/${eachProgram.id}`}>
                     <h3>{eachProgram.program_title}</h3>
@@ -190,8 +191,8 @@ const ProfilePage = () => {
                   name="program"
                   value={eachProgram.id}
                 />
-              </div>
-            ))
+              </div>)
+              })
           ) : (
             <>Пока у тебя нет подобранных программ...</>
           )}
