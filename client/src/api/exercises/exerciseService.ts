@@ -11,7 +11,7 @@ export interface Exercise {
 
 
 
-  const API_KEY = 'dfa37fc518msh4a4dea48e32971ep1ccecbjsn6155276a10f1';
+  const API_KEY = '2783f908dcmshbee08532b23fa4bp1dd413jsncfdc7203f740';
   const API_HOST = 'exercisedb.p.rapidapi.com';
   
   const exerciseApi = axios.create({

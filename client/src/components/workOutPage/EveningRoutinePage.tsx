@@ -1,62 +1,74 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { Button, Card, Progress, Carousel, Typography } from 'antd';
 import { fetchExercisesByNames } from '../../api/exercises/exerciseService';
+const { Title, Text } = Typography;
 
 const EveningRoutinePage = () => {
   const [exercises, setExercises] = useState([]);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30); // Время для упражнений
+  const [timeLeft, setTimeLeft] = useState(30);
   const [isPaused, setIsPaused] = useState(false);
-  const [isResting, setIsResting] = useState(false); // Состояние для отслеживания периода отдыха
+  const [isResting, setIsResting] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const timerRef = useRef(null);
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     const dailyExercises = JSON.parse(localStorage.getItem('dailyExercises'));
-    const eveningExercises = dailyExercises ? dailyExercises.evening : [];
-
     const loadExercises = async () => {
-      const names = eveningExercises.map(ex => ex.exercise_title);
+      const names = dailyExercises.evening.slice(0, 6).map(ex => ex.exercise_title);
       const loadedExercises = await fetchExercisesByNames(names);
-      setExercises(loadedExercises.slice(0, 6));
+      setExercises(loadedExercises);
     };
 
-    if (eveningExercises.length > 0) {
+    if (dailyExercises.evening.length > 0) {
       loadExercises();
     }
   }, []);
 
   useEffect(() => {
-    if (!isPaused) {
+    if (!isPaused && !isFinished && exercises.length > 0) {
       startExerciseTimer();
     }
-    return () => clearInterval(timerRef.current);
-  }, [currentExerciseIndex, isPaused, isResting]);
+  }, [isPaused, isFinished, exercises.length, isResting, currentExerciseIndex]);
 
   const startExerciseTimer = () => {
     clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setTimeLeft(prevTime => {
-        if (prevTime > 1) {
-          return prevTime - 1;
-        } else {
-          if (isResting) {
-            switchExercise();
-          } else {
-            startRestingPeriod();
-          }
-          return isResting ? 30 : 20; // Время отдыха 20 секунд, упражнений 30 секунд
-        }
-      });
+      setTimeLeft(prevTime => prevTime - 1);
     }, 1000);
   };
 
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      clearInterval(timerRef.current);
+      if (isResting) {
+        if (currentExerciseIndex === exercises.length - 1) {
+          setIsFinished(true);
+        } else {
+          switchExercise();
+        }
+      } else {
+        if (currentExerciseIndex === exercises.length - 1) {
+          setIsFinished(true);
+        } else {
+          startRestingPeriod();
+        }
+      }
+    }
+  }, [timeLeft]);
+
   const startRestingPeriod = () => {
     setIsResting(true);
+    setTimeLeft(20);
   };
 
   const switchExercise = () => {
     setIsResting(false);
-    const nextIndex = currentExerciseIndex < exercises.length - 1 ? currentExerciseIndex + 1 : 0;
+    const nextIndex = (currentExerciseIndex + 1) % exercises.length;
     setCurrentExerciseIndex(nextIndex);
+    setTimeLeft(30);
+    carouselRef.current?.goTo(nextIndex);
   };
 
   const pauseTimer = () => {
@@ -66,23 +78,44 @@ const EveningRoutinePage = () => {
 
   const resumeTimer = () => {
     setIsPaused(false);
+    if (!isFinished) {
+      startExerciseTimer();
+    }
   };
 
   return (
-    <div>
-      <h2>Вечерняя тренировка</h2>
-      {!isResting && exercises.length > 0 && (
-        <div>
-          <h3>{exercises[currentExerciseIndex].name}</h3>
-          <img src={exercises[currentExerciseIndex].gifUrl} alt={exercises[currentExerciseIndex].name} />
-        </div>
-      )}
-      <div>
-        <p>{isResting ? 'Отдых' : 'Оставшееся время'}: {timeLeft} секунд</p>
-        <button onClick={pauseTimer} disabled={isResting}>Пауза</button>
-        <button onClick={resumeTimer} disabled={isResting}>Продолжить</button>
+    <Card title="Вечерняя тренировка" bordered={false}>
+      <Carousel autoplay={false} ref={carouselRef} dots={false} draggable={false}>
+        {exercises.map((exercise, index) => (
+          <div key={index}>
+            <Card
+              bordered={false}
+              type="inner"
+              title={<Title level={4}>{exercise.name.toUpperCase()}</Title>}
+              extra={<img src={exercise.gifUrl} alt={exercise.name} style={{ width: '100%', maxHeight: '300px' }} />}
+            >
+              <Text>{exercise.bodyPart.toUpperCase()}</Text>
+            </Card>
+          </div>
+        ))}
+      </Carousel>
+      <div style={{ marginTop: 16 }}>
+        {isFinished ? (
+          <Text>Тренировка завершена!</Text>
+        ) : (
+          <>
+            <Text>{isResting ? 'Отдых' : 'Оставшееся время'}: {timeLeft} секунд</Text>
+            <Button onClick={pauseTimer} disabled={isPaused || isResting} style={{ margin: '0 8px' }}>Пауза</Button>
+            <Button onClick={resumeTimer} disabled={!isPaused}>Продолжить</Button>
+            <Progress
+              percent={Math.round((timeLeft / (isResting ? 20 : 30)) * 100)}
+              status={isResting ? 'success' : 'active'}
+              strokeColor={isResting ? '#52c41a' : '#1890ff'}
+            />
+          </>
+        )}
       </div>
-    </div>
+    </Card>
   );
 };
 
