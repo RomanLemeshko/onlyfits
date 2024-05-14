@@ -101,6 +101,8 @@ const ProfilePage = () => {
     }
   }, [dispatch, user]);
 
+  
+
   return (
     <CalculatorContextProvider>
       <div id="profile-page-container">

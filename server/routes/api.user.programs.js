@@ -14,7 +14,7 @@ router.get('/get-user-programs', async (req, res) => {
         {
           model: db.User,
           where: { id: user_id },
-          as: "programs"
+          as: 'programs',
         },
       ],
     });
@@ -29,15 +29,33 @@ router.get('/get-user-programs', async (req, res) => {
 router.post('/add-user-program', async (req, res) => {
   try {
     const { user_id, program_id } = req.body;
-    
-    const check = await db.User_Program.findOne({where:{user_id, program_id}})
-    if(!check){
-      await db.User_Program.create({ user_id, program_id });
-    res.sendStatus(201);
-    } else {
-      res.status(409).json({message:"program already added"})
 
+    const check = await db.User_Program.findOne({
+      where: { user_id, program_id },
+    });
+    if (!check) {
+      await db.User_Program.create({ user_id, program_id });
+      res.sendStatus(201);
+    } else {
+      res.status(409).json({ message: 'program already added' });
     }
+  } catch (error) {
+    console.log('ОШИБКА ДОБАВЛЕНИИ ПРОГРАММЫ ПОЛЬЗОВАТЕЛЯ СЕРВЕР', error);
+  }
+});
+
+router.delete('/delete-user-program', async (req, res) => {
+  try {
+    const { user_id, program_id } = req.body;
+
+    console.log("DSD: ", user_id, program_id)
+    const destroy = await db.User_Program.destroy({
+      where: { user_id, program_id },
+    });
+
+    console.log("DELETED!!!!!: ", destroy)
+
+    res.status(200).json({message:"OK"});
   } catch (error) {
     console.log('ОШИБКА ДОБАВЛЕНИИ ПРОГРАММЫ ПОЛЬЗОВАТЕЛЯ СЕРВЕР', error);
   }

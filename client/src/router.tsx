@@ -45,7 +45,7 @@ const RouterComponent = () => (
       <Route element={<PrivateRoute />}>
         <Route path="/view-profile" element={<ProfilePage />} />
         <Route path="/view-programms" element={<ProgramsPage />} />
-        <Route path="program/:id" element={<CertainProgramPage />} />
+        <Route path="/view-programms/program/:id" element={<CertainProgramPage />} />
         <Route
           path="/view-profile/program/:id"
           element={<CertainProgramPage />}

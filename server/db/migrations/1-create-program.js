@@ -24,6 +24,9 @@ module.exports = {
       training_days: {
         type: Sequelize.INTEGER,
       },
+      presentation:{
+        type: Sequelize.TEXT,
+      },
       description: {
         type: Sequelize.TEXT,
       },
