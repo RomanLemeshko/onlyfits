@@ -14,13 +14,13 @@ const SelectPurpose = () => {
   return (
   <Space wrap>
     <Select
-      defaultValue="Выберите цель"
+      defaultValue="Select a goal"
       style={{ width: 475 }}
       onChange={handleChange}
       options={[
-        { value: 'Похудение', label: 'Похудение' },
-        { value: 'Поддержание', label: 'Поддержание' },
-        { value: 'Набор массы', label: 'Набор массы' },
+        { value: 'Lose weight', label: 'Lose weight' },
+        { value: 'Keeping fit', label: 'Keeping fit' },
+        { value: 'Gain muscle', label: 'Gain muscle' },
       ]}
     />
   </Space>

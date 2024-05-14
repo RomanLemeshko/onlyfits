@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Select, Space } from 'antd';
 import { CalculatorContext } from '../../context/CalculatorContext';
-
+import './SelectGender.css'
 
 const SelectGender = () => {
   
@@ -15,12 +15,12 @@ const SelectGender = () => {
   return (
     <Space wrap>
       <Select
-        defaultValue="Выберите пол"
-        style={{ width: 475 }}
+        defaultValue="Select gender"
+        style={{ width: 475, marginBottom: '10px' }}
         onChange={handleChange}
         options={[
-          { value: 'Мужчина', label: 'Мужчина' },
-          { value: 'Женщина', label: 'Женщина' },
+          { value: 'Male', label: 'Male' },
+          { value: 'Female', label: 'Female' },
         ]}
       />
     </Space>

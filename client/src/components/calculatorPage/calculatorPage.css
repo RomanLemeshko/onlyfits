@@ -1,4 +1,4 @@
-.ant-modal-content {
+/* .ant-modal-content {
   box-shadow: none;
 }
 
@@ -76,4 +76,120 @@
   display: flex;
   justify-content: center;
   text-align: center;
+} */
+
+/* ! */
+.modal-style {
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(13, 20, 28);
+}
+
+.modal-style .ant-modal-content {
+  background-color: rgb(26, 26, 26);
+  color: white;
+  border: 3px solid rgb(233, 144, 26);
+  box-shadow: none;
+}
+
+.modal-style .ant-modal-footer {
+  background-color: rgb(26, 26, 26);
+  color: white;
+  box-shadow: none;
+}
+
+.inputValueCalculator {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
+  gap: 20px;
+}
+
+.labeledInput {
+  margin-bottom: 10px;
+  position: relative;
+  
+}
+
+.labeledInput label {
+  position: absolute;
+  top: 6px;
+  left: 20px;
+  pointer-events: none;
+  
+}
+
+.labeledInput input {
+  width: 100%;
+  padding-top: 35px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  border: 1px solid rgb(51, 51, 51);
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: rgb(51, 51, 51);
+  color: white;
+}
+
+.labeledInput input[type='number']::-webkit-inner-spin-button,
+.labeledInput input[type='number']::-webkit-outer-spin-button,
+.labeledInput input[type='date']::-webkit-inner-spin-button,
+.labeledInput input[type='date']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.labeledInput input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.calculatorPage__result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+
+  /* border: 1px solid rgb(51, 51, 51); */
+  border-radius: 20px;
+  box-sizing: border-box;
+
+  background-color: rgb(51, 51, 51);
+}
+
+.calculatorPage__result p {
+  margin: 2px;
+}
+
+.calculatorPage__macros {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  gap: 50px;
+}
+
+.calculatorPage__header {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.ant-btn {
+  background-color: #FF6600;
+  border: none;
+}
+
+.ant-modal .ant-modal-close {
+  color: white;
+}
+
+.ant-modal .ant-modal-close:hover {
+  color: #FF6600;
+}
+
+.ant-select .ant-select-arrow {
+  color: white;
 }

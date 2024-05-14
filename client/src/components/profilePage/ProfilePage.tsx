@@ -110,19 +110,19 @@ const ProfilePage = () => {
         <div>
           {latestMacros ? (
             <>
-              <p>Текущая цель: {latestMacros.purpose}</p>
-              <p>Требуемые показатели макроэлементов:</p>
+              <p>Current goal: {latestMacros.purpose}</p>
+              <p>Required indicators:</p>
               <div className="calculatorPage__result">
                 <h3>{`${latestMacros.kilocalories} ккал`}</h3>
                 <div className="calculatorPage__macros">
-                  <p>Белки: {`${latestMacros.proteins} гр`}</p>
-                  <p>Жиры: {`${latestMacros.fats} гр`}</p>
-                  <p>Углеводы: {`${latestMacros.carbohydrates} гр`}</p>
+                  <p>Proteins: {`${latestMacros.proteins} grams`}</p>
+                  <p>Fats: {`${latestMacros.fats} grams`}</p>
+                  <p>Carbs: {`${latestMacros.carbohydrates} grams`}</p>
                 </div>
               </div>
             </>
           ) : (
-            <p>Вы еще не рассчитали свою цель.</p>
+            <p>You haven’t calculated your target yet.</p>
           )}
         </div>
         <h3>Выберите расписание занятий:</h3>
@@ -172,7 +172,7 @@ const ProfilePage = () => {
         <h2>Мое расписание</h2>
         <CalendarPage />
         <Button type="primary" onClick={showModal}>
-          Калькулятор калорий
+        Calorie calculator
         </Button>
         <Modal
           open={isModalOpen}
