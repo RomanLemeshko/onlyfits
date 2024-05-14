@@ -45,9 +45,12 @@ const MainPage = () => {
 
   const progFilterHandler = () => {
     if (programType !== 'all' || programLevel !== 'all') {
+      console.log(programs)
+      console.log("!!!!", { type: programType, level: programLevel })
       dispatch(setFilteredPrograms({ type: programType, level: programLevel }));
+    
     } else {
-      dispatch(resetFilters());
+       dispatch(resetFilters());
     }
   };
 
@@ -74,25 +77,25 @@ const MainPage = () => {
         <div className="filter-container">
           <label htmlFor="programType">Тип тренировки:</label>
           <select
-            id="programType"
+            className="program-level-type-filter"
             onChange={(e) => setProgramType(e.target.value)}
           >
             <option value="all">Все</option>
-            <option value="cardio">Кардио</option>
-            <option value="strength">Силовая</option>
-            <option value="stretching">Растяжка</option>
+            <option value="кардио">Кардио</option>
+            <option value="сила">Силовая</option>
+            <option value="растяжка">Растяжка</option>
           </select>
         </div>
         <div className="filter-container">
           <label htmlFor="programLevel">Уровень сложности:</label>
           <select
-            id="programLevel"
+            className="program-level-type-filter"
             onChange={(e) => setProgramLevel(e.target.value)}
           >
             <option value="all">Все</option>
-            <option value="beginner">Начинающий</option>
-            <option value="medium">Средний</option>
-            <option value="professional">Профессионал</option>
+            <option value="начинающий">Начинающий</option>
+            <option value="средний">Средний</option>
+            <option value="профессионал">Профессионал</option>
           </select>
         </div>
         <button id="search-btn" onClick={progFilterHandler}>
@@ -102,7 +105,7 @@ const MainPage = () => {
       <div id="general">
         <div id="programs-container">
           {programs.map((eachProgram: ProgramType) => (
-            <div className='card-container'>
+            <div className="card-container">
               <Card
                 className="card"
                 key={eachProgram.id}
@@ -122,9 +125,6 @@ const MainPage = () => {
                     <p>Тип: {eachProgram.program_type}</p>
                     <p>{eachProgram.description}</p>
                     <p>Уровень: {eachProgram.program_level}</p>
-
-
-                    
                   </div>
                 </Link>
                 <div className="btn-container">
