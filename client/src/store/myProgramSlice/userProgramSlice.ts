@@ -12,10 +12,6 @@ interface Program {
   url: string
 }
 
-
-
-
-
 interface InitialState {
   programs: Program[];
   error?: string;
@@ -57,6 +53,26 @@ export const addUserProgramsThunky = createAsyncThunk(
   }
 );
 
+
+export const deleteUserProgramsThunky = createAsyncThunk(
+  'deleteUserProg',
+  async (data: { user_id: number; program_id: number }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_HOST_URL}/api/delete-user-program`,
+       
+        {  data, withCredentials: true }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue('ОШИБКА ПРИ ДОБАВЛЕНИИ ПРОГРАММ ПОЛЬЗОВАТЕЛЯ');
+    }
+  }
+);
+
+
+
+
 const myProgramSlice = createSlice({
   name: 'myProgram',
   initialState,
@@ -74,6 +90,15 @@ const myProgramSlice = createSlice({
     builder.addCase(addUserProgramsThunky.rejected, (state, action) => {
       state.error = action.payload as string;
     });
+
+
+    
+    builder.addCase(deleteUserProgramsThunky.fulfilled, (state, action) => {
+      state.programs = state.programs.filter((each) => each.id !==action.payload.program_id);
+    });
+    // builder.addCase(deleteUserProgramsThunky.rejected, (state, action) => {
+    //   state.error = action.payload as string;
+    // });
   },
 });
 

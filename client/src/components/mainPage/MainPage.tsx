@@ -35,7 +35,6 @@ const MainPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
 
-  console.log('ALL PROGRAMS', programs);
   useEffect(() => {
     dispatch(getAllProgramsThunky());
     if (user?.id) {
@@ -45,12 +44,11 @@ const MainPage = () => {
 
   const progFilterHandler = () => {
     if (programType !== 'all' || programLevel !== 'all') {
-      console.log(programs)
-      console.log("!!!!", { type: programType, level: programLevel })
+      console.log(programs);
+      console.log('!!!!', { type: programType, level: programLevel });
       dispatch(setFilteredPrograms({ type: programType, level: programLevel }));
-    
     } else {
-       dispatch(resetFilters());
+      dispatch(resetFilters());
     }
   };
 
@@ -103,13 +101,12 @@ const MainPage = () => {
         </button>
       </div>
       <div id="general">
-        <div id="programs-container">
+        <div className="programs-container">
           {programs.map((eachProgram: ProgramType) => (
             <div className="card-container">
               <Card
                 className="card"
                 key={eachProgram.id}
-                hoverable
                 size="small"
                 cover={
                   <img
@@ -119,14 +116,18 @@ const MainPage = () => {
                   />
                 }
               >
-                <Link to={`program/${eachProgram.id}`}>
+                <div>
                   <div className="card-info">
-                    <p>Название: {eachProgram.program_title}</p>
-                    <p>Тип: {eachProgram.program_type}</p>
+                    <p>
+                      <h2>Название: {eachProgram.program_title}</h2>
+                    </p>
+                    <p>
+                      <h3>Тип: {eachProgram.program_type}</h3>
+                    </p>
                     <p>{eachProgram.description}</p>
                     <p>Уровень: {eachProgram.program_level}</p>
                   </div>
-                </Link>
+                </div>
                 <div className="btn-container">
                   <Button
                     className="add-prog-btn"
