@@ -1,14 +1,35 @@
-#all-picked-program-container{
+body {
+  background-image: url('../../background.main.page/gym_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: relative;
+  background-attachment: fixed;
+}
+
+/* .programs-container{
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:5px;
+  margin: auto;
 
 }
 
-.picked-program-container{
-  margin: auto;
+.card-container{
+  direction: flex;
   border-radius: 10px;
   border: solid gray 2px;
-  width: 300px;
+  justify-content: center;
+  gap:5px;
 }
+
+.img-user-prog-page:hover{
+  transition: 0.3s;
+  opacity: 0.8;
+} */
+
+
+
+

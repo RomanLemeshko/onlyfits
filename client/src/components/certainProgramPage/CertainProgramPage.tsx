@@ -1,32 +1,37 @@
-import { useParams } from "react-router-dom";
-import './certainProgramPage.css'
-import {  useSelector } from "react-redux";
-import { RootState } from "../../store";
-// import {arr} from '../mainPage/MainPage'
+import { useParams } from 'react-router-dom';
+import './certainProgramPage.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import Header from '../header/Header';
 
 const CertainProgramPage = () => {
-const {id} = useParams()
-const progs = useSelector((state:RootState)=> state.allPrograms)
+  const { id } = useParams();
+  console.log('PARAMS: ', id);
+  const progs = useSelector((state: RootState) => state.allPrograms.programs);
 
-const certainProg= progs.find((each) =>{ return each.id === Number(id)})
+  const certainProg = progs.find((each) => {
+    return each.id === Number(id);
+  });
 
+  // const certainProgram:ProgramType =arr[Number(id)-1]
 
-// const certainProgram:ProgramType =arr[Number(id)-1]
-
-
-console.log("CertainProgram:", certainProg)
+  console.log('CertainProgram:', certainProg);
   return (
-    <div id="container">
-      <h1>Описание программы</h1>
-      <h2>Вид программы: {certainProg?.program_type}</h2>
-      <h2>Название программы: {certainProg?.program_title}</h2>
-      <h2>Программа расчитана на {certainProg?.training_days} дней</h2>
-      <h2>Уровень сложности: {certainProg?.program_level}</h2>
-      <h2>Рейтинг программы: {certainProg?.program_rating}</h2>
-
-
-      
-    </div>
+    <>
+      <Header />
+      <div className="certain-program-page-container" >
+        <div className="certain-program-page">
+          <h1>
+            Program "{certainProg?.program_title}" {certainProg?.presentation}
+          </h1>
+          <h2>Program type: {certainProg?.program_type}</h2>
+          <h2>Level of complexity: {certainProg?.program_level}</h2>
+          <h2>Program duration: {certainProg?.training_days} days</h2>
+          <h2>Program raiting: {certainProg?.program_rating}</h2>
+          <h2>Program description: {certainProg?.description}</h2>
+        </div>
+      </div>
+    </>
   );
 };
 

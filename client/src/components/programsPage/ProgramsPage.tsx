@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../store';
 import './programsPage.css';
 import { useEffect } from 'react';
-import { getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
+import {
+  deleteUserProgramsThunky,
+  getUserProgramsThunky,
+} from '../../store/myProgramSlice/userProgramSlice';
+import { Button, Card } from 'antd';
 
 const ProgramsPage = (): JSX.Element => {
   const progs = useSelector((state: RootState) => state.userPrograms.programs);
@@ -21,18 +25,61 @@ const ProgramsPage = (): JSX.Element => {
     return <div>Loading or error...</div>;
   }
 
+  const deleteProgram = (programId: number) => {
+    dispatch(
+      deleteUserProgramsThunky({
+        user_id: user?.user?.id,
+        program_id: programId,
+      })
+    )
+      .unwrap()
+      .then(() => {
+        dispatch(getUserProgramsThunky(Number(user?.user?.id)));
+      });
+  };
+
   return (
     <div>
       <Header />
-      <div id="all-picked-program-container">
-        {progs.map((eachProgram) => (
-          <div key={eachProgram.id} className="picked-program-container">
-            <Link to={`/view-profile/program/${eachProgram.id}`}>
-              <h3>{eachProgram.program_level}</h3>
-              <h4>{eachProgram.program_type}</h4>
-            </Link>
-          </div>
-        ))}
+      <div className="programs-container">
+        {progs &&
+          progs.map((eachProgram) => (
+            <div key={eachProgram.id} className="card-container">
+              <Card
+                hoverable
+                size="small"
+                cover={
+                  <img
+                    alt="example"
+                    src={eachProgram.url}
+                    style={{ width: 390, height: 300 }}
+                  />
+                }
+              >
+                {' '}
+                <Link to={`program/${eachProgram.id}`}>
+                  <div className="card-info">
+                    <p>
+                      <h2>Title: {eachProgram.program_title}</h2>
+                    </p>
+                    <p>
+                      <h3>Difficulty level: {eachProgram.program_level}</h3>
+                    </p>
+                    <p>Type: {eachProgram.program_type}</p>
+                    <p>{eachProgram.presentation}</p>
+                  </div>
+                </Link>
+                <div className="btn-container">
+                  <Button
+                    className="add-prog-btn"
+                    onClick={() => deleteProgram(eachProgram.id)}
+                  >
+                    Delete program
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          ))}
       </div>
     </div>
   );

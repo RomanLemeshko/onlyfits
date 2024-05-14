@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       program_level: DataTypes.STRING,
       program_rating: DataTypes.INTEGER,
       training_days: DataTypes.INTEGER,
+      presentation:DataTypes.TEXT,
       description: DataTypes.TEXT,
       url: DataTypes.TEXT,
 

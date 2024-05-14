@@ -11,15 +11,13 @@ body {
   display: flex;
 }
 
-#programs-container {
+.programs-container {
   display: flex;
-  /* flex-direction: row; */
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
   gap:5px;
   margin: auto;
-  /* gap: 50px */
 }
 
 .eachProgram {
@@ -73,11 +71,9 @@ img:hover{
 }
 
 .program-level-type-filter{
-  /* opacity: 0.5; */
   display: block;
   width: 100%;
   padding: 8px 12px;
-  /* font-size: 16px; */
   border-radius: 8px;
   background: transparent; 
 

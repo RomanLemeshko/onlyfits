@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import './mainPage.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +21,7 @@ export type ProgramType = {
   training_days: number;
   program_level: string;
   program_rating: number;
+  presentation:string,
   description: string;
   url: string;
 };
@@ -35,7 +35,6 @@ const MainPage = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
 
-  console.log('ALL PROGRAMS', programs);
   useEffect(() => {
     dispatch(getAllProgramsThunky());
     if (user?.id) {
@@ -45,12 +44,11 @@ const MainPage = () => {
 
   const progFilterHandler = () => {
     if (programType !== 'all' || programLevel !== 'all') {
-      console.log(programs)
-      console.log("!!!!", { type: programType, level: programLevel })
+      console.log(programs);
+      console.log('!!!!', { type: programType, level: programLevel });
       dispatch(setFilteredPrograms({ type: programType, level: programLevel }));
-    
     } else {
-       dispatch(resetFilters());
+      dispatch(resetFilters());
     }
   };
 
@@ -75,41 +73,40 @@ const MainPage = () => {
       <Header />
       <div id="programs-filters-container">
         <div className="filter-container">
-          <label htmlFor="programType">Тип тренировки:</label>
+          <label htmlFor="programType">Training type:</label>
           <select
             className="program-level-type-filter"
             onChange={(e) => setProgramType(e.target.value)}
           >
-            <option value="all">Все</option>
-            <option value="кардио">Кардио</option>
-            <option value="сила">Силовая</option>
-            <option value="растяжка">Растяжка</option>
+            <option value="all">All</option>
+            <option value="cardio">Cardio</option>
+            <option value="strength">Strength</option>
+            <option value="stretching">Stretching</option>
           </select>
         </div>
         <div className="filter-container">
-          <label htmlFor="programLevel">Уровень сложности:</label>
+          <label htmlFor="programLevel">Difficulty level:</label>
           <select
             className="program-level-type-filter"
             onChange={(e) => setProgramLevel(e.target.value)}
           >
-            <option value="all">Все</option>
-            <option value="начинающий">Начинающий</option>
-            <option value="средний">Средний</option>
-            <option value="профессионал">Профессионал</option>
+            <option value="all">All</option>
+            <option value="beginner">Beginner</option>
+            <option value="medium">Medium</option>
+            <option value="professional">Professional</option>
           </select>
         </div>
         <button id="search-btn" onClick={progFilterHandler}>
-          Фильтр
+          Filter
         </button>
       </div>
       <div id="general">
-        <div id="programs-container">
+        <div className="programs-container">
           {programs.map((eachProgram: ProgramType) => (
             <div className="card-container">
               <Card
                 className="card"
                 key={eachProgram.id}
-                hoverable
                 size="small"
                 cover={
                   <img
@@ -119,20 +116,24 @@ const MainPage = () => {
                   />
                 }
               >
-                <Link to={`program/${eachProgram.id}`}>
+                <div>
                   <div className="card-info">
-                    <p>Название: {eachProgram.program_title}</p>
-                    <p>Тип: {eachProgram.program_type}</p>
-                    <p>{eachProgram.description}</p>
-                    <p>Уровень: {eachProgram.program_level}</p>
+                  <p>
+                      <h2>Title: {eachProgram.program_title}</h2>
+                    </p>
+                    <p>
+                      <h3>Difficulty level: {eachProgram.program_level}</h3>
+                    </p>
+                    <p>Type: {eachProgram.program_type}</p>
+                    <p>{eachProgram.presentation}</p>
                   </div>
-                </Link>
+                </div>
                 <div className="btn-container">
                   <Button
                     className="add-prog-btn"
                     onClick={() => addProgramToUser(eachProgram.id)}
                   >
-                    Добавить программу
+                    Add program
                   </Button>
                 </div>
               </Card>

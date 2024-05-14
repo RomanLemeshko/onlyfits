@@ -8,6 +8,7 @@ interface Program {
   training_days: number;
   program_level: string;
   program_rating: number;
+  presentation:string,
   description:string;
   url: string
 }
