@@ -7,6 +7,7 @@ router.get('/getAllPrograms', async(req, res) =>{
   try {
     const allProg = await db.Program.findAll()
     const parsed = JSON.parse(JSON.stringify(allProg))
+    console.log(parsed)
     res.json(parsed)
     
   } catch (error) {
