@@ -8,6 +8,7 @@ interface Program {
   training_days: number;
   program_level: string;
   program_rating: number;
+  presentation:string,
   description:string;
   url: string
 }
@@ -70,9 +71,6 @@ export const deleteUserProgramsThunky = createAsyncThunk(
   }
 );
 
-
-
-
 const myProgramSlice = createSlice({
   name: 'myProgram',
   initialState,
@@ -90,9 +88,6 @@ const myProgramSlice = createSlice({
     builder.addCase(addUserProgramsThunky.rejected, (state, action) => {
       state.error = action.payload as string;
     });
-
-
-    
     builder.addCase(deleteUserProgramsThunky.fulfilled, (state, action) => {
       state.programs = state.programs.filter((each) => each.id !==action.payload.program_id);
     });

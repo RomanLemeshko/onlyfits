@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import './mainPage.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +21,7 @@ export type ProgramType = {
   training_days: number;
   program_level: string;
   program_rating: number;
+  presentation:string,
   description: string;
   url: string;
 };
@@ -79,9 +79,9 @@ const MainPage = () => {
             onChange={(e) => setProgramType(e.target.value)}
           >
             <option value="all">Все</option>
-            <option value="кардио">Кардио</option>
-            <option value="сила">Силовая</option>
-            <option value="растяжка">Растяжка</option>
+            <option value="cardio">Кардио</option>
+            <option value="strength">Силовая</option>
+            <option value="stretching">Растяжка</option>
           </select>
         </div>
         <div className="filter-container">
@@ -91,9 +91,9 @@ const MainPage = () => {
             onChange={(e) => setProgramLevel(e.target.value)}
           >
             <option value="all">Все</option>
-            <option value="начинающий">Начинающий</option>
-            <option value="средний">Средний</option>
-            <option value="профессионал">Профессионал</option>
+            <option value="beginner">Начинающий</option>
+            <option value="medium">Средний</option>
+            <option value="professional">Профессионал</option>
           </select>
         </div>
         <button id="search-btn" onClick={progFilterHandler}>
@@ -118,14 +118,14 @@ const MainPage = () => {
               >
                 <div>
                   <div className="card-info">
-                    <p>
+                  <p>
                       <h2>Название: {eachProgram.program_title}</h2>
                     </p>
                     <p>
-                      <h3>Тип: {eachProgram.program_type}</h3>
+                      <h3>Уровень: {eachProgram.program_level}</h3>
                     </p>
-                    <p>{eachProgram.description}</p>
-                    <p>Уровень: {eachProgram.program_level}</p>
+                    <p>Тип: {eachProgram.program_type}</p>
+                    <p>{eachProgram.presentation}</p>
                   </div>
                 </div>
                 <div className="btn-container">

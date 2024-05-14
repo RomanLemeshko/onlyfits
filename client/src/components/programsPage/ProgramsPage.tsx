@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../store';
 import './programsPage.css';
 import { useEffect } from 'react';
-import { deleteUserProgramsThunky, getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
+import {
+  deleteUserProgramsThunky,
+  getUserProgramsThunky,
+} from '../../store/myProgramSlice/userProgramSlice';
 import { Button, Card } from 'antd';
 
 const ProgramsPage = (): JSX.Element => {
@@ -12,26 +15,28 @@ const ProgramsPage = (): JSX.Element => {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth);
 
-
   useEffect(() => {
     if (user?.user?.id) {
       dispatch(getUserProgramsThunky(Number(user.user.id)));
     }
-  }, [user?.user?.id, dispatch, ]);
+  }, [user?.user?.id, dispatch]);
 
   if (!Array.isArray(progs)) {
     return <div>Loading or error...</div>;
   }
 
-
-  const deleteProgram =(programId: number)=>{
-    dispatch(deleteUserProgramsThunky({ user_id: user?.user?.id, program_id: programId }))
-    .unwrap()
-    .then(()=>{
-      dispatch(getUserProgramsThunky(Number(user?.user?.id)));
-    })
-
-  }
+  const deleteProgram = (programId: number) => {
+    dispatch(
+      deleteUserProgramsThunky({
+        user_id: user?.user?.id,
+        program_id: programId,
+      })
+    )
+      .unwrap()
+      .then(() => {
+        dispatch(getUserProgramsThunky(Number(user?.user?.id)));
+      });
+  };
 
   return (
     <div>
@@ -51,6 +56,7 @@ const ProgramsPage = (): JSX.Element => {
                   />
                 }
               >
+                {' '}
                 <Link to={`program/${eachProgram.id}`}>
                   <div className="card-info">
                     <p>
@@ -60,11 +66,11 @@ const ProgramsPage = (): JSX.Element => {
                       <h3>Уровень: {eachProgram.program_level}</h3>
                     </p>
                     <p>Тип: {eachProgram.program_type}</p>
-                    <p>{eachProgram.description}</p>
+                    <p>{eachProgram.presentation}</p>
                   </div>
                 </Link>
                 <div className="btn-container">
-                <Button
+                  <Button
                     className="add-prog-btn"
                     onClick={() => deleteProgram(eachProgram.id)}
                   >
