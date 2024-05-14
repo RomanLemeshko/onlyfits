@@ -73,31 +73,31 @@ const MainPage = () => {
       <Header />
       <div id="programs-filters-container">
         <div className="filter-container">
-          <label htmlFor="programType">Тип тренировки:</label>
+          <label htmlFor="programType">Training type:</label>
           <select
             className="program-level-type-filter"
             onChange={(e) => setProgramType(e.target.value)}
           >
-            <option value="all">Все</option>
-            <option value="cardio">Кардио</option>
-            <option value="strength">Силовая</option>
-            <option value="stretching">Растяжка</option>
+            <option value="all">All</option>
+            <option value="cardio">Cardio</option>
+            <option value="strength">Strength</option>
+            <option value="stretching">Stretching</option>
           </select>
         </div>
         <div className="filter-container">
-          <label htmlFor="programLevel">Уровень сложности:</label>
+          <label htmlFor="programLevel">Difficulty level:</label>
           <select
             className="program-level-type-filter"
             onChange={(e) => setProgramLevel(e.target.value)}
           >
-            <option value="all">Все</option>
-            <option value="beginner">Начинающий</option>
-            <option value="medium">Средний</option>
-            <option value="professional">Профессионал</option>
+            <option value="all">All</option>
+            <option value="beginner">Beginner</option>
+            <option value="medium">Medium</option>
+            <option value="professional">Professional</option>
           </select>
         </div>
         <button id="search-btn" onClick={progFilterHandler}>
-          Фильтр
+          Filter
         </button>
       </div>
       <div id="general">
@@ -119,12 +119,12 @@ const MainPage = () => {
                 <div>
                   <div className="card-info">
                   <p>
-                      <h2>Название: {eachProgram.program_title}</h2>
+                      <h2>Title: {eachProgram.program_title}</h2>
                     </p>
                     <p>
-                      <h3>Уровень: {eachProgram.program_level}</h3>
+                      <h3>Difficulty level: {eachProgram.program_level}</h3>
                     </p>
-                    <p>Тип: {eachProgram.program_type}</p>
+                    <p>Type: {eachProgram.program_type}</p>
                     <p>{eachProgram.presentation}</p>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ const MainPage = () => {
                     className="add-prog-btn"
                     onClick={() => addProgramToUser(eachProgram.id)}
                   >
-                    Добавить программу
+                    Add program
                   </Button>
                 </div>
               </Card>

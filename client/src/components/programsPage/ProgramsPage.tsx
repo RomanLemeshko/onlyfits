@@ -60,12 +60,12 @@ const ProgramsPage = (): JSX.Element => {
                 <Link to={`program/${eachProgram.id}`}>
                   <div className="card-info">
                     <p>
-                      <h2>Название: {eachProgram.program_title}</h2>
+                      <h2>Title: {eachProgram.program_title}</h2>
                     </p>
                     <p>
-                      <h3>Уровень: {eachProgram.program_level}</h3>
+                      <h3>Difficulty level: {eachProgram.program_level}</h3>
                     </p>
-                    <p>Тип: {eachProgram.program_type}</p>
+                    <p>Type: {eachProgram.program_type}</p>
                     <p>{eachProgram.presentation}</p>
                   </div>
                 </Link>
@@ -74,7 +74,7 @@ const ProgramsPage = (): JSX.Element => {
                     className="add-prog-btn"
                     onClick={() => deleteProgram(eachProgram.id)}
                   >
-                    Удалить программу
+                    Delete program
                   </Button>
                 </div>
               </Card>
