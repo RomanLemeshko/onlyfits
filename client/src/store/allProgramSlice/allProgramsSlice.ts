@@ -3,11 +3,13 @@ import axios from 'axios';
 
 interface Program {
   id: number;
-  program_title: string;
   program_type: string;
+  program_title: string;
+  training_days: number;
   program_level: string;
   program_rating: number;
-  training_days: number;
+  description:string;
+  url: string
 }
 
 interface ProgramsState {

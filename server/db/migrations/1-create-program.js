@@ -7,34 +7,41 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       program_title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       program_type: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       program_level: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       program_rating: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       training_days: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
+      description: {
+        type: Sequelize.TEXT,
+      },
+      url: {
+        type: Sequelize.TEXT,
+      },
+
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Programs');
-  }
+  },
 };

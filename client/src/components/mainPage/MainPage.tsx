@@ -4,9 +4,16 @@ import './mainPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getAllProgramsThunky } from '../../store/allProgramSlice/allProgramsSlice';
-import { setFilteredPrograms, resetFilters } from '../../store/allProgramSlice/allProgramsSlice';
-import { addUserProgramsThunky, getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
+import {
+  setFilteredPrograms,
+  resetFilters,
+} from '../../store/allProgramSlice/allProgramsSlice';
+import {
+  addUserProgramsThunky,
+  getUserProgramsThunky,
+} from '../../store/myProgramSlice/userProgramSlice';
 import { AppDispatch, RootState } from '../../store';
+import { Card, Button } from 'antd';
 
 export type ProgramType = {
   id: number;
@@ -15,15 +22,20 @@ export type ProgramType = {
   training_days: number;
   program_level: string;
   program_rating: number;
+  description: string;
+  url: string;
 };
 
 const MainPage = () => {
   const [programType, setProgramType] = useState<string>('all');
   const [programLevel, setProgramLevel] = useState<string>('all');
-  const programs = useSelector((state: RootState) => state.allPrograms.filteredPrograms);
+  const programs = useSelector(
+    (state: RootState) => state.allPrograms.filteredPrograms
+  );
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();
 
+  console.log('ALL PROGRAMS', programs);
   useEffect(() => {
     dispatch(getAllProgramsThunky());
     if (user?.id) {
@@ -33,15 +45,20 @@ const MainPage = () => {
 
   const progFilterHandler = () => {
     if (programType !== 'all' || programLevel !== 'all') {
+      console.log(programs)
+      console.log("!!!!", { type: programType, level: programLevel })
       dispatch(setFilteredPrograms({ type: programType, level: programLevel }));
+    
     } else {
-      dispatch(resetFilters());
+       dispatch(resetFilters());
     }
   };
 
   const addProgramToUser = (programId: number) => {
     if (user?.id) {
-      dispatch(addUserProgramsThunky({ user_id: user.id, program_id: programId }))
+      dispatch(
+        addUserProgramsThunky({ user_id: user.id, program_id: programId })
+      )
         .unwrap()
         .then(() => {
           console.log('Program added successfully');
@@ -60,47 +77,68 @@ const MainPage = () => {
         <div className="filter-container">
           <label htmlFor="programType">Тип тренировки:</label>
           <select
-            id="programType"
+            className="program-level-type-filter"
             onChange={(e) => setProgramType(e.target.value)}
           >
             <option value="all">Все</option>
-            <option value="cardio">Кардио</option>
-            <option value="strength">Силовая</option>
-            <option value="stretching">Растяжка</option>
+            <option value="кардио">Кардио</option>
+            <option value="сила">Силовая</option>
+            <option value="растяжка">Растяжка</option>
           </select>
         </div>
         <div className="filter-container">
           <label htmlFor="programLevel">Уровень сложности:</label>
           <select
-            id="programLevel"
+            className="program-level-type-filter"
             onChange={(e) => setProgramLevel(e.target.value)}
           >
             <option value="all">Все</option>
-            <option value="beginner">Начинающий</option>
-            <option value="medium">Средний</option>
-            <option value="professional">Профессионал</option>
+            <option value="начинающий">Начинающий</option>
+            <option value="средний">Средний</option>
+            <option value="профессионал">Профессионал</option>
           </select>
         </div>
         <button id="search-btn" onClick={progFilterHandler}>
           Фильтр
         </button>
       </div>
-      <div id="programs-container">
-        {programs.map((eachProgram: ProgramType) => (
-          <div key={eachProgram.id} className="eachProgram">
-            <Link to={`program/${eachProgram.id}`}>
-              <h3>Название: {eachProgram.program_title}</h3>
-              <h4>Тип: {eachProgram.program_type}</h4>
-              <h4>Уровень: {eachProgram.program_level}</h4>
-            </Link>
-            <button
-              className="add-prog-btn"
-              onClick={() => addProgramToUser(eachProgram.id)}
-            >
-              Добавить программу
-            </button>
-          </div>
-        ))}
+      <div id="general">
+        <div id="programs-container">
+          {programs.map((eachProgram: ProgramType) => (
+            <div className="card-container">
+              <Card
+                className="card"
+                key={eachProgram.id}
+                hoverable
+                size="small"
+                cover={
+                  <img
+                    alt="example"
+                    src={eachProgram.url}
+                    style={{ width: 390, height: 300 }}
+                  />
+                }
+              >
+                <Link to={`program/${eachProgram.id}`}>
+                  <div className="card-info">
+                    <p>Название: {eachProgram.program_title}</p>
+                    <p>Тип: {eachProgram.program_type}</p>
+                    <p>{eachProgram.description}</p>
+                    <p>Уровень: {eachProgram.program_level}</p>
+                  </div>
+                </Link>
+                <div className="btn-container">
+                  <Button
+                    className="add-prog-btn"
+                    onClick={() => addProgramToUser(eachProgram.id)}
+                  >
+                    Добавить программу
+                  </Button>
+                </div>
+              </Card>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
