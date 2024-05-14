@@ -1,19 +1,76 @@
-#programs-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap:25px;
+body {
+  background-image: url('C:\Users\skhva\OneDrive\Desktop\Elbrus\Phase-3\FINAL_PROJECT_ONLYFITS\onlyfits\client\public\background.main.page\gym_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: relative;
+  background-attachment: fixed;
 }
 
-.eachProgram{
+#general {
+  display: flex;
+}
+
+#programs-container {
+  display: flex;
+  /* flex-direction: row; */
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:5px;
+  margin: auto;
+  /* gap: 50px */
+}
+
+.eachProgram {
   margin: auto;
   border-radius: 10px;
   border: solid gray 2px;
   width: 300px;
 }
 
-#programs-filters-container{
+#programs-filters-container {
   display: flex;
   gap: 30px;
+}
+
+.card-info {
+  width: 340px;
+  text-align: center;
+  color: white;
+}
+
+.card {
+  background-color: black;
+  
+}
+
+
+
+/* .card-container :hover{
+  background-color: gray
+} */
+
+.add-prog-btn {
+  background-color: rgb(255, 105, 5);
+  color: black;
+  font-weight: 600;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.btn-container:hover {
+  transition: 0.3s;
+  opacity: 0.5;
+}
+
+img:hover{
+  transition: 0.3s;
+  opacity: 0.5;
+
 }
