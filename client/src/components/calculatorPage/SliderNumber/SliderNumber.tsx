@@ -115,11 +115,11 @@ const SliderNumber: React.FC = () => {
 
   return (
     <Space style={{ width: '100%' }} direction="vertical">
-      <p className='textSliderCalculator'>Функциональных тренировок в неделю</p>
+      <p className='textSliderCalculator'>Functional training per week</p>
       <IntegerStepFunctionalTraining />
-      <p className='textSliderCalculator'>Силовых тренировок в неделю</p>
+      <p className='textSliderCalculator'>Strength training per week</p>
       <IntegerStepStrengthTraining />
-      <p className='textSliderCalculator'>Активных хобби в неделю</p>
+      <p className='textSliderCalculator'>Active hobbies per week</p>
       <IntegerStepActiveHobbies />
     </Space>
   )

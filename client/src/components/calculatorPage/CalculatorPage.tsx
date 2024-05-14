@@ -61,9 +61,9 @@ const CalculatorPage = ({ updateCaloriesData }:any ) => {
 
     // Рассчитываем базовый метаболизм в зависимости от пола
     let bmr;
-    if (gender === "Мужчина") {
+    if (gender === "Man") {
         bmr = (menCoefficient * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) + 5;
-    } else if (gender === "Женщина") {
+    } else if (gender === "Woman") {
         bmr = (womenCoefficient * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) - 161;
     } else {
         return 0;
@@ -72,13 +72,13 @@ const CalculatorPage = ({ updateCaloriesData }:any ) => {
     // Рассчитываем общий калорийный расход с учетом активности
     let totalCalories;
     switch (purpose) {
-        case "Похудение":
+        case "Lose weight":
             totalCalories = bmr * activityFactor - 500; // Для похудения вычитаем 500 ккал
             break;
-        case "Поддержание":
+        case "Keeping fit":
             totalCalories = bmr * activityFactor;
             break;
-        case "Набор массы":
+        case "Gain muscle":
             totalCalories = bmr * activityFactor + 200; // Для набора массы добавляем 300 ккал
             break;
         default:
@@ -97,32 +97,32 @@ const CalculatorPage = ({ updateCaloriesData }:any ) => {
 
   return (
     <>
-      <h3 className="calculatorPage__header">Калькулятор калорий</h3>
+      <h3 className="calculatorPage__header">Calorie calculator</h3>
       <SelectGender />
-      <p></p>
+      <p> </p>
       <SelectPurpose />
       <div className="inputValueCalculator">
         <LabeledInput
-          label="Вес, кг"
+          label="Weight, kg"
           type="number"
           value={weight}
           onChange={inputWeightHandler}
         />
         <LabeledInput
-          label="Рост, см"
+          label="Growth, cm"
           type="number"
           value={height}
           onChange={inputHeightHandler}
         />
         <LabeledInput
-          label="Возраст"
+          label="Age"
           type="number"
           value={age}
           onChange={inputAgeHandler}
         />
       </div>
       <LabeledInput
-        label="Шагов в среднем в день"
+        label="Average steps per day"
         type="number"
         value={step}
         onChange={inputStepHandler}
@@ -130,20 +130,20 @@ const CalculatorPage = ({ updateCaloriesData }:any ) => {
       <SliderNumber />
       <div className="calculatorPage__result">
         <div>
-          <h3>{`${kilocalories} ккал`}</h3>
+          <h3>{`${kilocalories} kcal`}</h3>
         </div>
         <div className="calculatorPage__macros">
           <div>
-            <p>Белки</p>
-            <p>{`${proteins} гр.`}</p>
+            <p>Proteins</p>
+            <p>{`${proteins} grams`}</p>
           </div>
           <div>
-            <p>Жиры</p>
-            <p>{`${fats} гр.`}</p>
+            <p>Fats</p>
+            <p>{`${fats} grams`}</p>
           </div>
           <div>
-            <p>Углеводы</p>
-            <p>{`${carbohydrates} гр.`}</p>
+            <p>Carbs</p>
+            <p>{`${carbohydrates} grams`}</p>
           </div>
         </div>
       </div>

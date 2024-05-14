@@ -4,3 +4,42 @@
     text-align: center;
     margin: 0;
 }
+
+.ant-slider .ant-slider-step {
+    background: #FF6600;
+}
+
+.ant-input-number-input-wrap {
+    background-color: rgb(51, 51, 51);
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+.ant-input-number-input-wrap:hover {
+    background-color: rgb(51, 51, 51);
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+.ant-input-number-input-wrap:active {
+    background-color: rgb(51, 51, 51);
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
+.ant-input-number-outlined {
+    border: none;
+    background: rgb(51, 51, 51);
+}
+
+.ant-input-number .ant-input-number-input {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-slider .ant-slider-handle::after {
+    background-color: rgb(51, 51, 51);
+    box-shadow: 0 0 0 2px #FF6600;
+}
