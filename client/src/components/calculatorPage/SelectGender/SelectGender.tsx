@@ -19,8 +19,8 @@ const SelectGender = () => {
         style={{ width: 475, marginBottom: '10px' }}
         onChange={handleChange}
         options={[
-          { value: 'Man', label: 'Man' },
-          { value: 'Woman', label: 'Woman' },
+          { value: 'Male', label: 'Male' },
+          { value: 'Female', label: 'Female' },
         ]}
       />
     </Space>

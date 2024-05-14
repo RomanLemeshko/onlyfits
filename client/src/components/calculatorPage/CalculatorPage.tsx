@@ -61,9 +61,9 @@ const CalculatorPage = ({ updateCaloriesData }:any ) => {
 
     // Рассчитываем базовый метаболизм в зависимости от пола
     let bmr;
-    if (gender === "Man") {
+    if (gender === "Male") {
         bmr = (menCoefficient * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) + 5;
-    } else if (gender === "Woman") {
+    } else if (gender === "Female") {
         bmr = (womenCoefficient * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) - 161;
     } else {
         return 0;
