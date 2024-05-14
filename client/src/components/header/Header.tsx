@@ -25,20 +25,22 @@ const Header = () => {
       <div>
         {isLoggedIn ? (
           <>
-            <ul id="header-container">
-              <li><Link to="/">Главная</Link></li>
-              <li><Link to="/view-programms">Программы</Link></li>
-              <li><Link to="/view-profile">Профиль</Link></li>
-              <li><Link to="/chat-bot">Чат</Link></li>
-              <li><button onClick={handleLogout}>Выйти</button></li>
+          <div className='header-content'>
+            <ul id="header-container" className="authenticated">
+              <li><Link to="/" className={location.pathname === "/" ? "active-link" : ""}>Главная</Link></li>
+              <li><Link to="/view-programms" className={location.pathname === "/view-programms" ? "active-link" : ""}>Программы</Link></li>
+              <li><Link to="/view-profile" className={location.pathname === "/view-profile" ? "active-link" : ""}>Профиль</Link></li>
+              <li><Link to="/chat-bot" className={location.pathname === "/chat-bot" ? "active-link" : ""}>Чат</Link></li>
+              <li><button className='btn-logout' onClick={handleLogout}>Выйти</button></li>
             </ul>
-            <div><h5>User: {user?.name}</h5></div>
+            <div><h5>{user?.name}</h5></div>
+          </div>
           </>
         ) : (
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/register">Зарегистрироваться</Link></li>
-            <li><Link to="/login">Войти</Link></li>
+          <ul className="unauthenticated">
+            <li><Link to="/" className={location.pathname === "/" ? "active-link" : ""}>Home</Link></li>
+            <li><Link to="/register" className={location.pathname === "/register" ? "active-link" : ""}>Зарегистрироваться</Link></li>
+            <li><Link to="/login" className={location.pathname === "/login" ? "active-link" : ""}>Войти</Link></li>
           </ul>
         )}
       </div>
