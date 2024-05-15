@@ -1,47 +1,98 @@
-/* #day-plan-container{
-  margin: auto;
-  width: 1000px;
-  display: flex;
-  flex-direction: column;
-  align-items:center
+body {
+  background-image: url('firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9dkground.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Arial', sans-serif;
 }
 
-a{
-  text-decoration: none
+#day-plan-container {
+  background-color: rgba(26, 26, 26, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid #FFA500;
+  margin: 20px;
 }
 
-.meal-container{
-  margin: 10px;
-  border:solid gray 2px;
-  border-radius: 10px;
-  width: 500px;
+h2, h3, div {
+  color: #FFFFFF;
+  font-family: 'Arial', sans-serif;
 }
 
-h2, h3{
-  margin: 5px;
+.start-btn {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  color: #FFFFFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin: 10px 0;
+  text-align: center;
 }
 
-.container-excersice-modal{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  overflow: hidden;
-  overflow-y: auto;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  z-index: 99;
-  padding: 30px 0;
- }
- 
- .modal-excersices{
- background: gray;
- width: 600px;
- height: 300px;
- max-width: 100%;
- 
- 
- } */
+.start-btn a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.start-btn:hover {
+  background: linear-gradient(90deg, #FFA500, #FF6F00);
+}
+
+.start-btn:focus {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  color: #FFFFFF;
+}
+
+.meal-container {
+  background-color: #333333;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.meal-container h2, .meal-container h3 {
+  color: #FFFFFF;
+}
+
+.meal-container a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.meal-container a:hover {
+  text-decoration: underline;
+}
+
+/* Добавим стили для модального окна */
+.ant-modal-content {
+  background-color: rgba(26, 26, 26, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid #FFA500;
+}
+
+.ant-modal-footer {
+  border-top: none;
+}
+
+.ant-modal-footer .ant-btn-primary {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ant-modal-footer .ant-btn-primary:hover {
+  background: linear-gradient(90deg, #FFA500, #FF6F00);
+}

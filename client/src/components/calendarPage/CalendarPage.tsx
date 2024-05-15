@@ -1,7 +1,6 @@
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { useEffect, useState } from 'react';
-import { ru } from 'date-fns/locale';
 import CalendarDayComponent from '../calendarDayComponent/CalendarDayComponent';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
@@ -40,7 +39,6 @@ const CalendarPage = () => {
         selected={selectedDay}
         onDayClick={setSelectedDay}
         disabled={day => daysToDisable.includes(day.getDay())}
-        locale={ru}
         footer={footer}
         components={{ Day: CalendarDayComponent }}
       />
