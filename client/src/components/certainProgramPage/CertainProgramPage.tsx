@@ -20,15 +20,19 @@ const CertainProgramPage = () => {
     <>
       <Header />
       <div className="certain-program-page-container" >
-        <div className="certain-program-page">
-          <h1>
-            Program "{certainProg?.program_title}" {certainProg?.presentation}
+        <div className="certain-program-page" style={{backgroundImage:`url(${certainProg?.url})`, backgroundSize: 'cover'}}>
+        
+          
+           
+           <h1 className='program-title'>
+            {certainProg?.presentation}
           </h1>
-          <h2>Program type: {certainProg?.program_type}</h2>
-          <h2>Level of complexity: {certainProg?.program_level}</h2>
-          <h2>Program duration: {certainProg?.training_days} days</h2>
-          <h2>Program raiting: {certainProg?.program_rating}</h2>
-          <h2>Program description: {certainProg?.description}</h2>
+          <h2 className='certain-program-info'>Program type: {certainProg?.program_type}</h2>
+          <h2 className='certain-program-info'>Level of complexity: {certainProg?.program_level}</h2>
+          <h3 className='certain-program-info'>Program duration: {certainProg?.training_days} days</h3>
+          <h3 className='certain-program-info'>Program raiting: {certainProg?.program_rating}</h3>
+          <h3 className='certain-program-info description'>Program description: {certainProg?.description}</h3>
+          
         </div>
       </div>
     </>
