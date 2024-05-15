@@ -3,7 +3,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-  background-position: center;
+  background-position: relative;
   background-attachment: fixed;
   font-family: 'Arial', sans-serif;
 }
@@ -18,6 +18,7 @@ body {
   background-color: rgba(26, 26, 26, 0.9);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border: 2px solid #ffa500;
+  
 }
 
 .profile-block {
