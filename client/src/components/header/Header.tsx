@@ -26,6 +26,11 @@ const Header = () => {
         {isLoggedIn ? (
           <>
           <div className='header-content'>
+            <div className="logo">
+              <img src="https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/onlyfits_logotype.png?alt=media&token=3e929633-b844-48cd-9158-1a8a2581c6de" alt="onlyfits_logo" />
+            </div>
+            <div>
+
             <ul id="header-container" className="authenticated">
               <li><Link to="/" className={location.pathname === "/" ? "active-link" : ""}>Main</Link></li>
               <li><Link to="/view-programms" className={location.pathname === "/view-programms" ? "active-link" : ""}>Programs</Link></li>
@@ -33,6 +38,7 @@ const Header = () => {
               <li><Link to="/chat-bot" className={location.pathname === "/chat-bot" ? "active-link" : ""}>Chat</Link></li>
               <li><button className='btn-logout' onClick={handleLogout}>Logout</button></li>
             </ul>
+            </div>
             <div><h5>{user?.name}</h5></div>
           </div>
           </>

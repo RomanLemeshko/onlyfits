@@ -69,7 +69,8 @@ p {
   background-color: #333333;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
+  width: 85%;
 }
 
 .program-radio {
@@ -83,9 +84,26 @@ p {
   color: #ffffff;
 }
 
+.modal-style .ant-modal-footer {
+  background-color: rgb(26, 26, 26);
+  color: white;
+  box-shadow: none;
+  display: flex;
+  align-content: center;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.ant-btn {
+  display: flex;
+  align-items: center;
+}
+
 .modal-style .ant-modal-footer .ant-btn-primary {
   background: linear-gradient(90deg, #ff6f00, #ffa500);
   border: none;
+  display: flex;
+  align-items: center;
 }
 
 .modal-style .ant-modal-footer .ant-btn-primary:hover {

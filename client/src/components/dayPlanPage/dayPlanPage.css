@@ -9,11 +9,15 @@ body {
 }
 
 #day-plan-container {
-  background-color: rgba(26, 26, 26, 0.9);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+  /* background-color: rgba(26, 26, 26, 0.9); */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 2px solid #FFA500;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+  /* border: 2px solid #FFA500; */
   margin: 20px;
 }
 
@@ -95,4 +99,23 @@ h2, h3, div {
 
 .ant-modal-footer .ant-btn-primary:hover {
   background: linear-gradient(90deg, #FFA500, #FF6F00);
+}
+
+.ant-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ant-modal-footer .ant-btn-primary {
+  display: flex;
+  align-items: center;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-modal {
+  padding: 0px;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-modal .ant-modal-content {
+  background-color: rgba(26, 26, 26, 1);
+  border: 1px solid #FFA500;
 }

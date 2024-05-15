@@ -112,11 +112,11 @@ const ProfilePage = () => {
                 <p>Current goal: {latestMacros.purpose}</p>
                 <p>Required indicators:</p>
                 <div className="calculatorPage__result">
-                  <h3>{`${latestMacros.kilocalories} ккал`}</h3>
+                  <h3>{`${latestMacros.kilocalories} kcal`}</h3>
                   <div className="calculatorPage__macros">
-                    <p>Proteins: {`${latestMacros.proteins} grams`}</p>
-                    <p>Fats: {`${latestMacros.fats} grams`}</p>
-                    <p>Carbs: {`${latestMacros.carbohydrates} grams`}</p>
+                    <p>Proteins: {`${latestMacros.proteins} gr.`}</p>
+                    <p>Fats: {`${latestMacros.fats} gr.`}</p>
+                    <p>Carbs: {`${latestMacros.carbohydrates} gr.`}</p>
                   </div>
                 </div>
               </>
