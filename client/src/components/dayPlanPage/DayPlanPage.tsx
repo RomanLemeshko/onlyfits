@@ -12,6 +12,7 @@ export type RecipeType = {
   ingridients: string;
   description: string;
 };
+
 export const mealArr = [
   {
     id: 1,
@@ -19,47 +20,46 @@ export const mealArr = [
     cooktime: '5 min',
     complexity: 'easy',
     calories: 500,
-    ingridients: 'carb protein bread, peanut butter, coconut oil, mozzurella',
+    ingridients: 'carb protein bread, peanut butter, coconut oil, mozzarella',
     description: 'keto peanut and mozzarella toast',
   },
   {
     id: 2,
     time: 'lunch',
     cooktime: '15 min',
-    complexity: 'intermediat',
+    complexity: 'intermediate',
     calories: 800,
-    ingridients: 'chicken breast, bulgar, cherry tomato, olive oil',
+    ingridients: 'chicken breast, bulgur, cherry tomato, olive oil',
     description: 'Seasoned chicken breast with salt',
   },
   {
     id: 3,
     time: 'dinner',
     cooktime: '25 min',
-    complexity: 'intermediat',
+    complexity: 'intermediate',
     calories: 1000,
     ingridients: 'ground beef, mushrooms, cream cheese, olive oil, salt',
-    description: 'creamy beef abd mushroom bowl',
+    description: 'creamy beef and mushroom bowl',
   },
 ];
 
-const DayPlanPage = React.memo(({ data }:{data:DayPlan | null }) => {
+const DayPlanPage = React.memo(({ data }: { data: DayPlan | null }) => {
   console.log('DATA SET', data);
 
   return (
     <div>
       {/* <Header /> */}
-
       <div id="day-plan-container" className='container-excersice-modal modal-excersices'>
-        <h3>Твой план на день</h3>
-        <div>УТРЕННЯЯ ЗАРЯДКА</div>
+        <h3>Your plan for the day</h3>
+        <div>MORNING WORKOUT</div>
         <button className="start-btn">
           <Link to="/view-profile/day-plan/morning-routine">
-            НАЧАТЬ ЗАНЯТИЕ
+          START
           </Link>
         </button>
-        <div>ОСНОВНОЕ ЗАНЯТИЕ</div>
+        <div>EVENING WORKOUT</div>
         <button className="start-btn">
-          <Link to="/view-profile/day-plan/workout">НАЧАТЬ ЗАНЯТИЕ</Link>
+          <Link to="/view-profile/day-plan/workout">START</Link>
         </button>
         <div id="day-recipes">
           {mealArr.map((eachMeal) => (
@@ -72,7 +72,6 @@ const DayPlanPage = React.memo(({ data }:{data:DayPlan | null }) => {
           ))}
         </div>
       </div>
-      
     </div>
   );
 });

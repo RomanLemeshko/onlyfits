@@ -1,111 +1,111 @@
-#profile-page-container{
-  display: flex;
-  flex-direction: column;
-  align-items: center
-
+body {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9dkground.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Arial', sans-serif;
 }
 
+#profile-page-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  background-color: rgba(26, 26, 26, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid #FFA500;
+}
+
+.profile-block {
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid #FFA500;
+  flex: 1;
+  min-width: 300px;
+}
+
+h2, h3, h4, p {
+  color: #FFFFFF;
+  font-family: 'Arial', sans-serif;
+}
+
+.calculatorPage__result {
+  background-color: #333333;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.calculatorPage__macros {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+#exercise-schedule {
+  margin: 20px 0;
+}
+
+#exercise-schedule label {
+  display: block;
+  margin-bottom: 10px;
+  color: white;
+}
 
 #all-picked-program-container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+  margin-top: 20px;
 }
 
 .picked-program-container {
-  margin: auto;
-  border-radius: 10px;
-  border: solid gray 2px;
-  width: 300px;
-}
-
-#calendar-container {
-  width: 500px;
-  height: 400px;
-  text-align: center;
+  background-color: #333333;
+  padding: 10px;
   border-radius: 8px;
-  border: solid gray 2px;
+  margin-bottom: 10px;
 }
 
-
-table{
-  width: 480px;
-  height: 380px;
-}
-
-
-.button{
-  /* display: inline-block;
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 5px;
-  margin-top: 10px;
-  width: 400px; */
-}
-
-.calculator {
-  display: flex; 
-  justify-content: center; 
-  flex-direction: column; 
-  text-align: center;
-}
-
-.ant-btn {
-  width: 200px;
-}
-
-.modal-style {
-  background-color: rgb(243,244,239);
-  color: rgb(13, 20, 28);
+.program-radio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .modal-style .ant-modal-content {
-  background-color: rgb(243,244,239);
-  color: rgb(13, 20, 28);
+  background-color: #1a1a1a;
+  color: #FFFFFF;
 }
 
-.modal-style .ant-modal-header {
-  background-color: rgb(243,244,239);
-  color: rgb(13, 20, 28);
+.modal-style .ant-modal-footer .ant-btn-primary {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  border: none;
 }
 
-.modal-style .ant-modal-footer {
-  background-color: rgb(243,244,239);
-  color: rgb(13, 20, 28);
+.modal-style .ant-modal-footer .ant-btn-primary:hover {
+  background: linear-gradient(90deg, #FFA500, #FF6F00);
 }
 
-.ant-modal-footer {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+.button-primary {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 20px;
 }
 
-.ant-btn-default {
-  width: 250px;
+.button-primary:hover {
+  background: linear-gradient(90deg, #FFA500, #FF6F00);
 }
 
-.ant-btn-primary {
-  width: 250px;
-  background-color: rgb(13, 20, 28);
-  color: rgb(243,244,239);
-}
-
-.ant-modal-content {
-  box-shadow: none;
-}
-
-.program-radio{
-  display: flex;
-}
-
-#exercise-schedule{
-  display: flex;
-  gap:130px
+.button-primary:focus {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  color: #FFFFFF;
 }

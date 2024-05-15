@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Header from '../header/Header';
-import './profilePage.css';
+import './ProfilePage.css';
 import { useState, useEffect } from 'react';
 import { Button, Modal } from 'antd';
 import CalculatorPage from '../calculatorPage/CalculatorPage';
@@ -14,12 +14,12 @@ import { getUserSchedule } from '../../store/userScheduleSlice/userSchedule';
 import { getUserProgIdForMonth } from '../../store/userProgIdForMonth/userProgIdForMonth';
 
 interface MacrosType {
-    user_id: number;
-    purpose: string;
-    kilocalories: number;
-    proteins: number;
-    fats: number;
-    carbohydrates: number;
+  user_id: number;
+  purpose: string;
+  kilocalories: number;
+  proteins: number;
+  fats: number;
+  carbohydrates: number;
 }
 
 const ProfilePage = () => {
@@ -41,7 +41,7 @@ const ProfilePage = () => {
         console.error('Ошибка при получении последних макросов:', error);
       }
     };
-  
+
     if (user && user.id) {
       getLatestMacros();
     }
@@ -101,87 +101,91 @@ const ProfilePage = () => {
     }
   }, [dispatch, user]);
 
-  
-
   return (
     <CalculatorContextProvider>
-      <div id="profile-page-container">
+      <div>
         <Header />
-        <div>
-          {latestMacros ? (
-            <>
-              <p>Current goal: {latestMacros.purpose}</p>
-              <p>Required indicators:</p>
-              <div className="calculatorPage__result">
-                <h3>{`${latestMacros.kilocalories} ккал`}</h3>
-                <div className="calculatorPage__macros">
-                  <p>Proteins: {`${latestMacros.proteins} grams`}</p>
-                  <p>Fats: {`${latestMacros.fats} grams`}</p>
-                  <p>Carbs: {`${latestMacros.carbohydrates} grams`}</p>
+        <div id="profile-page-container">
+          <div className="profile-block">
+            {latestMacros ? (
+              <>
+                <p>Current goal: {latestMacros.purpose}</p>
+                <p>Required indicators:</p>
+                <div className="calculatorPage__result">
+                  <h3>{`${latestMacros.kilocalories} ккал`}</h3>
+                  <div className="calculatorPage__macros">
+                    <p>Proteins: {`${latestMacros.proteins} grams`}</p>
+                    <p>Fats: {`${latestMacros.fats} grams`}</p>
+                    <p>Carbs: {`${latestMacros.carbohydrates} grams`}</p>
+                  </div>
                 </div>
-              </div>
-            </>
-          ) : (
-            <p>You haven’t calculated your target yet.</p>
-          )}
+              </>
+            ) : (
+              <p>You haven’t calculated your target yet.</p>
+            )}
+            <Button className="button-primary" onClick={showModal}>
+              Calorie calculator
+            </Button>
+          </div>
+          <div className="profile-block">
+            <h3>Select your exercise schedule::</h3>
+            <div id="exercise-schedule">
+              <label htmlFor="schedule">
+                <input
+                  type="radio"
+                  name="schedule"
+                  value="two"
+                  checked={scheduleToWork === 'two'}
+                  onChange={scheduleHandler}
+                /> Two
+              </label>
+              <label htmlFor="schedule">
+                <input
+                  type="radio"
+                  name="schedule"
+                  value="four"
+                  checked={scheduleToWork === 'four'}
+                  onChange={scheduleHandler}
+                /> Four
+              </label>
+            </div>
+            <div id="all-picked-program-container">
+              {progs && progs.length > 0 ? (
+                progs.map((eachProgram) => (
+                  <div className="program-radio" key={eachProgram.id}>
+                    <div className="picked-program-container">
+                      <Link to={`/view-profile/program/${eachProgram.id}`}>
+                        <h3>{eachProgram.program_title}</h3>
+                        <h4>{eachProgram.program_type}</h4>
+                      </Link>
+                    </div>
+                    <input
+                      type="radio"
+                      name="program"
+                      value={eachProgram.id}
+                      checked={programToWork === eachProgram.id.toString()}
+                      onChange={programForMonthHandler}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p>No selected programs</p>
+              )}
+            </div>
+          </div>
+          <div className="profile-block">
+            <h2>My schedule</h2>
+            <CalendarPage />
+          </div>
+          <Modal
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            className="modal-style"
+          >
+            <CalculatorPage updateCaloriesData={updateCaloriesData} />
+          </Modal>
         </div>
-        <h3>Выберите расписание занятий:</h3>
-        <div id="exercise-schedule">
-          <label htmlFor="schedule">
-            <input
-              type="radio"
-              name="schedule"
-              value="two"
-              checked={scheduleToWork === 'two'}
-              onChange={scheduleHandler}
-            /> Two
-          </label>
-          <label htmlFor="schedule">
-            <input
-              type="radio"
-              name="schedule"
-              value="four"
-              checked={scheduleToWork === 'four'}
-              onChange={scheduleHandler}
-            /> Four
-          </label>
-        </div>
-        <div id="all-picked-program-container">
-  {progs && progs.length > 0 ? (
-    progs.map((eachProgram) => (
-      <div className="program-radio" key={eachProgram.id}>
-        <div className="picked-program-container">
-          <Link to={`/view-profile/program/${eachProgram.id}`}>
-            <h3>{eachProgram.program_title}</h3>
-            <h4>{eachProgram.program_type}</h4>
-          </Link>
-        </div>
-        <input
-          type="radio"
-          name="program"
-          value={eachProgram.id}
-          checked={programToWork === eachProgram.id.toString()}
-          onChange={programForMonthHandler}
-        />
-      </div>
-    ))
-  ) : (
-    <p>Пока у тебя нет подобранных программ...</p>
-  )}
-</div>
-        <h2>Мое расписание</h2>
-        <CalendarPage />
-        <Button type="primary" onClick={showModal}>
-        Calorie calculator
-        </Button>
-        <Modal
-          open={isModalOpen}
-          onOk={handleOk}
-          onCancel={handleCancel}
-          className="modal-style"
-        >
-          <CalculatorPage updateCaloriesData={updateCaloriesData} />
-        </Modal>
       </div>
     </CalculatorContextProvider>
   );
