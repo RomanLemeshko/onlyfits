@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Header from '../header/Header';
-import './ProfilePage.css';
+import './profilePage.css';
 import { useState, useEffect } from 'react';
 import { Button, Modal } from 'antd';
 import CalculatorPage from '../calculatorPage/CalculatorPage';
