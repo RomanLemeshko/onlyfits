@@ -25,17 +25,18 @@ const ProgramsPage = (): JSX.Element => {
     return <div>Loading or error...</div>;
   }
 
-  const deleteProgram = (programId: number) => {
-    dispatch(
-      deleteUserProgramsThunky({
-        user_id: user?.user?.id,
-        program_id: programId,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        dispatch(getUserProgramsThunky(Number(user?.user?.id)));
-      });
+  const deleteProgram = ( programId: number ) => {
+      dispatch(
+        deleteUserProgramsThunky({
+          user_id: user?.user?.id,
+          program_id: programId,
+        })
+      )
+        .unwrap()
+        .then(() => {
+          dispatch(getUserProgramsThunky(Number(user?.user?.id)));
+        });
+    
   };
 
   return (
@@ -45,19 +46,22 @@ const ProgramsPage = (): JSX.Element => {
         {progs &&
           progs.map((eachProgram) => (
             <div key={eachProgram.id} className="card-container">
-              <Card
-                hoverable
-                size="small"
-                cover={
-                  <img
-                    alt="example"
-                    src={eachProgram.url}
-                    style={{ width: 390, height: 300 }}
-                  />
-                }
+              <Link
+                to={`program/${eachProgram.id}`}
+                style={{ textDecoration: 'none' }}
               >
-                {' '}
-                <Link to={`program/${eachProgram.id}`}>
+                <Card
+                  hoverable
+                  className="card-programs"
+                  size="small"
+                  cover={
+                    <img
+                      alt="example"
+                      src={eachProgram.url}
+                      style={{ width: 390, height: 300 }}
+                    />
+                  }
+                >
                   <div className="card-info">
                     <p>
                       <h2>Title: {eachProgram.program_title}</h2>
@@ -68,16 +72,20 @@ const ProgramsPage = (): JSX.Element => {
                     <p>Type: {eachProgram.program_type}</p>
                     <p>{eachProgram.presentation}</p>
                   </div>
-                </Link>
-                <div className="btn-container">
-                  <Button
-                    className="add-prog-btn"
-                    onClick={() => deleteProgram(eachProgram.id)}
-                  >
-                    Delete program
-                  </Button>
-                </div>
-              </Card>
+
+                  <div className="btn-container">
+                    <Button
+                      className="delete-prog-btn"
+                      onClick={(event) => {
+                        event.preventDefault()
+                        deleteProgram(eachProgram.id);
+                      }}
+                    >
+                      Delete program
+                    </Button>
+                  </div>
+                </Card>
+              </Link>
             </div>
           ))}
       </div>
