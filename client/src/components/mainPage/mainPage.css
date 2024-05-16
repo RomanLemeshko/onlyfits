@@ -3,8 +3,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-  background-position: relative;
+  background-position: center;
   background-attachment: fixed;
+  font-family: 'Arial', sans-serif;
 }
 
 #general {
@@ -55,9 +56,17 @@ body {
   justify-content: space-around;
 }
 
-img:hover{
+/* img:hover{
   transition: 0.3s;
   opacity: 0.7;
+} */
+
+.card{
+  transition: 0.9s;
+  opacity: 0.89;
+}
+.card:hover{
+  opacity: 1;
 }
 
 /* filter styles */

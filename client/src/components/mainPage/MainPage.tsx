@@ -106,6 +106,7 @@ const MainPage = () => {
             <div className="card-container">
               <Card
                 className="card"
+                hoverable
                 key={eachProgram.id}
                 size="small"
                 cover={

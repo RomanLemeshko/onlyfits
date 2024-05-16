@@ -3,33 +3,27 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-  background-position: relative;
+  background-position: center;
   background-attachment: fixed;
+  font-family: 'Arial', sans-serif;
+  text-decoration: none;
 }
 
-/* .programs-container{
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap:5px;
-  margin: auto;
+
+.card-programs{
+  transition: 0.9s;
+  opacity: 0.89;
 
 }
-
-.card-container{
-  direction: flex;
-  border-radius: 10px;
-  border: solid gray 2px;
-  justify-content: center;
-  gap:5px;
+.card-programs:hover{
+  opacity: 1;
 }
 
-.img-user-prog-page:hover{
-  transition: 0.3s;
-  opacity: 0.8;
-} */
-
-
+.delete-prog-btn {
+  background-color: rgb(255, 105, 5);
+  color: black;
+  font-weight: 600;
+  border: solid 1px black
+}
 
 

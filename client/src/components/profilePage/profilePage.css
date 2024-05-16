@@ -3,7 +3,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-  background-position: center;
+  background-position: relative;
   background-attachment: fixed;
   font-family: 'Arial', sans-serif;
 }
@@ -17,7 +17,8 @@ body {
   border-radius: 8px;
   background-color: rgba(26, 26, 26, 0.9);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 2px solid #FFA500;
+  border: 2px solid #ffa500;
+  
 }
 
 .profile-block {
@@ -25,13 +26,16 @@ body {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 2px solid #FFA500;
+  border: 2px solid #ffa500;
   flex: 1;
   min-width: 300px;
 }
 
-h2, h3, h4, p {
-  color: #FFFFFF;
+h2,
+h3,
+h4,
+p {
+  color: #ffffff;
   font-family: 'Arial', sans-serif;
 }
 
@@ -77,22 +81,22 @@ h2, h3, h4, p {
 
 .modal-style .ant-modal-content {
   background-color: #1a1a1a;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .modal-style .ant-modal-footer .ant-btn-primary {
-  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  background: linear-gradient(90deg, #ff6f00, #ffa500);
   border: none;
 }
 
 .modal-style .ant-modal-footer .ant-btn-primary:hover {
-  background: linear-gradient(90deg, #FFA500, #FF6F00);
+  background: linear-gradient(90deg, #ffa500, #ff6f00);
 }
 
 .button-primary {
-  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  background: linear-gradient(90deg, #ff6f00, #ffa500);
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
   padding: 10px 20px;
@@ -102,10 +106,10 @@ h2, h3, h4, p {
 }
 
 .button-primary:hover {
-  background: linear-gradient(90deg, #FFA500, #FF6F00);
+  background: linear-gradient(90deg, #ffa500, #ff6f00);
 }
 
 .button-primary:focus {
-  background: linear-gradient(90deg, #FF6F00, #FFA500);
-  color: #FFFFFF;
+  background: linear-gradient(90deg, #ff6f00, #ffa500);
+  color: #ffffff;
 }
