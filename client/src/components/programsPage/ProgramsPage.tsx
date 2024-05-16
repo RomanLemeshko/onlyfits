@@ -52,8 +52,9 @@ const ProgramsPage = (): JSX.Element => {
               >
                 <Card
                   hoverable
-                  className="card-programs"
+                  className="card"
                   size="small"
+                  key={eachProgram.id}
                   cover={
                     <img
                       alt="example"
