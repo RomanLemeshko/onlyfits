@@ -1,19 +1,28 @@
 import { useParams } from 'react-router-dom';
 import './certainProgramPage.css';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
 import Header from '../header/Header';
+import { getAllProgramsThunky } from '../../store/allProgramSlice/allProgramsSlice';
+import { useEffect } from 'react';
+import { getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
 
 const CertainProgramPage = () => {
   const { id } = useParams();
   console.log('PARAMS: ', id);
   const progs = useSelector((state: RootState) => state.allPrograms.programs);
+  const dispatch = useDispatch<AppDispatch>();
 
   const certainProg = progs.find((each) => {
     return each.id === Number(id);
   });
 
   // const certainProgram:ProgramType =arr[Number(id)-1]
+  //! use effect to fill out relevant state
+  useEffect(() => {
+    dispatch(getAllProgramsThunky());
+  }, []);
+
 
   console.log('CertainProgram:', certainProg);
   return (
@@ -21,9 +30,6 @@ const CertainProgramPage = () => {
       <Header />
       <div className="certain-program-page-container" >
         <div className="certain-program-page" style={{backgroundImage:`url(${certainProg?.url})`, backgroundSize: 'cover'}}>
-        
-          
-           
            <h1 className='program-title'>
             {certainProg?.presentation}
           </h1>
@@ -40,3 +46,5 @@ const CertainProgramPage = () => {
 };
 
 export default CertainProgramPage;
+
+
