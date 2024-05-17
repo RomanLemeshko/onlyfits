@@ -1,0 +1,74 @@
+body {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9d');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: relative;
+  background-attachment: fixed;
+  font-family: 'Arial', sans-serif;
+}
+
+.card {
+  background: rgba(43, 43, 43, 0.9); /* Более светлый и прозрачный фон */
+  border: 1px solid #ff6600;
+  color: #ff6600;
+  padding: 16px; /* Добавляем отступы */
+  border-radius: 8px; /* Скругленные углы */
+}
+
+.carousel {
+  margin-bottom: 16px;
+}
+
+.exerciseCard {
+  background: rgba(31, 31, 31, 0.9); /* Более светлый и прозрачный фон */
+  border: none;
+  color: #ff6600;
+  border-radius: 8px; /* Скругленные углы */
+  overflow: hidden; /* Для предотвращения выхода изображения за границы */
+}
+
+.exerciseTitle {
+  color: #ff6600; /* Белый цвет текста */
+  font-size: 20px; /* Увеличиваем размер шрифта */
+}
+
+.exerciseImage {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover; /* Сохраняем соотношение сторон и обрезаем излишки */
+}
+
+.controlButtons {
+  margin: 16px 0;
+  display: flex;
+  justify-content: space-between;
+  color: #ff6600; /* Добавляем белый цвет текста */
+}
+
+.timerText {
+  font-size: 18px; /* Увеличиваем размер шрифта таймера */
+  color: #ff6600; /* Белый цвет текста */
+}
+
+.progressBar {
+  margin-top: 16px;
+  height: 8px; /* Увеличиваем высоту полосы прогресса */
+}
+
+.orangeTitle {
+  color: #ff6600; /* Оранжевый цвет заголовка */
+}
+
+.button {
+  background-color: #ff6600; /* Оранжевый фон */
+  border: none; /* Убираем рамку */
+  color: white; /* Белый текст */
+  transition: all 0.3s ease; /* Плавный переход для всех свойств */
+}
+
+.button:hover {
+  background-color: white !important; /* Белый фон при наведении, использование !important для переопределения */
+  color: #ff6600 !important; /* Оранжевый текст при наведении, использование !important для переопределения */
+}
+
