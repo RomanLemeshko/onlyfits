@@ -1,25 +1,49 @@
-import {RecipeType, mealArr} from '../dayPlanPage/DayPlanPage'
+import { RecipeType, mealArr } from '../dayPlanPage/DayPlanPage';
 import { useParams } from 'react-router-dom';
-import './recipes.css'
+import './recipes.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import {
+  Recipe,
+  getAllRecipiesThunky,
+} from '../../store/allRecipies/allRecipies';
+import Header from '../header/Header';
+import { useEffect, useState } from 'react';
 
+const RecipePage = () => {
+  const { id } = useParams();
+  const [certainMeal, setCrtainMeal] = useState<Recipe>({
+    id: 0,
+    title: "",
+    ingredients: "",
+    kcal: "",
+    protein: "",
+    carbs: "",
+    fat: "",
+    url: "",
+    type: "",
+    time: "",
+    instructions: ""
+  })
 
+  const dispatch = useDispatch<AppDispatch>();
 
+  useEffect(() => {
+    dispatch(getAllRecipiesThunky())
+      .unwrap()
+      .then((data) => {
+        const foundMeal = data.find((eachMeal: Recipe) => eachMeal.id === Number(id));
+        setCrtainMeal(foundMeal);
+      });
+  }, [dispatch, id]);
 
-const Recipe = () => {
-  const {id} = useParams()
-  const certainRecipe:RecipeType =mealArr[Number(id)-1]
-
+  // console.log('RECEAP PAGE: ', certainMeal);
   return (
-    <div id="recipe-container">
-      <h2>Your {certainRecipe.time}</h2>
-      <h2>{certainRecipe.description}</h2>
-      <h3>Complexity: {certainRecipe.complexity}</h3>
-      <h3>Cooking time: {certainRecipe.cooktime}</h3>
-      <h3>Ingridients: {certainRecipe.ingridients}</h3>
-      <h3>Calories: {certainRecipe.calories}</h3>
-      
-    </div>
+    <>
+      <Header />
+      <div id="recipe-container">{certainMeal && certainMeal.title}</div>
+    </>
   );
 };
 
-export default Recipe;
+export default RecipePage;

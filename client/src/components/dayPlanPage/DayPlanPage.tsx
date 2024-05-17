@@ -1,75 +1,78 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './dayPlanPage.css';
 import { DayPlan } from '../calendarDayComponent/CalendarDayComponent';
-
-export type RecipeType = {
-  id: number;
-  time: string;
-  cooktime: string;
-  complexity: string;
-  calories: number;
-  ingridients: string;
-  description: string;
-};
-
-export const mealArr = [
-  {
-    id: 1,
-    time: 'breakfast',
-    cooktime: '5 min',
-    complexity: 'easy',
-    calories: 500,
-    ingridients: 'carb protein bread, peanut butter, coconut oil, mozzarella',
-    description: 'keto peanut and mozzarella toast',
-  },
-  {
-    id: 2,
-    time: 'lunch',
-    cooktime: '15 min',
-    complexity: 'intermediate',
-    calories: 800,
-    ingridients: 'chicken breast, bulgur, cherry tomato, olive oil',
-    description: 'Seasoned chicken breast with salt',
-  },
-  {
-    id: 3,
-    time: 'dinner',
-    cooktime: '25 min',
-    complexity: 'intermediate',
-    calories: 1000,
-    ingridients: 'ground beef, mushrooms, cream cheese, olive oil, salt',
-    description: 'creamy beef and mushroom bowl',
-  },
-];
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import {
+  Recipe,
+  getAllRecipiesThunky,
+} from '../../store/allRecipies/allRecipies';
 
 const DayPlanPage = React.memo(({ data }: { data: DayPlan | null }) => {
   console.log('DATA SET', data);
+  const mealArr: Recipe[] = useSelector(
+    (state: RootState) => state.allRecipies
+  );
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(getAllRecipiesThunky());
+  }, []);
+
+  function getRundomRecipies(arr: Recipe[]): Recipe[] {
+    const recepiesForToday: Recipe[] = [];
+    const randomTrack: number[] = [];
+    for (let i = 0; i < 2; i++) {
+      const random = Math.floor(Math.random() * 30);
+      if (randomTrack.includes(random)) {
+        i--;
+      } else {
+        randomTrack.push(random);
+      }
+    }
+    for (let i = 0; i < 2; i++) {
+      recepiesForToday.push(arr[randomTrack[i]]);
+    }
+    return recepiesForToday;
+  }
+  const dayMeal: Recipe[] = getRundomRecipies(mealArr);
+  console.log('ALLMEAL: ', dayMeal);
 
   return (
     <div>
-      {/* <Header /> */}
-      <div id="day-plan-container" className='container-excersice-modal modal-excersices'>
+      <div
+        id="day-plan-container"
+        className="container-excersice-modal modal-excersices"
+      >
         <h3>Your plan for the day</h3>
         <div>MORNING WORKOUT</div>
         <button className="start-btn">
-          <Link to="/view-profile/day-plan/morning-routine">
-          START
-          </Link>
+          <Link to="/view-profile/day-plan/morning-routine">START</Link>
         </button>
         <div>EVENING WORKOUT</div>
         <button className="start-btn">
           <Link to="/view-profile/day-plan/workout">START</Link>
         </button>
         <div id="day-recipes">
-          {mealArr.map((eachMeal) => (
-            <div key={eachMeal.id} className="meal-container">
-              <Link to={`/view-profile/day-plan/eat/${eachMeal.id}`}>
-                <h2>{eachMeal.time}</h2>
-                <h3>Calories: {eachMeal.calories}</h3>
-              </Link>
-            </div>
-          ))}
+          {!!dayMeal &&
+            dayMeal.map((eachMeal: Recipe) => (
+              <div key={eachMeal.id} className="meal-container">
+                <Link to={`/view-profile/day-plan/eat/${eachMeal.id}` }>
+                  <div className="day-meal-container">
+                    <div className='meal-description'>
+                    <h4 className='meal-complexity'>easy to cook</h4>
+
+                      <h4>{eachMeal.title}</h4>
+                      <h4>
+                        {eachMeal.time} : {eachMeal.kcal}
+                      </h4>
+                    </div>
+                    <img className="meal-pic" src={eachMeal.url} alt="meal-picture" />
+                  </div>
+                </Link>
+              </div>
+            ))}
         </div>
       </div>
     </div>

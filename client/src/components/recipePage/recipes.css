@@ -1,3 +1,13 @@
+body {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9d');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Arial', sans-serif;
+}
+
 #recipe-container{
   margin: auto;
   width: 300px;

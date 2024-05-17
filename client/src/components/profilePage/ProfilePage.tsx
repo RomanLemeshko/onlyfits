@@ -12,6 +12,7 @@ import axios from 'axios';
 import CalendarPage from '../calendarPage/CalendarPage';
 import { getUserSchedule } from '../../store/userScheduleSlice/userSchedule';
 import { getUserProgIdForMonth } from '../../store/userProgIdForMonth/userProgIdForMonth';
+import { getAllRecipiesThunky } from '../../store/allRecipies/allRecipies';
 
 interface MacrosType {
   user_id: number;
@@ -100,6 +101,13 @@ const ProfilePage = () => {
       dispatch(getUserProgramsThunky(user.id));
     }
   }, [dispatch, user]);
+
+//! to drop ino redux store all recipies
+useEffect(() => {
+  dispatch(getAllRecipiesThunky());
+}, []);
+
+
 
   return (
     <CalculatorContextProvider>

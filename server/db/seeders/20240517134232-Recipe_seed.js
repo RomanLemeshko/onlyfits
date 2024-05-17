@@ -85,7 +85,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Easy Pesto Chicken & Veg Meal Prep',
+        title: 'Easy Pesto Chicken',
         ingredients:
           '1 tbsp. - olive oil, 4 - chicken breast, 1/2 tsp. - salt, 1/2 tsp. - pepper, 1 - red onion, 1 - courgette, 400 g - green beans, 100 g - reduced fat pesto',
         kcal: '523 g',
@@ -101,7 +101,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Air Fryer Chicken Skewers Meal Prep',
+        title: 'Air Fryer Chicken Skewers',
         ingredients:
           '1 tbsp -  siracha, 40g - honey, 1/2 - lime, 2 tbsp- soy sauce, 1 pinch - salt, 2 - garlic cloves, 1cm - piece of fresh ginger, 400g - chicken, 1 - red onion',
         kcal: '356 g',
@@ -133,7 +133,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Protein-Packed Air-Fried Chicken Sandwich',
+        title: 'Air-Fried Chicken Sandwich',
         ingredients:
           '130 g - chicken breast, 15 g - Protein Crispies, 2 tsp. - garlic powder, 2 tsp. - onion powder, 2 tsp. - paprika, 2 tsp. - chilli powder, 2 tsp. - cumin powder, 10 g - egg whites Dash hot sauce, 15 g - fat-free Greek yoghurt, 5 g - fat-free mayo',
         kcal: '400 g',
@@ -149,7 +149,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Harissa Chicken & Moroccan Couscous',
+        title: 'Harissa Chicken & Couscous',
         ingredients:
           '500 g - chicken thighs, 1 tbsp. - olive oil, 2 tbsp. - harissa paste, 1/2 - lemon, 1 - onion, 3 - garlic cloves, 2 tbsp. - coconut oil, 1 tsp. - cumin, 1 tsp. - smoked paprika, 350 g - couscous, 1 litre - boiled water, 1 bunch - fresh parsley, 1 tsp. - chilli flakes, 40 g - pine nuts',
         kcal: '579 g',
@@ -197,7 +197,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Asian Peanut Butter Sesame Chicken',
+        title: 'Asian Peanut Butter Chicken',
         ingredients:
           '5 tbsp. - Peanut Butter, 50ml - orange juice, 3 tbsp. - sugar-Free Syrup, 3 tbsp. - soy sauce, 1 thumb - ginger,3 - chicken breasts',
         kcal: '315 g',
@@ -245,7 +245,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'One-Pot Creamy Garlic Chicken & Rice',
+        title: 'Creamy Garlic Chicken',
         ingredients:
           '1 tbsp. - olive oil, 500g - chicken breast, 300g - brown rice, 2 tbsp. - mixed herbs, 3 - garlic cloves, 1 - lemon, 750ml - chicken stock, 200g - green beans, 200g - low-fat Greek yoghurt, 250g - spinach',
         kcal: '576 g',
@@ -261,7 +261,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'BBQ Pulled Chicken Mac N Cheese',
+        title: 'BBQ Pulled Chicken Mac',
         ingredients:
           '4 tbsp. - sugar-Free Sauce, 1 tsp. - paprika, 1 tsp. - garlic granules, 300g - chicken breast, 3 tbsp. - butter, 3 tbsp. - plain flour, 1 - garlic clove, 1 pint - semi-skimmed milk, 150g - low-fat cheddar',
         kcal: '397 g',
@@ -310,7 +310,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Creamy Lemon & Thyme Chicken',
+        title: 'Lemon & Thyme Chicken',
         ingredients:
           '2 tsp. - fresh thyme, 2 tsp. - mixed herbs, 6 - boneless, skinless chicken thighs, 1 tbsp. - oil, 1 - onion, 2 - garlic cloves, 1 - lemon, 100ml - chicken stock, 200ml - crème fraiche, 2 pinch - thyme',
         kcal: '481 g',
@@ -342,7 +342,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Seared Tuna Steak & Sweet Potato Wedges',
+        title: 'Seared Tuna Steak',
         ingredients:
           '150g - tuna steaks, 1 tsp. - coarse sea salt, 1 tbsp. - coconut oil, 2 tbsp. - pink peppercorns, 4 - large sweet potatoes, 1 tbsp. - plain flour, 1/2 tsp. - pepper',
         kcal: '250 g',
@@ -359,7 +359,7 @@ module.exports = {
       },
 
       {
-        title: 'Quick Spicy Cajun Salmon & Garlicky Veg',
+        title: 'Quick Spicy Cajun Salmon',
         ingredients:
           '3 - cloves garlic, 1 - lemon, 1 - wild salmon fillets, 1 tbsp. - cajun seasoning, 1 tbsp. - olive oil, 1 tsp. coarse sea salt and black pepper, 180g - couscous, 5 stems - tender stem broccoli',
         kcal: '220 g',
@@ -424,7 +424,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Spiced Lamb With Feta Bulgur',
+        title: 'Spiced Lamb With Bulgur',
         ingredients:
           '1 tbsp. - oil, 1 - red onion, 1 tbsp. - ras el hanout, 3 tbsp. - tomato puree, 250g - lamb mince, 125ml - boiling water, 130g - bulgur wheat, 100g - feta, 1/2 cucumber',
         kcal: '562 g',
@@ -440,7 +440,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Lean, Creamy Sausage Pasta',
+        title: 'Creamy Sausage Pasta',
         ingredients:
           '1 tsp - coconut oil, 1 - leek, 2 clove - garlics, 8 - reduced-fat sausages, 200 g - quark, 1 tin - chopped tomatoes, 240 g - wholemeal penne pasta, 1 tsp - dried chilli flakes, 1 handful - fresh basil leaves',
         kcal: '582 g',
@@ -456,7 +456,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        title: 'Sweet Potato & Chorizo Hash',
+        title: 'Sweet Potato & Chorizo',
         ingredients:
           '100g - sweet potatoes, 1 tbsp. - coconut oil, 1/2 red onion, 200g - tinned chickpeas, 150g - chorizo or pancetta, 2 - medium free-range eggs',
         kcal: '481 g',
@@ -473,7 +473,7 @@ module.exports = {
       },
 
       {
-        title: 'Low-Carb Teriyaki Beef Zoodles',
+        title: 'Low-Carb Teriyaki Beef',
         ingredients:
           '75ml - soy sauce, 120ml - water, 1 tbsp. - cornstarch, 2 tbsp. - maple syrup, 1 tsp. - coconut oil, 1 - rump steaks, 2 - courgettes, 1 - yellow peppers, 55g - edamame beans',
         kcal: '381 g',

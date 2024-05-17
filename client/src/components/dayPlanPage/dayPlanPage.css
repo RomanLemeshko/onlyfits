@@ -96,3 +96,34 @@ h2, h3, div {
 .ant-modal-footer .ant-btn-primary:hover {
   background: linear-gradient(90deg, #FFA500, #FF6F00);
 }
+
+
+/* meal recipies styles */
+.meal-container{
+  padding: 2px;
+}
+
+.day-meal-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.meal-pic{
+  width: 100px;
+  height: 80px;
+}
+
+.meal-complexity{
+  background-color:rgb(33, 32, 32);
+  width:100px;
+  border-radius: 8px;
+}
+
+.meal-description{
+  display: flex;
+  flex-direction: column; 
+   align-items: center
+
+}
