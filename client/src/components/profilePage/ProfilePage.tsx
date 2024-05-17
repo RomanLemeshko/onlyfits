@@ -12,6 +12,8 @@ import axios from 'axios';
 import CalendarPage from '../calendarPage/CalendarPage';
 import { getUserSchedule } from '../../store/userScheduleSlice/userSchedule';
 import { getUserProgIdForMonth } from '../../store/userProgIdForMonth/userProgIdForMonth';
+import ChartsPieProgram from '../Charts/ChartsPieProgram/ChartsPieProgram';
+import ChartsPieMacros from '../Charts/ChartsPieMacros/ChartsPieMacros';
 
 interface MacrosType {
   user_id: number;
@@ -128,7 +130,7 @@ const ProfilePage = () => {
             </Button>
           </div>
           <div className="profile-block">
-            <h3>Select your exercise schedule::</h3>
+            <h3>Select your exercise schedule:</h3>
             <div id="exercise-schedule">
               <label htmlFor="schedule">
                 <input
@@ -137,7 +139,7 @@ const ProfilePage = () => {
                   value="two"
                   checked={scheduleToWork === 'two'}
                   onChange={scheduleHandler}
-                /> Two
+                />{' '}Two
               </label>
               <label htmlFor="schedule">
                 <input
@@ -146,7 +148,7 @@ const ProfilePage = () => {
                   value="four"
                   checked={scheduleToWork === 'four'}
                   onChange={scheduleHandler}
-                /> Four
+                />{' '}Four
               </label>
             </div>
             <div id="all-picked-program-container">
@@ -176,6 +178,14 @@ const ProfilePage = () => {
           <div className="profile-block">
             <h2>My schedule</h2>
             <CalendarPage />
+          </div>
+          <div className="profile-block">
+            <h2>Macros:</h2>
+            <ChartsPieMacros latestMacros={latestMacros}/>
+          </div>
+          <div className="profile-block">
+            <h2>Programs:</h2>
+            <ChartsPieProgram />
           </div>
           <Modal
             open={isModalOpen}

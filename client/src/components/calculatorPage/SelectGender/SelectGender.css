@@ -5,11 +5,11 @@
     border: none;
 }
 
-/* :where(.css-dev-only-do-not-override-1okl62o).ant-select-single:not(.ant-select-customize-input) .ant-select-selector .ant-select-selection-search-input {
-    height: 30px;
-    color: gray;
-} */
+:where(.css-dev-only-do-not-override-1okl62o)[class^="ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class*=" ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class^="ant-select"] [class*=" ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class*=" ant-select"] [class*=" ant-select"] {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+}
 
-.ant-select-open {
-    background-color: gray;
+:where(.css-dev-only-do-not-override-1okl62o).ant-select-single.ant-select-show-arrow .ant-select-selection-item, :where(.css-dev-only-do-not-override-1okl62o).ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+    color: white;
 }

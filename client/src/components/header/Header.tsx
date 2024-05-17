@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <div className='main-page-container'>
-      <div>
+      <div className='header-container'>
         {isLoggedIn ? (
           <>
           <div className='header-content'>

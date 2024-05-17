@@ -5,6 +5,7 @@ import CalendarDayComponent from '../calendarDayComponent/CalendarDayComponent';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store';
 import { getUserProgramsExercisesThunky } from '../../store/userProgsExcersicesSlice/userProgsExercises';
+import './CalendarPage.css'
 
 const CalendarPage = () => {
   const today = new Date();
