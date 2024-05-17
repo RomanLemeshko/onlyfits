@@ -1,3 +1,4 @@
+/* STASHED */
 body {
   background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9dkground.jpg');
   background-size: cover;
@@ -9,21 +10,55 @@ body {
   text-decoration: none;
 }
 
-
-.card-programs{
-  transition: 0.9s;
-  opacity: 0.89;
-
-}
-.card-programs:hover{
-  opacity: 1;
-}
-
 .delete-prog-btn {
   background-color: rgb(255, 105, 5);
   color: black;
   font-weight: 600;
   border: solid 1px black
 }
+
+.programs-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap:5px;
+  margin: auto;
+}
+
+.card-info {
+  width: 340px;
+  text-align: center;
+  color: white;
+}
+
+.ant-card-body{
+  background-color: rgb(12, 7, 7);
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.card{
+  transition: 0.9s;
+  opacity: 0.89;
+}
+.card:hover{
+  opacity: 1;
+}
+
+#search-btn{
+  background-color: rgb(255, 105, 5);
+  color: black;
+  font-weight: 600;
+  border: solid 1px black;
+  height: 32px;
+  border-radius: 6px;
+  padding: 4px 15px;
+}
+
 
 
