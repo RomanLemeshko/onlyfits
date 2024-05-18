@@ -1,11 +1,9 @@
+
 const DayMealPage = () => {
 
-  return (
-    <div>
-      eat
-          
-    </div>
-  );
+ 
+
+  return <div></div>;
 };
 
 export default DayMealPage;

@@ -7,6 +7,7 @@ import myProgramSlice from './myProgramSlice/userProgramSlice';
 import userProgsExercises from './userProgsExcersicesSlice/userProgsExercises';
 import userSchedule from './userScheduleSlice/userSchedule';
 import userProgIdForMonth from './userProgIdForMonth/userProgIdForMonth';
+import allRecipiesSlice from './allRecipies/allRecipies'
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     userPrograms: myProgramSlice,
     userProgsExercises: userProgsExercises,
     userSсhedule: userSchedule,
-    userProgIdForMonth: userProgIdForMonth
+    userProgIdForMonth: userProgIdForMonth,
+    allRecipies: allRecipiesSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
