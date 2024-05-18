@@ -4,3 +4,12 @@
     color: white;
     border: none;
 }
+
+:where(.css-dev-only-do-not-override-1okl62o)[class^="ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class*=" ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class^="ant-select"] [class*=" ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class*=" ant-select"] [class*=" ant-select"] {
+    box-sizing: border-box;
+    color: rgb(51, 51, 51);
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-select-single.ant-select-show-arrow .ant-select-selection-item, :where(.css-dev-only-do-not-override-1okl62o).ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+    color: white;
+}

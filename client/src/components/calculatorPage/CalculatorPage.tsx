@@ -135,15 +135,15 @@ const CalculatorPage = ({ updateCaloriesData }:any ) => {
         <div className="calculatorPage__macros">
           <div>
             <p>Proteins</p>
-            <p>{`${proteins} grams`}</p>
+            <p>{`${proteins} gr.`}</p>
           </div>
           <div>
             <p>Fats</p>
-            <p>{`${fats} grams`}</p>
+            <p>{`${fats} gr.`}</p>
           </div>
           <div>
             <p>Carbs</p>
-            <p>{`${carbohydrates} grams`}</p>
+            <p>{`${carbohydrates} gr.`}</p>
           </div>
         </div>
       </div>

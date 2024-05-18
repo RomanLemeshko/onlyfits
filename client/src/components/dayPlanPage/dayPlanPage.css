@@ -9,22 +9,28 @@ body {
 }
 
 #day-plan-container {
-  background-color: rgba(26, 26, 26, 0.9);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+  /* background-color: rgba(26, 26, 26, 0.9); */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 2px solid #FFA500;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+  /* border: 2px solid #FFA500; */
   margin: 20px;
 }
 
-h2, h3, div {
-  color: #FFFFFF;
+h2,
+h3,
+div {
+  color: #ffffff;
   font-family: 'Arial', sans-serif;
 }
 
 .start-btn {
-  background: linear-gradient(90deg, #FF6F00, #FFA500);
-  color: #FFFFFF;
+  background: linear-gradient(90deg, #ff6f00, #ffa500);
+  color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
   border: none;
@@ -36,17 +42,17 @@ h2, h3, div {
 }
 
 .start-btn a {
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
 }
 
 .start-btn:hover {
-  background: linear-gradient(90deg, #FFA500, #FF6F00);
+  background: linear-gradient(90deg, #ffa500, #ff6f00);
 }
 
 .start-btn:focus {
-  background: linear-gradient(90deg, #FF6F00, #FFA500);
-  color: #FFFFFF;
+  background: linear-gradient(90deg, #ff6f00, #ffa500);
+  color: #ffffff;
 }
 
 .meal-container {
@@ -57,13 +63,14 @@ h2, h3, div {
   text-align: center;
 }
 
-.meal-container h2, .meal-container h3 {
-  color: #FFFFFF;
+.meal-container h2,
+.meal-container h3 {
+  color: #ffffff;
 }
 
 .meal-container a {
   text-decoration: none;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .meal-container a:hover {
@@ -75,7 +82,7 @@ h2, h3, div {
   background-color: rgba(26, 26, 26, 0.9);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 2px solid #FFA500;
+  border: 2px solid #ffa500;
 }
 
 .ant-modal-footer {
@@ -83,9 +90,9 @@ h2, h3, div {
 }
 
 .ant-modal-footer .ant-btn-primary {
-  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  background: linear-gradient(90deg, #ff6f00, #ffa500);
   border: none;
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
   padding: 10px 20px;
@@ -94,37 +101,53 @@ h2, h3, div {
 }
 
 .ant-modal-footer .ant-btn-primary:hover {
-  background: linear-gradient(90deg, #FFA500, #FF6F00);
+  background: linear-gradient(90deg, #ffa500, #ff6f00);
 }
 
+.ant-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ant-modal-footer .ant-btn-primary {
+  display: flex;
+  align-items: center;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-modal {
+  padding: 0px;
+}
+
+:where(.css-dev-only-do-not-override-1okl62o).ant-modal .ant-modal-content {
+  background-color: rgba(26, 26, 26, 1);
+  border: 1px solid #ffa500;
+}
 
 /* meal recipies styles */
-.meal-container{
+.meal-container {
   padding: 2px;
 }
 
-.day-meal-container{
+.day-meal-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 
-.meal-pic{
-  border-radius:8px;
+.meal-pic {
+  border-radius: 8px;
   width: 100px;
   height: 80px;
 }
 
-.meal-complexity{
-  background-color:rgb(33, 32, 32);
-  width:100px;
+.meal-complexity {
+  background-color: rgb(33, 32, 32);
+  width: 100px;
   border-radius: 8px;
 }
 
-.meal-description{
+.meal-description {
   display: flex;
-  flex-direction: column; 
-   align-items: center
-
+  flex-direction: column;
+  align-items: center;
 }

@@ -12,8 +12,9 @@ import axios from 'axios';
 import CalendarPage from '../calendarPage/CalendarPage';
 import { getUserSchedule } from '../../store/userScheduleSlice/userSchedule';
 import { getUserProgIdForMonth } from '../../store/userProgIdForMonth/userProgIdForMonth';
+import ChartsPieProgram from '../Charts/ChartsPieProgram/ChartsPieProgram';
+import ChartsPieMacros from '../Charts/ChartsPieMacros/ChartsPieMacros';
 import { getAllRecipiesThunky } from '../../store/allRecipies/allRecipies';
-
 interface MacrosType {
   user_id: number;
   purpose: string;
@@ -120,11 +121,11 @@ useEffect(() => {
                 <p>Current goal: {latestMacros.purpose}</p>
                 <p>Required indicators:</p>
                 <div className="calculatorPage__result">
-                  <h3>{`${latestMacros.kilocalories} ккал`}</h3>
+                  <h3>{`${latestMacros.kilocalories} kcal`}</h3>
                   <div className="calculatorPage__macros">
-                    <p>Proteins: {`${latestMacros.proteins} grams`}</p>
-                    <p>Fats: {`${latestMacros.fats} grams`}</p>
-                    <p>Carbs: {`${latestMacros.carbohydrates} grams`}</p>
+                    <p>Proteins: {`${latestMacros.proteins} gr.`}</p>
+                    <p>Fats: {`${latestMacros.fats} gr.`}</p>
+                    <p>Carbs: {`${latestMacros.carbohydrates} gr.`}</p>
                   </div>
                 </div>
               </>
@@ -136,7 +137,7 @@ useEffect(() => {
             </Button>
           </div>
           <div className="profile-block">
-            <h3>Select your exercise schedule::</h3>
+            <h3>Select your exercise schedule:</h3>
             <div id="exercise-schedule">
               <label htmlFor="schedule">
                 <input
@@ -145,7 +146,7 @@ useEffect(() => {
                   value="two"
                   checked={scheduleToWork === 'two'}
                   onChange={scheduleHandler}
-                /> Two
+                />{' '}Two
               </label>
               <label htmlFor="schedule">
                 <input
@@ -154,7 +155,7 @@ useEffect(() => {
                   value="four"
                   checked={scheduleToWork === 'four'}
                   onChange={scheduleHandler}
-                /> Four
+                />{' '}Four
               </label>
             </div>
             <div id="all-picked-program-container">
@@ -184,6 +185,14 @@ useEffect(() => {
           <div className="profile-block">
             <h2>My schedule</h2>
             <CalendarPage />
+          </div>
+          <div className="profile-block">
+            <h2>Macros:</h2>
+            <ChartsPieMacros latestMacros={latestMacros}/>
+          </div>
+          <div className="profile-block">
+            <h2>Programs:</h2>
+            <ChartsPieProgram />
           </div>
           <Modal
             open={isModalOpen}
