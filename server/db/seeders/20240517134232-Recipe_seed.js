@@ -7,7 +7,7 @@ module.exports = {
       {
         title: 'Creamy cajun chicken pasta',
         ingredients:
-          '1 tbsp - olive oil, 1 - red onion (diced), 200 g - mushrooms (sliced), 1 - red pepper, 500 g - chicken breast (diced), 1 tbsp. - Cajun seasoning, 1 pinch - salt, 500 g - pasta, 500 ml - chicken stock, 11 g - light cream cheese',
+          '1 tbsp - olive oil, 1 - red onion, 200 g - mushrooms (sliced), 1 - red pepper, 500g - chicken breast (diced), 1 tbsp. - Cajun seasoning, 1 pinch - salt, 500 g - pasta, 500ml - chicken stock, 11 g - light cream cheese',
         kcal: '516 g',
         protein: '38 g',
         carbs: '71 g',
@@ -23,7 +23,7 @@ module.exports = {
       {
         title: 'Spicy Chicken With Couscous',
         ingredients:
-          '1 tbsp. - curry paste, 1 tbsp. - mango chutney, 1/2 tsp. - turmeric, 50ml - olive oil, 4 - chicken breast, 300g - couscous, 350ml - vegetable stock',
+          '1 tbsp. - curry paste, 1 tbsp. - mango chutney, 1/2 tsp. - turmeric, 50 ml - olive oil, 4 - chicken breast, 300 g - couscous, 350 ml - vegetable stock',
         kcal: '508 g',
         protein: '66 g',
         carbs: '39 g',
@@ -39,7 +39,7 @@ module.exports = {
       {
         title: 'Simple High-Protein Lasagne',
         ingredients:
-          '500 g - lean beef mince (5% fat), 1 - carrot, 1 - celery stalk, 1/2 - onion, 1 can - tomato sauce, 1 tbsp. - tomato paste, 300 g - cottage cheese, 30 g - parmesan, 1 tsp. - Italian herbs, 1 tsp. - garlic powder, 1 tsp. - salt, 6 - lasagne sheets, 70 g - mozarella (grated)',
+          '500 g - lean beef mince, 1 - carrot, 1 - celery stalk, 1/2 - onion, 1 can - tomato sauce, 1 tbsp. - tomato paste, 300 g - cottage cheese, 30 g - parmesan, 1 tbsp. - Italian herbs, 1 tsp. - garlic powder, 1 tbsp. - salt, 6 - lasagne sheets, 70 g - mozarella',
         kcal: '447 g',
         protein: '55 g',
         carbs: '35 g',
@@ -55,7 +55,7 @@ module.exports = {
       {
         title: 'Chicken Curry Gyros',
         ingredients:
-          '500g - chicken thighs, 200g - plain yoghurt, 1 tbsp. - curry powder, 1 tsp. - sweet paprika, 1 tsp. - garam masala, 1/2 - lemon',
+          '500 g - chicken thighs, 200 g - plain yoghurt, 1 tbsp. - curry powder, 1 tbsp. - sweet paprika, 1 tbsp. - garam masala, 1/2 - lemon',
         kcal: '541 g',
         protein: '40 g',
         carbs: '52 g',
@@ -71,7 +71,7 @@ module.exports = {
       {
         title: 'Zingy Chicken Burger',
         ingredients:
-          '80g - spicy tortilla chips, 1 tsp. - chilli powder,1 tsp. - garlic granules, 1 tsp. - paprika, 4 - chicken breasts, 1 - egg, 50g - cornflourm, 4 - sesame seed burger buns',
+          '80 g - spicy tortilla chips, 1 tbsp. - chilli powder,1 tbsp. - garlic granules, 1 tsp. - paprika, 4 - chicken breasts, 1 - egg, 50 g - cornflourm, 4 - sesame seed burger buns',
         kcal: '564 g',
         protein: '56 g',
         carbs: '17 g',
@@ -87,7 +87,7 @@ module.exports = {
       {
         title: 'Easy Pesto Chicken',
         ingredients:
-          '1 tbsp. - olive oil, 4 - chicken breast, 1/2 tsp. - salt, 1/2 tsp. - pepper, 1 - red onion, 1 - courgette, 400 g - green beans, 100 g - reduced fat pesto',
+          '1 tbsp. - olive oil, 4 - chicken breast, 1/2 tbsp. - salt, 1/2 tsp. - pepper, 1 - red onion, 1 - courgette, 400 g - green beans, 100 g - reduced fat pesto',
         kcal: '523 g',
         protein: '52 g',
         carbs: '36 g',
@@ -103,7 +103,7 @@ module.exports = {
       {
         title: 'Air Fryer Chicken Skewers',
         ingredients:
-          '1 tbsp -  siracha, 40g - honey, 1/2 - lime, 2 tbsp- soy sauce, 1 pinch - salt, 2 - garlic cloves, 1cm - piece of fresh ginger, 400g - chicken, 1 - red onion',
+          '1 tbsp -  siracha, 40 g - honey, 1/2 - lime, 2 tbsp- soy sauce, 1 pinch - salt, 2 - garlic cloves, 1 cm - piece of fresh ginger, 400 g - chicken, 1 - red onion',
         kcal: '356 g',
         protein: '35 g',
         carbs: '47 g',
@@ -135,7 +135,7 @@ module.exports = {
       {
         title: 'Air-Fried Chicken Sandwich',
         ingredients:
-          '130 g - chicken breast, 15 g - Protein Crispies, 2 tsp. - garlic powder, 2 tsp. - onion powder, 2 tsp. - paprika, 2 tsp. - chilli powder, 2 tsp. - cumin powder, 10 g - egg whites Dash hot sauce, 15 g - fat-free Greek yoghurt, 5 g - fat-free mayo',
+          '130 g - chicken breast, 15 g - Protein Crispies, 2 tsp. - garlic powder, 2 tbsp. - onion powder, 2 tbsp. - paprika, 2 tbsp. - chilli powder, 2 tbsp. - cumin powder, 10 g - egg whites Dash hot sauce, 15 g - fat free Greek yoghurt, 5 g - fat free mayo',
         kcal: '400 g',
         protein: '46 g',
         carbs: '36 g',
@@ -167,7 +167,7 @@ module.exports = {
       {
         title: 'Buffalo Chicken Pasta Salad',
         ingredients:
-          '160g - cooked pasta, 3 - breasts cooked chicken, 2 stalks - celery, 5 - cherry tomatoes, 1 - yellow pepper, 2 tbsp. - reduced-fat ranch dressing, 175ml - peri-peri sauce, 1/2 tsp. - garlic powder, 4 tbsp. - reduced-fat butter or margarine',
+          '160 g - cooked pasta, 3 - breasts cooked chicken, 2 stalks - celery, 5 - cherry tomatoes, 1 - yellow pepper, 2 tbsp. - reduced-fat ranch dressing, 175 ml - peri sauce, 1/2 tsp. - garlic powder, 4 tbsp. - reduced fat butter or margarine',
         kcal: '485 g',
         protein: '49 g',
         carbs: '30 g',
@@ -183,7 +183,7 @@ module.exports = {
       {
         title: 'Easy Pasta Salad Meal',
         ingredients:
-          '200g - cooked pasta, 2 cans - tuna, 1 tin - sweetcorn, 2 - carrots, 1 - yellow pepper, 4 tbsp. - olive oil, 1 - lemon, 1/2 tsp. - garlic powder',
+          '200 g - cooked pasta, 2 cans - tuna, 1 tin - sweetcorn, 2 - carrots, 1 - yellow pepper, 4 tbsp. - olive oil, 1 - lemon, 1/2 tsp. - garlic powder',
         kcal: '415 g',
         protein: '26 g',
         carbs: '40 g',
@@ -199,7 +199,7 @@ module.exports = {
       {
         title: 'Asian Peanut Butter Chicken',
         ingredients:
-          '5 tbsp. - Peanut Butter, 50ml - orange juice, 3 tbsp. - sugar-Free Syrup, 3 tbsp. - soy sauce, 1 thumb - ginger,3 - chicken breasts',
+          '5 tbsp. - Peanut Butter, 50ml - orange juice, 3 tbsp. - sugar free Syrup, 3 tbsp. - soy sauce, 1 thumb - ginger,1 - chicken breasts',
         kcal: '315 g',
         protein: '36 g',
         carbs: '41 g',
@@ -247,7 +247,7 @@ module.exports = {
       {
         title: 'Creamy Garlic Chicken',
         ingredients:
-          '1 tbsp. - olive oil, 500g - chicken breast, 300g - brown rice, 2 tbsp. - mixed herbs, 3 - garlic cloves, 1 - lemon, 750ml - chicken stock, 200g - green beans, 200g - low-fat Greek yoghurt, 250g - spinach',
+          '1 tbsp. - olive oil, 500 g - chicken breast, 300 g - brown rice, 2 tbsp. - mixed herbs, 3 - garlic cloves, 1 - lemon, 750 ml - chicken stock, 200 g - green beans, 200 g - low fat Greek yoghurt, 250 g - spinach',
         kcal: '576 g',
         protein: '39 g',
         carbs: '67 g',
@@ -263,7 +263,7 @@ module.exports = {
       {
         title: 'BBQ Pulled Chicken Mac',
         ingredients:
-          '4 tbsp. - sugar-Free Sauce, 1 tsp. - paprika, 1 tsp. - garlic granules, 300g - chicken breast, 3 tbsp. - butter, 3 tbsp. - plain flour, 1 - garlic clove, 1 pint - semi-skimmed milk, 150g - low-fat cheddar',
+          '4 tbsp. - sugar free Sauce, 1 tsp. - paprika, 1 tsp. - garlic granules, 300g - chicken breast, 3 tbsp. - butter, 3 tbsp. - plain flour, 1 - garlic clove, 1 pint - semi skimmed milk, 150g - low fat cheddar',
         kcal: '397 g',
         protein: '21 g',
         carbs: '34 g',
@@ -280,7 +280,7 @@ module.exports = {
       {
         title: 'Peanut Butter Chicken Curry',
         ingredients:
-          '1 tbsp. - coconut Oil, 400g - chicken breast, 1 - onion, 2 - garlic cloves, 1 thumb - ginger, 1 - red chilli, 5 tbsp. - curry powder, 1 tin - chopped tomatoes, 1 - coriander,400ml - light coconut milk',
+          '1 tbsp. - coconut Oil, 400 g - chicken breast, 1 - onion, 2 - garlic cloves, 1 thumb - ginger, 1 - red chilli, 5 tbsp. - curry powder, 1 tin - chopped tomatoes, 1 - coriander,400ml - light coconut milk',
         kcal: '417 g',
         protein: '24 g',
         carbs: '24 g',
@@ -296,7 +296,7 @@ module.exports = {
       {
         title: 'Fajita Pasta Bake',
         ingredients:
-          '1 tbsp. - coconut oil, 350g - chicken thigh, 1 - onion, 2 - bell peppers, 1/2 pack - fajita seasoning, 350g - rigatoni, 100g - salsa dip, 100g - light cream cheese, 50g - light cheddar, 30g - light mozzarella',
+          '1 tbsp. - coconut oil, 350 g - chicken thigh, 1 - onion, 2 - bell peppers, 1/2 pack - fajita seasoning, 350g - rigatoni, 100 g - salsa dip, 100 g - light cream cheese, 50 g - light cheddar, 30 g - light mozzarella',
         kcal: '349 g',
         protein: '26 g',
         carbs: '24 g',
@@ -312,7 +312,7 @@ module.exports = {
       {
         title: 'Lemon & Thyme Chicken',
         ingredients:
-          '2 tsp. - fresh thyme, 2 tsp. - mixed herbs, 6 - boneless, skinless chicken thighs, 1 tbsp. - oil, 1 - onion, 2 - garlic cloves, 1 - lemon, 100ml - chicken stock, 200ml - crème fraiche, 2 pinch - thyme',
+          '2 tsp. - fresh thyme, 2 tsp. - mixed herbs, 6 - boneless, skinless chicken thighs, 1 tbsp. - oil, 1 - onion, 2 - garlic cloves, 1 - lemon, 100 ml - chicken stock, 200 ml - crème fraiche, 2 pinch - thyme',
         kcal: '481 g',
         protein: '46 g',
         carbs: '14 g',
@@ -328,7 +328,7 @@ module.exports = {
       {
         title: 'Chicken & Chorizo Paella',
         ingredients:
-          '100g - chorizo, 500g - skinless chicken thighs, 1 pepper, 1 - brown onion, 1tsp. - turmeric, 1tsp. - paprika, 2 - garlic cloves, 1 - red bell pepper, 225g - paella rice, 400ml. - chicken stock, 4 - tomatoes, 100g. - frozen peas, 1 - lemon',
+          '100 g - chorizo, 500 g - skinless chicken thighs, 1 pepper, 1 - brown onion, 1tsp. - turmeric, 1tsp. - paprika, 2 - garlic cloves, 1 - red bell pepper, 225 g - paella rice, 400 ml. - chicken stock, 4 - tomatoes, 100 g. - frozen peas, 1 - lemon',
         kcal: '256 g',
         protein: '37 g',
         carbs: '39 g',
@@ -344,7 +344,7 @@ module.exports = {
       {
         title: 'Seared Tuna Steak',
         ingredients:
-          '150g - tuna steaks, 1 tsp. - coarse sea salt, 1 tbsp. - coconut oil, 2 tbsp. - pink peppercorns, 4 - large sweet potatoes, 1 tbsp. - plain flour, 1/2 tsp. - pepper',
+          '150 g - tuna steaks, 1 tsp. - coarse sea salt, 1 tbsp. - coconut oil, 2 tbsp. - pink peppercorns, 4 - large sweet potatoes, 1 tbsp. - plain flour, 1/2 tsp. - pepper',
         kcal: '250 g',
         protein: '17 g',
         carbs: '29 g',
@@ -361,7 +361,7 @@ module.exports = {
       {
         title: 'Quick Spicy Cajun Salmon',
         ingredients:
-          '3 - cloves garlic, 1 - lemon, 1 - wild salmon fillets, 1 tbsp. - cajun seasoning, 1 tbsp. - olive oil, 1 tsp. coarse sea salt and black pepper, 180g - couscous, 5 stems - tender stem broccoli',
+          '3 - cloves garlic, 1 - lemon, 1 - wild salmon fillets, 1 tbsp. - cajun seasoning, 1 tbsp. - olive oil, 1 tsp. coarse sea salt and black pepper, 180 g - couscous, 5 stems - tender stem broccoli',
         kcal: '220 g',
         protein: '19 g',
         carbs: '29 g',
@@ -377,7 +377,7 @@ module.exports = {
       {
         title: 'Salmon Poke Bowl',
         ingredients:
-          '3 tbsp. - light mayonnaise, 1 tbsp. - sriracha, 2 tbsp. - soy sauce, 2 tbsp. - mirin, 1 tbsp. - toasted sesame oil, 1 tbsp. - honey, 300g - sashimi grade salmon, 1 - carrot, 1 - cucumber, 1 - spring onions, 1 - avocado.',
+          '3 tbsp. - light mayonnaise, 1 tbsp. - sriracha, 2 tbsp. - soy sauce, 2 tbsp. - mirin, 1 tbsp. - toasted sesame oil, 1 tbsp. - honey, 300 g - sashimi grade salmon, 1 - carrot, 1 - cucumber, 1 - spring onions, 1 - avocado.',
         kcal: '233 g',
         protein: '22 g',
         carbs: '25 g',
@@ -393,7 +393,7 @@ module.exports = {
       {
         title: 'High-Protein Kedgeree',
         ingredients:
-          '1 - fillets smoked haddock, 1tsp. - coconut oil, 1 - white onion, 1tsp. - turmeric, 1tsp. - ground coriander, 1tsp. - medium curry powder, 2 - hard-boiled eggs, 500g - cooked wholegrain rice.',
+          '1 - fillets smoked haddock, 1 tsp. - coconut oil, 1 - white onion, 1 tsp. - turmeric, 1tsp. - ground coriander, 1 tsp. - curry powder, 2 - hard boiled eggs, 500 g - cooked wholegrain rice.',
         kcal: '268 g',
         protein: '34 g',
         carbs: '35 g',
@@ -426,7 +426,7 @@ module.exports = {
       {
         title: 'Spiced Lamb With Bulgur',
         ingredients:
-          '1 tbsp. - oil, 1 - red onion, 1 tbsp. - ras el hanout, 3 tbsp. - tomato puree, 250g - lamb mince, 125ml - boiling water, 130g - bulgur wheat, 100g - feta, 1/2 cucumber',
+          '1 tbsp. - oil, 1 - red onion, 1 tbsp. - ras el hanout, 3 tbsp. - tomato puree, 250 g - lamb mince, 125 ml - boiling water, 130 g - bulgur wheat, 100 g - feta, 1/2 cucumber',
         kcal: '562 g',
         protein: '49 g',
         carbs: '45 g',
@@ -442,7 +442,7 @@ module.exports = {
       {
         title: 'Creamy Sausage Pasta',
         ingredients:
-          '1 tsp - coconut oil, 1 - leek, 2 clove - garlics, 8 - reduced-fat sausages, 200 g - quark, 1 tin - chopped tomatoes, 240 g - wholemeal penne pasta, 1 tsp - dried chilli flakes, 1 handful - fresh basil leaves',
+          '1 tsp - coconut oil, 1 - leek, 2 clove - garlics, 8 - reduced fat sausages, 200 g - quark, 1 tin - chopped tomatoes, 240 g - wholemeal penne pasta, 1 tsp - dried chilli flakes, 1 handful - fresh basil leaves',
         kcal: '582 g',
         protein: '48 g',
         carbs: '45 g',
@@ -458,7 +458,7 @@ module.exports = {
       {
         title: 'Sweet Potato & Chorizo',
         ingredients:
-          '100g - sweet potatoes, 1 tbsp. - coconut oil, 1/2 red onion, 200g - tinned chickpeas, 150g - chorizo or pancetta, 2 - medium free-range eggs',
+          '100 g - sweet potatoes, 1 tbsp. - coconut oil, 1/2 - red onion, 200 g - tinned chickpeas, 150 g - chorizo , 2 - medium eggs',
         kcal: '481 g',
         protein: '37 g',
         carbs: '26 g',
@@ -475,7 +475,7 @@ module.exports = {
       {
         title: 'Low-Carb Teriyaki Beef',
         ingredients:
-          '75ml - soy sauce, 120ml - water, 1 tbsp. - cornstarch, 2 tbsp. - maple syrup, 1 tsp. - coconut oil, 1 - rump steaks, 2 - courgettes, 1 - yellow peppers, 55g - edamame beans',
+          '75 ml - soy sauce, 120 ml - water, 1 tbsp. - cornstarch, 2 tbsp. - maple syrup, 1 tsp. - coconut oil, 1 - rump steaks, 2 - courgettes, 1 - yellow peppers, 55 g - edamame beans',
         kcal: '381 g',
         protein: '35 g',
         carbs: '25 g',
