@@ -11,6 +11,10 @@
   /* position: fixed; */
 }
 
+.header-container {
+  width: 95%;
+}
+
 .header-content {
   display: flex;
   justify-content:space-between;
@@ -52,7 +56,7 @@
   color: white;
   text-decoration: none;
   font-family: "Open Sans", Sans-serif;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 400;
   text-transform: uppercase;
   line-height: 1em;
@@ -77,7 +81,7 @@
 h5 {
   color: #FF6600;
   font-family: "Open Sans", Sans-serif;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 400;
   text-transform: uppercase;
   line-height: 1em;
@@ -86,7 +90,10 @@ h5 {
 
 
 .btn-logout {
-  background-color: #FF6600;
+  /* background-color: #FF6600; */
+  background: linear-gradient(90deg, #ff6f00, #ffa500);
+  /* display: flex; */
+  align-items: center;
   color: #333333;
   border: none;
   padding: 10px 20px;
@@ -95,8 +102,20 @@ h5 {
   outline: none;
   transition: background-color 0.3s ease;
   transform: skewX(-10deg);
+
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background 0.3s ease;
 }
 
 .btn-logout:hover {
-  background-color: white;
+  /* background-color: white; */
+  background: linear-gradient(90deg, #ffa500, #ff6f00);
+}
+
+.logo img {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  max-width: 150px;
 }
