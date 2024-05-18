@@ -14,7 +14,7 @@ import { getUserSchedule } from '../../store/userScheduleSlice/userSchedule';
 import { getUserProgIdForMonth } from '../../store/userProgIdForMonth/userProgIdForMonth';
 import ChartsPieProgram from '../Charts/ChartsPieProgram/ChartsPieProgram';
 import ChartsPieMacros from '../Charts/ChartsPieMacros/ChartsPieMacros';
-
+import { getAllRecipiesThunky } from '../../store/allRecipies/allRecipies';
 interface MacrosType {
   user_id: number;
   purpose: string;
@@ -102,6 +102,13 @@ const ProfilePage = () => {
       dispatch(getUserProgramsThunky(user.id));
     }
   }, [dispatch, user]);
+
+//! to drop ino redux store all recipies
+useEffect(() => {
+  dispatch(getAllRecipiesThunky());
+}, []);
+
+
 
   return (
     <CalculatorContextProvider>
