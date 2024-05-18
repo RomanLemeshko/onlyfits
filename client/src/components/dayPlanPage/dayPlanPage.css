@@ -111,6 +111,7 @@ h2, h3, div {
 }
 
 .meal-pic{
+  border-radius:8px;
   width: 100px;
   height: 80px;
 }
