@@ -28,3 +28,7 @@
   text{
     color:white
   }
+
+  tspan {
+    fill: #ffffff;
+  }
