@@ -9,22 +9,21 @@ const TOKEN_EXPIRATION = 7 * 24 * 60 * 60 * 1000;
 // Регистрация пользователя
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
-  console.log(req.body);
   try {
+    const existingUser = await User.findOne({ where: { email } });
+    if (existingUser) {
+      return res.status(400).send({ message: 'Email already used' });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User.create({
       username,
       email,
       password: hashedPassword,
     });
-    res
-      .status(201)
-      .send({ message: 'User created successfully', userId: newUser.id });
+    res.status(201).send({ message: 'User created successfully', userId: newUser.id });
   } catch (error) {
     console.log(error);
-    res
-      .status(500)
-      .send({ message: 'Error registering user', error: error.message });
+    res.status(500).send({ message: 'Error registering user', error: error.message });
   }
 });
 

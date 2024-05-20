@@ -6,7 +6,7 @@ import { RootState, AppDispatch } from '../../store';
 import { fetchMessages, addMessage, setMessages } from '../../store/messageSlice/messageSlice';
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
-import './ChatComponent.css';
+import styles from './ChatComponent.module.css';
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -20,6 +20,8 @@ const ChatComponent = () => {
   const socket = useRef<Socket | null>(null);
   const userColors = useRef<{ [key: string]: string }>({});
   const emojiPickerRef = useRef<HTMLDivElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const chatMessagesRef = useRef<HTMLDivElement | null>(null);
 
   const generateRandomColor = () => {
     const letters = '0123456789ABCDEF';
@@ -52,11 +54,13 @@ const ChatComponent = () => {
       socket.current.on('initial messages', (msgs) => {
         console.log('Received initial messages:', msgs);
         dispatch(setMessages(msgs));
+        scrollToEnd();
       });
 
       socket.current.on('chat message', (msg) => {
         console.log('Received chat message:', msg);
         dispatch(addMessage(msg));
+        scrollToEnd();
       });
 
       dispatch(fetchMessages());
@@ -85,7 +89,7 @@ const ChatComponent = () => {
       console.log('Sending chat message:', newMessage);
       socket.current.emit('chat message', newMessage);
       setMessage('');
-      setShowEmojiPicker(false); // Скрыть окно выбора эмодзи при отправке сообщения
+      setShowEmojiPicker(false);
     }
   };
 
@@ -101,30 +105,42 @@ const ChatComponent = () => {
   };
 
   const toggleEmojiPicker = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Останавливаем распространение события
+    e.stopPropagation();
     setShowEmojiPicker(!showEmojiPicker);
   };
+
+  const scrollToEnd = () => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToEnd();
+  }, [messages]);
 
   return (
     <div className={styles.chatContainer} onClick={() => setShowEmojiPicker(false)}>
       <Title level={2} className={styles.chatTitle}>Chat</Title>
-      <List
-        className={styles.chatMessages}
-        bordered
-        dataSource={messages}
-        renderItem={(item) => (
-          <List.Item
-            className={`${styles.chatMessage} ${item.username === user?.name ? styles.chatMessageRight : styles.chatMessageLeft}`}
-          >
-            <span style={{ color: getUserColor(item.username) }} className={styles.userName}>
-              {item.username}:
-            </span>
-            <span className={styles.messageText}>
-              {item.text}
-            </span>
-          </List.Item>
-        )}
-      />
+      <div ref={chatMessagesRef} className={styles.chatMessages}>
+        <List
+          bordered
+          dataSource={messages}
+          renderItem={(item) => (
+            <List.Item
+              className={`${styles.chatMessage} ${item.username === user?.name ? styles.chatMessageRight : styles.chatMessageLeft}`}
+            >
+              <span style={{ color: getUserColor(item.username) }} className={styles.userName}>
+                {item.username}:
+              </span>
+              <span className={styles.messageText}>
+                {item.text}
+              </span>
+            </List.Item>
+          )}
+        />
+        <div ref={messagesEndRef} />
+      </div>
       <form onSubmit={(e) => e.preventDefault()} className={styles.chatForm}>
         <TextArea
           rows={2}
@@ -134,10 +150,10 @@ const ChatComponent = () => {
           placeholder="Type a message"
           className={styles.customChatInput}
         />
-        <Button type="primary" onClick={sendMessage} className={styles.customChatButton}>
+        <Button type="primary" onClick={sendMessage} className={`${styles.customChatButton} ${styles.antButtonOverride}`}>
           Send
         </Button>
-        <Button type="default" onClick={toggleEmojiPicker} className={styles.customChatButton}>
+        <Button type="default" onClick={toggleEmojiPicker} className={`${styles.customChatButton} ${styles.antButtonOverride}`}>
           😀
         </Button>
         {showEmojiPicker && (

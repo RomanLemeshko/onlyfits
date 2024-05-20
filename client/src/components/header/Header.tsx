@@ -35,7 +35,7 @@ const Header = () => {
               <li><Link to="/" className={location.pathname === "/" ? "active-link" : ""}>Main</Link></li>
               <li><Link to="/view-programms" className={location.pathname === "/view-programms" ? "active-link" : ""}>Programs</Link></li>
               <li><Link to="/view-profile" className={location.pathname === "/view-profile" ? "active-link" : ""}>Profile</Link></li>
-              <li><Link to="/chat-bot" className={location.pathname === "/chat-bot" ? "active-link" : ""}>Chat</Link></li>
+              <li><Link to="/chat" className={location.pathname === "/chat" ? "active-link" : ""}>Chat</Link></li>
               <li><button className='btn-logout' onClick={handleLogout}>Logout</button></li>
             </ul>
             </div>
