@@ -1,0 +1,240 @@
+
+@mixin dropdownAppearAnimation ($height) {
+  from {
+   height: 0;
+  }
+  to {
+    height: $height;
+  }
+}
+@mixin animation-mixin($name, $from, $to) {
+  @keyframes #{$name} {
+    0% {height: $from;}
+    100% {height: $to;}
+  }
+}
+@include animation-mixin(dropdownAppear, 0, 76px);
+
+
+.dropdown-reason,
+.dropdown-reason-second,
+.dropdown-unplanned-reason,
+.dropdown-dimissial-motives,
+.dropdown-recruitment {
+  z-index: 3;
+  position: relative;
+  min-height: 50px;
+  width: 590px;
+
+  &-comment {
+    &__underline {
+      margin-top: 12px;
+      color: #97999B;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 135%;
+    }
+  }
+
+  &-container {
+    width: 600px;
+    /* margin: auto; */
+
+  }
+
+  &__label {
+    margin: 0 auto 10px auto;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  &__select {
+    &-hidden,
+    &-active {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0 12px 0;
+      border-bottom: #EEEEEE .5px solid;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ERROR MGS */
+    &-danger {
+      border-bottom: 1px solid #ED1C24;
+    }
+
+    &__selected {
+      cursor: default;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    &__arrow {
+      display: flex;
+      align-items: center;
+    }
+
+    &__arrow-down {
+      cursor: default;
+      width: 15px;
+      height: 15px;
+      transform: rotateX(180deg);
+      transition-duration: .5s;
+    }
+
+    &__arrow-up {
+      cursor: default;
+      width: 15px;
+      height: 15px;
+      transform: rotateX(0deg);
+      transition-duration: .5s;
+    }
+  }
+
+  &__options-active {
+    display: block;
+    width: inherit;
+    background: #FFFFFF;
+    position: absolute;
+    max-height: 115px;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-shadow: rgba(149, 157, 165, .2) 0px 8px 24px;
+    animation: dropdownAppear 1s;
+  }
+
+  &__options-hidden {
+    display: none;
+  }
+
+  &__item {
+    background: #FFFFFF;
+    min-height: 38px;
+    padding: 12px 13px;
+    transition-duration: 1s;
+
+    &__text {
+      color: #767676;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    &__underline {
+      position: absolute;
+      color: #ED1C24;
+      /* padding: 8px 0; */
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: #EEEEEE;
+    }
+
+    &:hover &__text {
+      color: #6DCDF6;
+    }
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 15px;
+    color: #97999B;
+  }
+
+}
+
+.dropdown-recruitment {
+  &__options-active {
+    max-height: 400px;
+  }
+
+  &__item {
+    &__text {
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 12px;
+      color: #97999B;
+      margin-bottom: 10px
+    }
+  }
+}
+
+.dropdown-dimissial-motives__options-active {
+  height: 379px;
+  max-height: 379px;
+}
+
+.dropdown-dimissial-motives {
+  &__item {
+    display: flex;
+    gap: 10px;
+
+    &:hover &__text {
+      color: #6DCDF6;
+      font-weight: 450;
+    }
+  }
+
+  &__comment {
+    margin: 0 30px;
+    border: 1px solid #6D6E71;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    width: 400px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 60px;
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 21px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+
+    div {
+      width: 117px;
+      height: 41px;
+      transition: 1s;
+
+      &:hover {
+        cursor: pointer;
+        color: #6DCDF6;
+        transform: scale(1.03);
+        transition: 1s;
+      }
+    }
+  }
+}
+
+@keyframes dropdownAppear {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 200px;
+  }
+}
+
+/* TODO REFACTOR HARDCODE 2ND SELECT APPEARS OVER 1ST */
+.dropdown-reason-second {
+  z-index: 2;
+}
+
+.react-datepicker-popper {
+  z-index: 10 !important;
+}
