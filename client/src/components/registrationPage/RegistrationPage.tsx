@@ -12,6 +12,7 @@ const RegistrationPage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useAppDispatch(); 
   const navigate = useNavigate();
 
@@ -19,8 +20,13 @@ const RegistrationPage = () => {
     try {
       await dispatch(register({ username, email, password })).unwrap();
       navigate('/login'); 
-    } catch (error) {
-      console.error('Failed to register:', error);
+    } catch (err) {
+      if (err.message.includes('Email already used')) {
+        setError('User with this email already exists');
+      } else {
+        setError('Failed to register');
+      }
+      console.error('Failed to register:', err);
     }
   };
 
@@ -31,8 +37,9 @@ const RegistrationPage = () => {
           <div className="logo">
             <img src="https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/onlyfits_logotype.png?alt=media&token=3e929633-b844-48cd-9158-1a8a2581c6de" alt="onlyfits_logo" />
           </div>
-
+  
           <Title level={1} style={{ color: '#FFFFFF', textTransform: 'uppercase', fontWeight: 'bold' }}>SIGN UP</Title>
+          {error && <div className="error-message">{error}</div>}
           <Form
             name="register"
             initialValues={{ remember: true }}
