@@ -75,6 +75,7 @@ const MainPage = () => {
         <div className="filter-container">
           <label htmlFor="programType">Training type:</label>
           <select
+            id="programType"
             className="program-level-type-filter"
             onChange={(e) => setProgramType(e.target.value)}
           >
@@ -87,6 +88,7 @@ const MainPage = () => {
         <div className="filter-container">
           <label htmlFor="programLevel">Difficulty level:</label>
           <select
+            id="programLevel"
             className="program-level-type-filter"
             onChange={(e) => setProgramLevel(e.target.value)}
           >

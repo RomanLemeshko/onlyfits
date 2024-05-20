@@ -113,9 +113,13 @@ h5 {
   background: linear-gradient(90deg, #ffa500, #ff6f00);
 }
 
-.logo img {
+.logo-header img {
   display: flex;
   justify-content: center;
   text-align: center;
   max-width: 150px;
+}
+
+.header-content p {
+  color: black;
 }
