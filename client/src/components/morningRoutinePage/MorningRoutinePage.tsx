@@ -3,6 +3,7 @@ import { Button, Card, Progress, Carousel, Typography } from 'antd';
 import { fetchExercisesByNames } from '../../api/exercises/exerciseService';
 import styles from './MorningRoutinePage.module.css';
 import { BeatLoader } from 'react-spinners';
+import Header from '../header/Header';
 
 const { Title, Text } = Typography;
 
@@ -109,6 +110,10 @@ const MorningRoutinePage = () => {
   }
 
   return (
+
+    <>
+    <Header/>
+    
     <Card title={<span style={{ color: '#ff6600' }}>Morning workout</span>} bordered={false} className={styles.card}>
       <Carousel autoplay={false} ref={carouselRef} dots={false} draggable={false} className={styles.carousel}>
         {exercises.map((exercise, index) => (
@@ -144,6 +149,7 @@ const MorningRoutinePage = () => {
         )}
       </div>
     </Card>
+    </>
   );
 };
 
