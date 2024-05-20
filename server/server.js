@@ -24,7 +24,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
     credentials: true,
   }
-})
+});
 
 const PORT = process.env.PORT || 3000;
 
@@ -48,7 +48,7 @@ app.use('/api', allUserProgAddDeleteprog);
 app.use('/api', userMacros);
 app.use('/api', allUserProgExcersises);
 app.use('/api', allRecipies);
-app.use('/api/messages', messageRouter(messages));
+app.use('/api/messages', messageRouter(io, messages));
 
 io.on('connection', (socket) => {
   console.log('user connected: ', socket.id);
@@ -59,6 +59,12 @@ io.on('connection', (socket) => {
     messages.push(msg);
     io.emit('chat message', msg);
   });
+
+  socket.on('clear messages', () => {
+    messages.length = 0;
+    io.emit('clear messages');
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected: ', socket.id);
   });

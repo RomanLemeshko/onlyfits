@@ -23,6 +23,11 @@ export const fetchMessages = createAsyncThunk('messages/fetchMessages', async ()
   return response.data;
 });
 
+export const clearMessages = createAsyncThunk('messages/clearMessages', async () => {
+  await axios.delete(`${import.meta.env.VITE_HOST_URL}/api/messages`);
+  return [];
+});
+
 const messagesSlice = createSlice({
   name: 'messages',
   initialState,
@@ -32,6 +37,9 @@ const messagesSlice = createSlice({
     },
     addMessage: (state, action: PayloadAction<Message>) => {
       state.messages.push(action.payload);
+    },
+    clearMessagesState: (state) => {
+      state.messages = [];
     }
   },
   extraReducers: (builder) => {
@@ -47,10 +55,13 @@ const messagesSlice = createSlice({
       .addCase(fetchMessages.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch messages';
+      })
+      .addCase(clearMessages.fulfilled, (state, action) => {
+        state.messages = action.payload;
       });
   },
 });
 
-export const { setMessages, addMessage } = messagesSlice.actions;
+export const { setMessages, addMessage, clearMessagesState } = messagesSlice.actions;
 
 export default messagesSlice.reducer;

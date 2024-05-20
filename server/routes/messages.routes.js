@@ -13,5 +13,11 @@ module.exports = (io, messages) => {
     res.status(201).json(message);
   });
 
+  router.delete('/', (req, res) => {
+    messages.length = 0;
+    io.emit('clear messages'); 
+    res.status(204).end();
+  });
+
   return router;
 };

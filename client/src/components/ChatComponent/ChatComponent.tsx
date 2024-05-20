@@ -3,7 +3,7 @@ import io, { Socket } from 'socket.io-client';
 import { List, Input, Button, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
-import { fetchMessages, addMessage, setMessages } from '../../store/messageSlice/messageSlice';
+import { fetchMessages, addMessage, setMessages, clearMessagesState } from '../../store/messageSlice/messageSlice';
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
 import styles from './ChatComponent.module.css';
@@ -63,6 +63,11 @@ const ChatComponent = () => {
         scrollToEnd();
       });
 
+      socket.current.on('clear messages', () => {
+        console.log('Chat cleared');
+        dispatch(clearMessagesState());
+      });
+
       dispatch(fetchMessages());
     }
 
@@ -90,6 +95,13 @@ const ChatComponent = () => {
       socket.current.emit('chat message', newMessage);
       setMessage('');
       setShowEmojiPicker(false);
+    }
+  };
+
+  const clearChat = () => {
+    if (socket.current) {
+      socket.current.emit('clear messages');
+      dispatch(clearMessagesState());
     }
   };
 
@@ -123,22 +135,24 @@ const ChatComponent = () => {
     <div className={styles.chatContainer} onClick={() => setShowEmojiPicker(false)}>
       <Title level={2} className={styles.chatTitle}>Chat</Title>
       <div ref={chatMessagesRef} className={styles.chatMessages}>
-        <List
-          bordered
-          dataSource={messages}
-          renderItem={(item) => (
-            <List.Item
-              className={`${styles.chatMessage} ${item.username === user?.name ? styles.chatMessageRight : styles.chatMessageLeft}`}
-            >
-              <span style={{ color: getUserColor(item.username) }} className={styles.userName}>
-                {item.username}:
-              </span>
-              <span className={styles.messageText}>
-                {item.text}
-              </span>
-            </List.Item>
-          )}
-        />
+        {messages.length > 0 ? (
+          <List
+            bordered
+            dataSource={messages}
+            renderItem={(item) => (
+              <List.Item
+                className={`${styles.chatMessage} ${item.username === user?.name ? styles.chatMessageRight : styles.chatMessageLeft}`}
+              >
+                <span style={{ color: getUserColor(item.username) }} className={styles.userName}>
+                  {item.username}:
+                </span>
+                <span className={styles.messageText}>
+                  {item.text}
+                </span>
+              </List.Item>
+            )}
+          />
+        ) : null}
         <div ref={messagesEndRef} />
       </div>
       <form onSubmit={(e) => e.preventDefault()} className={styles.chatForm}>
@@ -155,6 +169,9 @@ const ChatComponent = () => {
         </Button>
         <Button type="default" onClick={toggleEmojiPicker} className={`${styles.customChatButton} ${styles.antButtonOverride}`}>
           😀
+        </Button>
+        <Button type="danger" onClick={clearChat} className={styles.customChatButton}>
+          Clear
         </Button>
         {showEmojiPicker && (
           <div className={styles.emojiPickerReact} ref={emojiPickerRef} onClick={(e) => e.stopPropagation()}>
