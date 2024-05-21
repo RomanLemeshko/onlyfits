@@ -25,7 +25,11 @@ h2,
 h3,
 div {
   color: #ffffff;
-  font-family: 'Arial', sans-serif;
+  /* font-family: 'Arial', sans-serif; */
+  font-family: "Bebas Neue", sans-serif;
+  /* font-size: 20px; */
+  font-weight: 400;
+  letter-spacing: 4px;
 }
 
 .start-btn {
@@ -131,7 +135,8 @@ div {
 .day-meal-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content:space-evenly;
+  font-weight: 400;
 }
 
 .meal-pic {
@@ -142,6 +147,7 @@ div {
 
 .meal-complexity {
   background-color: rgb(33, 32, 32);
+  font-weight: 400;
   width: 100px;
   border-radius: 8px;
 }
@@ -150,4 +156,10 @@ div {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: 400;
+}
+
+.meal-description h4 {
+  font-size: 20px;
+  font-weight: 400;
 }

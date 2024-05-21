@@ -118,7 +118,7 @@ useEffect(() => {
           <div className="profile-block">
             {latestMacros ? (
               <>
-                <p>Current goal: {latestMacros.purpose}</p>
+                <p>Current goal: <span className='currentGoal'>{latestMacros.purpose}</span></p>
                 <p>Required indicators:</p>
                 <div className="calculatorPage__result">
                   <h3>{`${latestMacros.kilocalories} kcal`}</h3>

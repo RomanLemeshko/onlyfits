@@ -1,3 +1,9 @@
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9d');
   background-size: cover;
@@ -5,16 +11,19 @@ body {
   min-height: 100vh;
   background-position: relative;
   background-attachment: fixed;
-  font-family: 'Arial', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 #profile-page-container {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
-  margin: 10px;
+  margin: 10px 20px;
   border-radius: 8px;
   background-color: rgba(26, 26, 26, 0.9);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -24,11 +33,14 @@ body {
 
 .profile-block {
   display: flex;
-  flex: 0 0 calc(33.33% - 20px); /* Ширина блока - 33.33% с учетом отступов между блоками */
+  justify-content: space-around;
+  /* flex: 0 0 calc(33.33% - 20px); Ширина блока - 33.33% с учетом отступов между блоками */
   /* margin-bottom: 20px; Отступ между строками */
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: #1a1a1a;
   border-radius: 8px;
   padding: 20px;
@@ -39,12 +51,33 @@ body {
   /* max-width: 2500px; */
 }
 
+.profile-block h2 {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.profile-block h3 {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.currentGoal {
+  color: #ffa500;
+}
+
 h2,
 h3,
 h4,
 p {
   color: #ffffff;
-  font-family: 'Arial', sans-serif;
+  /* font-family: 'Arial', sans-serif; */
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
 }
 
 .calculatorPage__result {
@@ -54,25 +87,40 @@ p {
   margin: 20px 0;
 }
 
+.calculatorPage__result:hover {
+  scale: 1.01;
+  transition: 0.5s;
+  border: #ffa500 solid 1px;
+}
+
 .calculatorPage__macros {
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
 }
 
 #exercise-schedule {
   margin-top: 20px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 #exercise-schedule label {
   display: block;
   margin-bottom: 10px;
   color: white;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 #all-picked-program-container {
   margin-top: 20px;
   width: 100%;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .picked-program-container {
@@ -81,6 +129,8 @@ p {
   border-radius: 8px;
   /* margin-bottom: 10px; */
   width: 85%;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .program-radio {
@@ -89,11 +139,15 @@ p {
   justify-content: space-between;
   margin: 15px;
   margin-top: 0px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .modal-style .ant-modal-content {
   background-color: #1a1a1a;
   color: #ffffff;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .modal-style .ant-modal-footer {
@@ -104,11 +158,17 @@ p {
   align-content: center;
   justify-content: flex-end;
   align-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .ant-btn {
   display: flex;
   align-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
 }
 
 .modal-style .ant-modal-footer .ant-btn-primary {
@@ -116,22 +176,28 @@ p {
   border: none;
   display: flex;
   align-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .modal-style .ant-modal-footer .ant-btn-primary:hover {
   background: linear-gradient(90deg, #ffa500, #ff6f00);
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .button-primary {
   background: linear-gradient(90deg, #ff6f00, #ffa500);
   border: none;
   color: #ffffff;
-  font-weight: bold;
+  font-weight: 400;
   text-transform: uppercase;
   padding: 10px 20px;
   cursor: pointer;
   transition: background 0.3s ease;
   margin-top: 20px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 3px;
 }
 
 .button-primary:hover {
@@ -148,6 +214,8 @@ p {
 .schedule-selector {
   display: flex;
   gap: 10px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .schedule-button {
@@ -159,6 +227,8 @@ p {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .schedule-button.selected {
@@ -168,6 +238,8 @@ p {
 
 .schedule-button input {
   display: none;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 /* Стили для выбранного занятия */
@@ -175,11 +247,15 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .program-radio {
   display: flex;
   align-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .program-button {
@@ -193,6 +269,8 @@ p {
   transition: background-color 0.3s, color 0.3s;
   width: 100%;
   text-align: left;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .program-button.selected {
@@ -202,14 +280,20 @@ p {
 
 .program-button input {
   display: none;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .picked-program-container a {
   text-decoration: none;
   color: inherit;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
 
 .picked-program-container h3,
 .picked-program-container h4 {
   margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 2px;
 }
