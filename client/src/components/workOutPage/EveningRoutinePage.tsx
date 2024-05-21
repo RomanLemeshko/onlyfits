@@ -57,12 +57,19 @@ const EveningRoutinePage = () => {
     if (!isPaused && !isFinished && exercises.length > 0 && imagesLoaded) {
       startExerciseTimer();
     }
-  }, [isPaused, isFinished, exercises.length, isResting, currentExerciseIndex, imagesLoaded]);
+  }, [
+    isPaused,
+    isFinished,
+    exercises.length,
+    isResting,
+    currentExerciseIndex,
+    imagesLoaded,
+  ]);
 
   const startExerciseTimer = () => {
     clearInterval(timerRef.current!);
     timerRef.current = setInterval(() => {
-      setTimeLeft(prevTime => prevTime - 1);
+      setTimeLeft((prevTime) => prevTime - 1);
     }, 1000);
   };
 

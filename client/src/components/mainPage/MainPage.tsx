@@ -1,4 +1,5 @@
 import Header from '../header/Header';
+import DropdownMenu from '../dropDownFilterComponent/DropDownFilterComponent';
 import './mainPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -21,10 +22,24 @@ export type ProgramType = {
   training_days: number;
   program_level: string;
   program_rating: number;
-  presentation:string,
+  presentation: string;
   description: string;
   url: string;
 };
+
+const listOfOptionsLevel = [
+  { id: 1, name: 'all' },
+  { id: 2, name: 'beginner' },
+  { id: 3, name: 'medium' },
+  { id: 4, name: 'professional' },
+];
+
+const listOfOptionsType = [
+  { id: 1, name: 'all' },
+  { id: 2, name: 'cardio' },
+  { id: 3, name: 'strength' },
+  { id: 4, name: 'stretching' },
+];
 
 const MainPage = () => {
   const [programType, setProgramType] = useState<string>('all');
@@ -43,10 +58,13 @@ const MainPage = () => {
   }, [dispatch, user?.id]);
 
   const progFilterHandler = () => {
-    if (programType !== 'all' || programLevel !== 'all') {
+    if (programType !== 'All' || programLevel !== 'All') {
       console.log(programs);
       console.log('!!!!', { type: programType, level: programLevel });
       dispatch(setFilteredPrograms({ type: programType, level: programLevel }));
+
+      console.log('@#@#, LEVEL', programLevel);
+      console.log('@#@#, TYPE', programType);
     } else {
       dispatch(resetFilters());
     }
@@ -68,11 +86,13 @@ const MainPage = () => {
     }
   };
 
+  //! for dropdown filter properties
+
   return (
     <div>
       <Header />
       <div id="programs-filters-container">
-        <div className="filter-container">
+        {/* <div className="filter-container">
           <label htmlFor="programType">Training type:</label>
           <select
             id="programType"
@@ -97,7 +117,24 @@ const MainPage = () => {
             <option value="medium">Medium</option>
             <option value="professional">Professional</option>
           </select>
-        </div>
+        </div> */}
+
+        <DropdownMenu
+          styleName="type"
+          listOfOptions={listOfOptionsType}
+          label="TRAIDING TYPE: "
+          initialMenuMessage="all"
+          setProgramFilter={setProgramType}
+        />
+
+        <DropdownMenu
+          styleName="level"
+          listOfOptions={listOfOptionsLevel}
+          label="DIFFICULTY LEVEL: "
+          initialMenuMessage="all"
+          setProgramFilter={setProgramLevel}
+        />
+
         <button id="search-btn" onClick={progFilterHandler}>
           Filter
         </button>
@@ -121,7 +158,7 @@ const MainPage = () => {
               >
                 <div>
                   <div className="card-info">
-                  <p>
+                    <p>
                       <h2>Title: {eachProgram.program_title}</h2>
                     </p>
                     <p>

@@ -7,6 +7,7 @@ import { fetchMessages, addMessage, setMessages, clearMessagesState } from '../.
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
 import styles from './ChatComponent.module.css';
+import Header from '../header/Header';
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -132,6 +133,8 @@ const ChatComponent = () => {
   }, [messages]);
 
   return (
+    <>
+    <Header/>
     <div className={styles.chatContainer} onClick={() => setShowEmojiPicker(false)}>
       <Title level={2} className={styles.chatTitle}>Chat</Title>
       <div ref={chatMessagesRef} className={styles.chatMessages}>
@@ -180,6 +183,7 @@ const ChatComponent = () => {
         )}
       </form>
     </div>
+    </>
   );
 };
 
