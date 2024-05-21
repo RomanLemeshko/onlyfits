@@ -10,18 +10,18 @@ const DropdownMenu = ({
   label, //! lable name
   listOfOptions, //! dropdown options
   setProgramFilter,
-//   selectOptionClick,
-//   stateProperty,
-//   currentRequest,
+  //   selectOptionClick,
+  //   stateProperty,
+  //   currentRequest,
   initialMenuMessage, //! initial picked
-//   isValidKey,
+  //   isValidKey,
   // optionsLoader,
-//   dropdownDescription,
+  //   dropdownDescription,
   // helper,
 }) => {
   const dropdownRef = useRef(null);
-//   const [searchParams] = useSearchParams();
-//   const queryString = searchParams.get("id");
+  //   const [searchParams] = useSearchParams();
+  //   const queryString = searchParams.get("id");
 
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [selectedOption, setSelectedOption] = useState(
@@ -33,7 +33,6 @@ const DropdownMenu = ({
   }
 
   function clickOutside(e) {
-    
     if (!dropdownRef.current.contains(e.target)) {
       setIsMenuActive(false);
     }
@@ -47,63 +46,47 @@ const DropdownMenu = ({
   console.log('DROPDOWN: ', isMenuActive);
 
   return (
-    <>
-      <div className={`dropdown-${styleName}-container`}>
-        <label
-          className={`dropdown-${styleName}__label`}
-          htmlFor={`${styleName}-selected`}
-        >
+    <div className='daddy'>
+      <div className={`dropdown-container-${styleName}`}>
+        <label className="filter-label" htmlFor={`${styleName}-selected`}>
           {label}
         </label>
-        <div
-          className={`dropdown-${styleName}`}
-          ref={dropdownRef}
-        >
+        <div className="dropdown-arrow-items" 
+        ref={dropdownRef}>
           {/*CONTAINER*/}
           <div
-            className="class"
+            className="selected-arrow"
             onClick={toggleMenuHandler}
             name={`${styleName}-selected`}
           >
-            <div className={`dropdown-${styleName}__select__selected`}>
-              {
-                                 selectedOption
-                            }
-            </div>
-            <div className={`dropdown-${styleName}__select__arrow`}>
+            {/* <div className="dropdown-selects-selected">
+              {selectedOption}
+            </div> */}
+            <div className='dropdown__select__arrow'>
               <img
-                className={`dropdown-${styleName}__select__arrow-${
-                  isMenuActive ? 'up' : 'down'
-                }`}
+                className="dropdown-arrow"
                 src={`${'\\dropdown_arrow\\icons8-dropdown-arrow-48.png'}`}
                 alt="arrow"
               />
             </div>
           </div>
           <ul
-            className={`dropdown-${styleName}__options-${
-              isMenuActive ? 'active' : 'hidden'
-            }`}
-          >
+            className={`dropdown__options `}
+          > {!isMenuActive ? (<li className='default-pick'>{selectedOption}</li>): (<li></li>)}
             {isMenuActive ? (
-              <ul className={`dropdown-${styleName}__list`}>
+              <ul className={`dropdown-list`}>
                 {listOfOptions.map((element) => (
                   <li
                     key={uuidv4()}
                     id={element.id}
-                    className={`dropdown-${styleName}__item`}
+                    className={`dropdown-${styleName}__item items`}
                     onClick={(event) => {
                       setSelectedOption(element.name);
                       setIsMenuActive(false);
-                      setProgramFilter(element.name)
-                    //   if (selectOptionClick) {
-                    //     selectOptionClick(event, element, stateProperty);
-                    //   }
+                      setProgramFilter(element.name);
                     }}
                   >
-                    <div className={`dropdown-${styleName}__item__text`}>
-                      {element.name}
-                    </div>
+                    <div >{element.name}</div>
                   </li>
                 ))}
               </ul>
@@ -112,28 +95,9 @@ const DropdownMenu = ({
             )}
           </ul>
         </div>
-        {/* {dropdownDescription ? (
-          <div className={`dropdown-${styleName}__description`}>
-            {dropdownDescription}
-          </div>
-        ) : null} */}
-        {/*typeof isValidKey !== 'undefined'*/}
-        {/* {isValidKey === false ? (
-          <div className={`dropdown-${styleName}__item__underline`}>
-            Обязательное поле
-          </div>
-        ) : null} */}
-        {/* {
-                    helper  &&
-                    (
-                        <p
-                            className={`dropdown-${styleName}-comment__underline`}>
-                            {helper}
-                        </p>
-                    )
-                } */}
+       
       </div>
-    </>
+    </div>
   );
 };
 

@@ -122,15 +122,15 @@ const MainPage = () => {
         <DropdownMenu
           styleName="type"
           listOfOptions={listOfOptionsType}
-          label="Training type: "
+          label="TRAIDING TYPE: "
           initialMenuMessage="all"
           setProgramFilter={setProgramType}
         />
 
         <DropdownMenu
-          styleName="type"
+          styleName="level"
           listOfOptions={listOfOptionsLevel}
-          label="Difficulty level: "
+          label="DIFFICULTY LEVEL: "
           initialMenuMessage="all"
           setProgramFilter={setProgramLevel}
         />
