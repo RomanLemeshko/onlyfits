@@ -17,13 +17,17 @@ body {
   border: solid 1px black
 }
 
-.programs-container {
+.programs-container-program-page {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
   gap:5px;
   margin: auto;
+  width: fit-content;
+  background-color:rgb(26, 26,26, 0.9);
+  padding: 30px;
+  border-radius: 8px
 }
 
 .card-info {
