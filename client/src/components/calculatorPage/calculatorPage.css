@@ -1,84 +1,7 @@
-/* .ant-modal-content {
-  box-shadow: none;
+.ant-modal-content {
+  
 }
 
-.inputValueCalculator {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  margin-top: 10px;
-  gap: 20px;
-}
-
-.labeledInput {
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.labeledInput label {
-  position: absolute;
-  top: 6px;
-  left: 20px;
-  pointer-events: none;
-}
-
-.labeledInput input {
-  width: 100%;
-  padding-top: 35px;
-  padding-left: 20px;
-  padding-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-sizing: border-box;
-}
-
-.labeledInput input[type='number']::-webkit-inner-spin-button,
-.labeledInput input[type='number']::-webkit-outer-spin-button,
-.labeledInput input[type='date']::-webkit-inner-spin-button,
-.labeledInput input[type='date']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.labeledInput input:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.calculatorPage__result {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  margin-top: 20px;
-
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-sizing: border-box;
-
-  background-color: white;
-}
-
-.calculatorPage__result p {
-  margin: 2px;
-}
-
-.calculatorPage__macros {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  gap: 50px;
-}
-
-.calculatorPage__header {
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-} */
-
-/* ! */
 .modal-style {
   background-color: rgba(0, 0, 0, 0);
   color: rgb(13, 20, 28);
@@ -86,6 +9,7 @@
 
 .modal-style .ant-modal-content {
   background-color: rgb(26, 26, 26);
+  font-size: x-large;
   color: white;
   border: 3px solid rgb(233, 144, 26);
   box-shadow: none;
@@ -171,6 +95,7 @@
 }
 
 .calculatorPage__header {
+  font-size: 24px;
   padding: 15px;
   display: flex;
   justify-content: center;
