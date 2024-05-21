@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { useRef, useState, useMemo} from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { Button, DayProps, useDayRender } from 'react-day-picker';
 import DayPlanPage from '../dayPlanPage/DayPlanPage';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ interface ExerciseData {
 }
 
 export interface DayPlan {
-  morning: ExerciseData[],
+  morning: ExerciseData[];
   evening: ExerciseData[];
 }
 
@@ -21,39 +21,25 @@ function CalendarDayComponent(props: DayProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dayRender = useDayRender(props.date, props.displayMonth, buttonRef);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const excercises = useSelector(
-    (state: RootState) => state.userProgsExercises
-  );
-  const userProgIdForMonth = useSelector(
-    (state: RootState) => state.userProgIdForMonth
-  );
+  const exercises = useSelector((state: RootState) => state.userProgsExercises);
+  const userProgIdForMonth = useSelector((state: RootState) => state.userProgIdForMonth);
 
   const exercisesData = useMemo(() => {
     if (userProgIdForMonth.progId > 0) {
-      const relevantExecises = [];
-      for (const eachProgram of excercises) {
-        for (const each of eachProgram) {
-          if (each.program_id !== Number(userProgIdForMonth.progId)) {
-            continue;
-          } else {
-            relevantExecises.push(each);
-          }
-        }
-      }
-      const random = [];
-      for (let i = 0; i < 12; i++) {
-        const number = Math.floor(Math.random() * relevantExecises.length);
-        const exerciseData = relevantExecises[number];
-        random.push(exerciseData);
-      }
-      const morningExercises = random.slice(0, 6);
-      const eveningExercises = random.slice(6, 12);
-      localStorage.setItem('dailyExercises', JSON.stringify({morning: morningExercises, evening: eveningExercises}))
+      const relevantExercises = exercises.flat().filter(each => each.program_id === Number(userProgIdForMonth.progId));
+      const uniqueExercises = Array.from(new Set(relevantExercises.map(ex => ex.exercise_title)))
+        .map(title => relevantExercises.find(ex => ex.exercise_title === title));
+
+      const shuffledExercises = uniqueExercises.sort(() => 0.5 - Math.random());
+      const morningExercises = shuffledExercises.slice(0, 6);
+      const eveningExercises = shuffledExercises.slice(6, 12);
+
+      localStorage.setItem('dailyExercises', JSON.stringify({ morning: morningExercises, evening: eveningExercises }));
       return { morning: morningExercises, evening: eveningExercises };
     } else {
       return null;
     }
-  }, [userProgIdForMonth.progId, excercises]);
+  }, [userProgIdForMonth.progId, exercises]);
 
   const showModal = () => {
     setIsModalOpen(true);

@@ -1,4 +1,5 @@
 import Header from '../header/Header';
+import DropdownMenu from '../dropDownFilterComponent/DropDownFilterComponent';
 import './mainPage.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -21,10 +22,24 @@ export type ProgramType = {
   training_days: number;
   program_level: string;
   program_rating: number;
-  presentation:string,
+  presentation: string;
   description: string;
   url: string;
 };
+
+const listOfOptionsLevel = [
+  { id: 1, name: 'all' },
+  { id: 2, name: 'beginner' },
+  { id: 3, name: 'medium' },
+  { id: 4, name: 'professional' },
+];
+
+const listOfOptionsType = [
+  { id: 1, name: 'all' },
+  { id: 2, name: 'cardio' },
+  { id: 3, name: 'strength' },
+  { id: 4, name: 'stretching' },
+];
 
 const MainPage = () => {
   const [programType, setProgramType] = useState<string>('all');
@@ -43,9 +58,7 @@ const MainPage = () => {
   }, [dispatch, user?.id]);
 
   const progFilterHandler = () => {
-    if (programType !== 'all' || programLevel !== 'all') {
-      console.log(programs);
-      console.log('!!!!', { type: programType, level: programLevel });
+    if (programType !== 'All' || programLevel !== 'All') {
       dispatch(setFilteredPrograms({ type: programType, level: programLevel }));
     } else {
       dispatch(resetFilters());
@@ -59,7 +72,6 @@ const MainPage = () => {
       )
         .unwrap()
         .then(() => {
-          console.log('Program added successfully');
           dispatch(getUserProgramsThunky(user.id));
         })
         .catch((error) => {
@@ -72,32 +84,20 @@ const MainPage = () => {
     <div>
       <Header />
       <div id="programs-filters-container">
-        <div className="filter-container">
-          <label htmlFor="programType">Training type:</label>
-          <select
-            id="programType"
-            className="program-level-type-filter"
-            onChange={(e) => setProgramType(e.target.value)}
-          >
-            <option value="all">All</option>
-            <option value="cardio">Cardio</option>
-            <option value="strength">Strength</option>
-            <option value="stretching">Stretching</option>
-          </select>
-        </div>
-        <div className="filter-container">
-          <label htmlFor="programLevel">Difficulty level:</label>
-          <select
-            id="programLevel"
-            className="program-level-type-filter"
-            onChange={(e) => setProgramLevel(e.target.value)}
-          >
-            <option value="all">All</option>
-            <option value="beginner">Beginner</option>
-            <option value="medium">Medium</option>
-            <option value="professional">Professional</option>
-          </select>
-        </div>
+        <DropdownMenu
+          styleName="type"
+          listOfOptions={listOfOptionsType}
+          initialMenuMessage="all"
+          setProgramFilter={setProgramType}
+        />
+
+        <DropdownMenu
+          styleName="level"
+          listOfOptions={listOfOptionsLevel}
+          initialMenuMessage="all"
+          setProgramFilter={setProgramLevel}
+        />
+
         <button id="search-btn" onClick={progFilterHandler}>
           Filter
         </button>
@@ -105,11 +105,10 @@ const MainPage = () => {
       <div id="general">
         <div className="programs-container">
           {programs.map((eachProgram: ProgramType) => (
-            <div className="card-container">
+            <div className="card-container" key={eachProgram.id}>
               <Card
                 className="card"
                 hoverable
-                key={eachProgram.id}
                 size="small"
                 cover={
                   <img
@@ -121,12 +120,8 @@ const MainPage = () => {
               >
                 <div>
                   <div className="card-info">
-                  <p>
-                      <h2>Title: {eachProgram.program_title}</h2>
-                    </p>
-                    <p>
-                      <h3>Difficulty level: {eachProgram.program_level}</h3>
-                    </p>
+                    <h2>Title: {eachProgram.program_title}</h2>
+                    <h3>Difficulty level: {eachProgram.program_level}</h3>
                     <p>Type: {eachProgram.program_type}</p>
                     <p>{eachProgram.presentation}</p>
                   </div>
