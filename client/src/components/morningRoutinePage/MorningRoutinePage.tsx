@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { Button, Card, Progress, Carousel, Typography } from 'antd';
+import { Button, Card, Progress, Carousel as AntdCarousel, Typography } from 'antd';
+import type { CarouselRef } from 'antd/es/carousel';
 import { fetchExercisesByNames } from '../../api/exercises/exerciseService';
 import './MorningRoutinePage.css';
 import { BeatLoader } from 'react-spinners';
@@ -32,14 +33,20 @@ const MorningRoutinePage = () => {
   const [isResting, setIsResting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const carouselRef = useRef<Carousel | null>(null);
+  const carouselRef = useRef<CarouselRef | null>(null);
 
   useEffect(() => {
     const dailyExercises = JSON.parse(localStorage.getItem('dailyExercises') || '{}');
+    console.log('Loaded exercises from localStorage:', dailyExercises.morning);
     if (dailyExercises.morning?.length > 0) {
       const loadExercises = async () => {
         const names = dailyExercises.morning.slice(0, 6).map((ex: any) => ex.exercise_title);
+        console.log('Exercise names:', names);
         const loadedExercises = await fetchExercisesByNames(names);
+        console.log('Loaded exercises from API:', loadedExercises);
+        if (loadedExercises.length > 6) {
+          loadedExercises.length = 6;
+        }
         setExercises(loadedExercises);
 
         const imageUrls = loadedExercises.map((ex: Exercise) => ex.gifUrl);
@@ -54,6 +61,10 @@ const MorningRoutinePage = () => {
   }, []);
 
   useEffect(() => {
+    console.log('isPaused:', isPaused);
+    console.log('isFinished:', isFinished);
+    console.log('exercises.length:', exercises.length);
+    console.log('imagesLoaded:', imagesLoaded);
     if (!isPaused && !isFinished && exercises.length > 0 && imagesLoaded) {
       startExerciseTimer();
     }
@@ -68,6 +79,7 @@ const MorningRoutinePage = () => {
 
   const switchExercise = useCallback(() => {
     const nextIndex = currentExerciseIndex + 1;
+    console.log('switchExercise called. nextIndex:', nextIndex, 'exercises.length:', exercises.length);
     if (nextIndex >= exercises.length) {
       setIsFinished(true);
       clearInterval(timerRef.current!);
@@ -80,9 +92,10 @@ const MorningRoutinePage = () => {
   }, [currentExerciseIndex, exercises.length]);
 
   useEffect(() => {
+    console.log('useEffect for timeLeft. timeLeft:', timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerRef.current!);
-      if (currentExerciseIndex === exercises.length - 1) {
+      if (currentExerciseIndex >= exercises.length - 1) {
         setIsFinished(true);
         clearInterval(timerRef.current!);
       } else if (isResting) {
@@ -116,7 +129,7 @@ const MorningRoutinePage = () => {
     <>
       <Header />
       <Card title={<span className="morningWorkoutTitle">Morning workout</span>} bordered={false} className="card">
-        <Carousel autoplay={false} ref={carouselRef} dots={false} draggable={false} className="carousel">
+        <AntdCarousel autoplay={false} ref={carouselRef} dots={false} draggable={false} className="carousel">
           {exercises.map((exercise, index) => (
             <div key={index}>
               <Card
@@ -142,7 +155,7 @@ const MorningRoutinePage = () => {
               </Card>
             </div>
           ))}
-        </Carousel>
+        </AntdCarousel>
         {isFinished ? (
           <Text className="timerText">Congratulations, workout is done!</Text>
         ) : (
