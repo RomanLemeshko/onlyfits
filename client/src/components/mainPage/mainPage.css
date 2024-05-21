@@ -12,10 +12,13 @@ body {
   display: flex;
 }
 
-
-
 .programs-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  margin: auto;
+  max-width: 1200px;
   flex-wrap: wrap; /* Добавлено для переноса элементов на следующую строку */
   justify-content: space-around; /* Для выравнивания блоков в центре горизонтально */
   gap: 10px; /* Добавлен отступ между блоками */
@@ -36,7 +39,11 @@ body {
 
 #programs-filters-container {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Отступ между элементами */
+  color: white;
+  margin-bottom: 25px;
 }
 
 .card-info {
@@ -45,7 +52,7 @@ body {
   color: white;
 }
 
-.ant-card-body{
+.ant-card-body {
   background-color: rgb(12, 7, 7);
 }
 
@@ -53,7 +60,7 @@ body {
   background-color: rgb(255, 105, 5);
   color: black;
   font-weight: 600;
-  border: solid 1px black
+  border: solid 1px black;
 }
 
 .btn-container {
@@ -62,15 +69,11 @@ body {
   justify-content: space-around;
 }
 
-/* img:hover{
-  transition: 0.3s;
-  opacity: 0.7;
-} */
-
-.card{
+.card {
   transition: 0.9s;
   opacity: 0.89;
 }
+
 .card:hover{
   transition: 0.5s;
   opacity: 1;
@@ -80,26 +83,7 @@ body {
 
 }
 
-/* filter styles */
-
-#programs-filters-container{
-  margin: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color:white;
-}
-
-.program-level-type-filter{
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: transparent; 
-
-}
-
-#search-btn{
+#search-btn {
   background-color: rgb(255, 105, 5);
   color: black;
   font-weight: 600;
@@ -107,56 +91,6 @@ body {
   height: 40px;
   border-radius: 6px;
   padding: 4px 15px;
-  margin-left: 440px ;
   font-size: larger;
   width: 165px;
-
-}
-
-/* Стили для фильтров */
-.filter-container {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.filter-container label {
-  font-size: 16px;
-  color: #ffa500;
-  font-weight: bold;
-}
-
-.program-level-type-filter {
-  width: 200px;
-  padding: 10px;
-  border: 2px solid rgb(51, 51, 51);
-  border-radius: 5px;
-  background-color: rgba(51, 51, 51, 0.5); /* Полупрозрачный фон */
-  color: #fff; /* Белый текст */
-  font-size: 16px;
-  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-  -webkit-appearance: none; /* for Chrome */
-  -moz-appearance: none; /* for Firefox */
-  appearance: none; /* for other browsers */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%23ffffff" d="M0 0l5 5 5-5z"/></svg>'); /* Custom arrow */
-  background-repeat: no-repeat;
-  background-position: right 10px top 50%;
-  background-size: 10px 10px;
-}
-
-.program-level-type-filter:focus {
-  border-color: #ffa500;
-  outline: none;
-}
-
-.program-level-type-filter option {
-  padding: 10px;
-  background-color: #fff;
-  color: #333;
-}
-
-.program-level-type-filter option:hover {
-  background-color: #ffa500;
-  color: #fff;
 }

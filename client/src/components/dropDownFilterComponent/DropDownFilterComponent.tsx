@@ -1,34 +1,21 @@
-// import triangle from "./Triangle.svg";
-
 import { memo, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './dropDownFilterComponent.css';
 import { useSearchParams } from 'react-router-dom';
 
 const DropdownMenu = ({
-  styleName, //! styles
-  label, //! lable name
-  listOfOptions, //! dropdown options
+  styleName,
+  listOfOptions,
   setProgramFilter,
-  //   selectOptionClick,
-  //   stateProperty,
-  //   currentRequest,
-  initialMenuMessage, //! initial picked
-  //   isValidKey,
-  // optionsLoader,
-  //   dropdownDescription,
-  // helper,
+  initialMenuMessage,
 }) => {
   const dropdownRef = useRef(null);
-  //   const [searchParams] = useSearchParams();
-  //   const queryString = searchParams.get("id");
-
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [selectedOption, setSelectedOption] = useState(
     initialMenuMessage ? initialMenuMessage : null
   );
 
-  function toggleMenuHandler(e) {
+  function toggleMenuHandler() {
     setIsMenuActive(!isMenuActive);
   }
 
@@ -43,59 +30,35 @@ const DropdownMenu = ({
     return () => document.removeEventListener('mousedown', clickOutside);
   }, []);
 
-  console.log('DROPDOWN: ', isMenuActive);
-
   return (
     <div className='daddy'>
       <div className={`dropdown-container-${styleName}`}>
-        <label className="filter-label" htmlFor={`${styleName}-selected`}>
-          {label}
-        </label>
-        <div className="dropdown-arrow-items" 
-        ref={dropdownRef}>
-          {/*CONTAINER*/}
-          <div
-            className="selected-arrow"
-            onClick={toggleMenuHandler}
-            name={`${styleName}-selected`}
-          >
-            {/* <div className="dropdown-selects-selected">
-              {selectedOption}
-            </div> */}
-            <div className='dropdown__select__arrow'>
-              <img
-                className="dropdown-arrow"
-                src={`${'\\dropdown_arrow\\icons8-dropdown-arrow-48.png'}`}
-                alt="arrow"
-              />
-            </div>
+        <div className="dropdown-arrow-items" ref={dropdownRef}>
+          <div className="selected-arrow" onClick={toggleMenuHandler} name={`${styleName}-selected`}>
+            <div className='default-pick'>{selectedOption}</div>
+            <img
+              className={`dropdown-arrow ${isMenuActive ? 'open' : ''}`}
+              src={`${'\\dropdown_arrow\\icons8-dropdown-arrow-48.png'}`}
+              alt="arrow"
+            />
           </div>
-          <ul
-            className={`dropdown__options `}
-          > {!isMenuActive ? (<li className='default-pick'>{selectedOption}</li>): (<li></li>)}
-            {isMenuActive ? (
-              <ul className={`dropdown-list`}>
-                {listOfOptions.map((element) => (
-                  <li
-                    key={uuidv4()}
-                    id={element.id}
-                    className={`dropdown-${styleName}__item items`}
-                    onClick={(event) => {
-                      setSelectedOption(element.name);
-                      setIsMenuActive(false);
-                      setProgramFilter(element.name);
-                    }}
-                  >
-                    <div >{element.name}</div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <></>
-            )}
+          <ul className={`dropdown__options ${isMenuActive ? 'open' : ''}`}>
+            {listOfOptions.map((element) => (
+              <li
+                key={uuidv4()}
+                id={element.id}
+                className={`dropdown-${styleName}__item items`}
+                onClick={() => {
+                  setSelectedOption(element.name);
+                  setIsMenuActive(false);
+                  setProgramFilter(element.name);
+                }}
+              >
+                <div>{element.name}</div>
+              </li>
+            ))}
           </ul>
         </div>
-       
       </div>
     </div>
   );
