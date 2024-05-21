@@ -1,40 +1,48 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { Button, Card, Progress, Carousel, Typography } from 'antd';
 import { fetchExercisesByNames } from '../../api/exercises/exerciseService';
-import styles from './EveningRoutinePage.module.css';
+import './EveningRoutinePage.css';
 import { BeatLoader } from 'react-spinners';
+import Header from '../header/Header';
 
 const { Title, Text } = Typography;
 
-const preloadImages = (srcArray) => {
-  return Promise.all(srcArray.map(src => new Promise((resolve, reject) => {
+interface Exercise {
+  name: string;
+  gifUrl: string;
+  bodyPart: string;
+  exercise_title?: string;
+}
+
+const preloadImages = (srcArray: string[]): Promise<void[]> => {
+  return Promise.all(srcArray.map((src: string) => new Promise<void>((resolve, reject) => {
     const img = new Image();
     img.src = src;
-    img.onload = resolve;
-    img.onerror = reject;
+    img.onload = () => resolve();
+    img.onerror = () => reject();
   })));
 };
 
 const EveningRoutinePage = () => {
-  const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState<Exercise[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(5);
   const [isPaused, setIsPaused] = useState(false);
   const [isResting, setIsResting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const timerRef = useRef(null);
-  const carouselRef = useRef(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const carouselRef = useRef<Carousel | null>(null);
 
   useEffect(() => {
-    const dailyExercises = JSON.parse(localStorage.getItem('dailyExercises'));
-    if (dailyExercises.evening.length > 0) {
+    const dailyExercises = JSON.parse(localStorage.getItem('dailyExercises') || '{}');
+    if (dailyExercises.evening?.length > 0) {
       const loadExercises = async () => {
-        const names = dailyExercises.evening.slice(0, 6).map(ex => ex.exercise_title);
+        const names = dailyExercises.evening.slice(0, 6).map((ex: any) => ex.exercise_title);
         const loadedExercises = await fetchExercisesByNames(names);
         setExercises(loadedExercises);
 
-        const imageUrls = loadedExercises.map(ex => ex.gifUrl);
+        const imageUrls = loadedExercises.map((ex: Exercise) => ex.gifUrl);
         preloadImages(imageUrls).then(() => {
           setImagesLoaded(true);
         }).catch(error => {
@@ -52,46 +60,42 @@ const EveningRoutinePage = () => {
   }, [isPaused, isFinished, exercises.length, isResting, currentExerciseIndex, imagesLoaded]);
 
   const startExerciseTimer = () => {
-    clearInterval(timerRef.current);
+    clearInterval(timerRef.current!);
     timerRef.current = setInterval(() => {
       setTimeLeft(prevTime => prevTime - 1);
     }, 1000);
   };
 
+  const switchExercise = useCallback(() => {
+    const nextIndex = currentExerciseIndex + 1;
+    if (nextIndex >= exercises.length) {
+      setIsFinished(true);
+      clearInterval(timerRef.current!);
+    } else {
+      setIsResting(false);
+      setCurrentExerciseIndex(nextIndex);
+      setTimeLeft(5);
+      carouselRef.current?.goTo(nextIndex);
+    }
+  }, [currentExerciseIndex, exercises.length]);
+
   useEffect(() => {
     if (timeLeft <= 0) {
-      clearInterval(timerRef.current);
-      if (isResting) {
-        if (currentExerciseIndex === exercises.length - 1) {
-          setIsFinished(true);
-        } else {
-          switchExercise();
-        }
+      clearInterval(timerRef.current!);
+      if (currentExerciseIndex === exercises.length - 1) {
+        setIsFinished(true);
+        clearInterval(timerRef.current!);
+      } else if (isResting) {
+        switchExercise();
       } else {
-        if (currentExerciseIndex === exercises.length - 1) {
-          setIsFinished(true);
-        } else {
-          startRestingPeriod();
-        }
+        setIsResting(true);
+        setTimeLeft(5);
       }
     }
-  }, [timeLeft]);
-
-  const startRestingPeriod = () => {
-    setIsResting(true);
-    setTimeLeft(20);
-  };
-
-  const switchExercise = () => {
-    setIsResting(false);
-    const nextIndex = (currentExerciseIndex + 1) % exercises.length;
-    setCurrentExerciseIndex(nextIndex);
-    setTimeLeft(30);
-    carouselRef.current?.goTo(nextIndex);
-  };
+  }, [timeLeft, isResting, currentExerciseIndex, exercises.length, switchExercise]);
 
   const pauseTimer = () => {
-    clearInterval(timerRef.current);
+    clearInterval(timerRef.current!);
     setIsPaused(true);
   };
 
@@ -103,47 +107,59 @@ const EveningRoutinePage = () => {
   };
 
   if (!imagesLoaded) {
-    return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+    return <div className="loadingContainer">
       <BeatLoader color="#ff6600" size={15} />
     </div>;
   }
 
   return (
-    <Card title={<span style={{ color: '#ff6600' }}>Evening workout</span>} bordered={false} className={styles.card}>
-      <Carousel autoplay={false} ref={carouselRef} dots={false} draggable={false} className={styles.carousel}>
-        {exercises.map((exercise, index) => (
-          <div key={index}>
-            <Card
-              bordered={false}
-              type="inner"
-              title={<Title level={4} className={styles.exerciseTitle} style={{ color: '#ff6600' }}>{exercise.name.toUpperCase()}</Title>}
-              extra={<img src={exercise.gifUrl} alt={exercise.name} className={styles.exerciseImage} />}
-              className={styles.exerciseCard}
-            >
-              <Text style={{ color: '#ff6600' }}>{exercise.bodyPart.toUpperCase()}</Text>
-            </Card>
-          </div>
-        ))}
-      </Carousel>
-      <div className={styles.controlContainer}>
-        <Text className={styles.timerText}>{isResting ? 'Rest time' : 'Time remaining'}: {timeLeft} seconds</Text>
-        <Progress
-          percent={Math.round((timeLeft / (isResting ? 20 : 30)) * 100)}
-          status={isResting ? 'success' : 'active'}
-          strokeColor={isResting ? '#52c41a' : '#ff6600'}
-          className={styles.progressBar}
-          strokeWidth={12}
-        />
+    <>
+      <Header />
+      <Card title={<span className="eveningWorkoutTitle">Evening workout</span>} bordered={false} className="card">
+        <Carousel autoplay={false} ref={carouselRef} dots={false} draggable={false} className="carousel">
+          {exercises.map((exercise, index) => (
+            <div key={index}>
+              <Card
+                bordered={false}
+                type="inner"
+                className="exerciseCard"
+              >
+                <Title level={4} className="ant-typography exerciseTitle css-dev-only-do-not-override-1okl62o">{exercise.name.toUpperCase()}</Title>
+                <div className="exerciseImageContainer">
+                  <img src={exercise.gifUrl} alt={exercise.name} className="exerciseImage" />
+                </div>
+                <div className="exerciseDetails">
+                  <Text className="ant-typography css-dev-only-do-not-override-1okl62o">{exercise.bodyPart.toUpperCase()}</Text>
+                  <Text className="timerText">{isResting ? 'Rest time' : 'Time remaining'}: {timeLeft} seconds</Text>
+                </div>
+                <Progress
+                  percent={Math.round((timeLeft / 5) * 100)}
+                  status={isResting ? 'success' : 'active'}
+                  strokeColor={isResting ? '#52c41a' : '#ff6600'}
+                  className="progressBar"
+                  strokeWidth={12}
+                />
+              </Card>
+            </div>
+          ))}
+        </Carousel>
         {isFinished ? (
-          <Text className={styles.timerText}>Congratulations, workout is done!</Text>
+          <Text className="timerText">Congratulations, workout is done!</Text>
         ) : (
-          <div className={styles.controlButtons}>
-            <Button className={styles.button} onClick={pauseTimer} disabled={isPaused || isResting} style={{ margin: '0 8px' }}>Pause</Button>
-            <Button className={styles.button} onClick={resumeTimer} disabled={!isPaused} type="primary">Resume</Button>
+          <div className="controlButtons">
+            {!isPaused ? (
+              <Button className="custom-button" onClick={pauseTimer} disabled={isResting}>
+                Pause
+              </Button>
+            ) : (
+              <Button className="custom-button" onClick={resumeTimer}>
+                Resume
+              </Button>
+            )}
           </div>
         )}
-      </div>
-    </Card>
+      </Card>
+    </>
   );
 };
 
