@@ -13,7 +13,7 @@ interface ExerciseData {
 }
 
 export interface DayPlan {
-  morning: ExerciseData[],
+  morning: ExerciseData[];
   evening: ExerciseData[];
 }
 
@@ -21,43 +21,18 @@ function CalendarDayComponent(props: DayProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dayRender = useDayRender(props.date, props.displayMonth, buttonRef);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const exercises = useSelector(
-    (state: RootState) => state.userProgsExercises
-  );
-  const userProgIdForMonth = useSelector(
-    (state: RootState) => state.userProgIdForMonth
-  );
+  const exercises = useSelector((state: RootState) => state.userProgsExercises);
+  const userProgIdForMonth = useSelector((state: RootState) => state.userProgIdForMonth);
 
   const exercisesData = useMemo(() => {
     if (userProgIdForMonth.progId > 0) {
-      const relevantExercises: ExerciseData[] = [];
-      for (const eachProgram of exercises) {
-        for (const each of eachProgram) {
-          if (each.program_id !== Number(userProgIdForMonth.progId)) {
-            continue;
-          } else {
-            relevantExercises.push(each);
-          }
-        }
-      }
+      const relevantExercises = exercises.flat().filter(each => each.program_id === Number(userProgIdForMonth.progId));
+      const uniqueExercises = Array.from(new Set(relevantExercises.map(ex => ex.exercise_title)))
+        .map(title => relevantExercises.find(ex => ex.exercise_title === title));
 
-      const uniqueExerciseTitles = new Set<string>();
-      const morningExercises: ExerciseData[] = [];
-      const eveningExercises: ExerciseData[] = [];
-
-      while (morningExercises.length < 6 || eveningExercises.length < 6) {
-        const randomIndex = Math.floor(Math.random() * relevantExercises.length);
-        const selectedExercise = relevantExercises[randomIndex];
-
-        if (!uniqueExerciseTitles.has(selectedExercise.exercise_title)) {
-          uniqueExerciseTitles.add(selectedExercise.exercise_title);
-          if (morningExercises.length < 6) {
-            morningExercises.push(selectedExercise);
-          } else if (eveningExercises.length < 6) {
-            eveningExercises.push(selectedExercise);
-          }
-        }
-      }
+      const shuffledExercises = uniqueExercises.sort(() => 0.5 - Math.random());
+      const morningExercises = shuffledExercises.slice(0, 6);
+      const eveningExercises = shuffledExercises.slice(6, 12);
 
       localStorage.setItem('dailyExercises', JSON.stringify({ morning: morningExercises, evening: eveningExercises }));
       return { morning: morningExercises, evening: eveningExercises };
