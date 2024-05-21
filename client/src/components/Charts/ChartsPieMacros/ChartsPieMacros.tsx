@@ -1,4 +1,4 @@
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
 const ChartsPieMacros = ({latestMacros}) => {
 
@@ -25,13 +25,21 @@ const ChartsPieMacros = ({latestMacros}) => {
 
   return (
     <PieChart
+    colors={['#ffa500', '#ff4500', '#ff6f00']}
       series={[
         {
+          arcLabel: (item) => `${item.value} %`,
           data: data,
         },
       ]}
       width={400}
       height={200}
+      sx={{
+        [`& .${pieArcLabelClasses.root}`]: {
+          fill: 'white',
+          fontWeight: 'bold',
+        },
+      }}
     />
   );
 };

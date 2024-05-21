@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9d');
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.card {
+  background: rgba(43, 43, 43, 0.9);
+  border: 1px solid #ff6600;
+  color: #ff6600;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+.ant-card-head-wrapper,
+.ant-card-body,
+.ant-card-head {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ant-card-head {
+  display: flex;
+  justify-content: center;
+}
+
+.ant-card-head-title {
+  width: 100%;
+  text-align: center;
+}
+
+.carousel {
+  margin-bottom: 16px;
+}
+
+.exerciseCard {
+  background: rgba(31, 31, 31, 0.9);
+  border: none;
+  color: #ff6600;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 5px;
+  text-align: center;
+}
+
+.ant-typography.exerciseTitle.css-dev-only-do-not-override-1okl62o {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 24px;
+  text-align: center;  
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  margin-bottom: 5px;
+}
+
+.exerciseImageContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.exerciseImage {
+  max-width: 100%;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+}
+
+.exerciseDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.ant-card-body .ant-typography.css-dev-only-do-not-override-1okl62o {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 30px;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.timerText {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.controlButtons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.progressBar {
+  margin-top: 8px;
+  height: 8px;
+}
+
+.orangeTitle {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.custom-button {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  color: #FFFFFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  padding: 25px 50px;
+  transform: skewX(-15deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  margin: 0 auto;
+  font-size: 26px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.2em;
+}
+
+.custom-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  color: #000000 !important;
+}
+
+.custom-button:focus {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  color: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 165, 0, 0.4);
+}
+
+.custom-button:active {
+  animation: pulse 0.3s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.ant-progress-text {
+  color: #FFA500 !important;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.eveningWorkoutTitle {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 60px;  
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+.controlContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

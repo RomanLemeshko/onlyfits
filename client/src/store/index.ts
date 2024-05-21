@@ -7,11 +7,13 @@ import myProgramSlice from './myProgramSlice/userProgramSlice';
 import userProgsExercises from './userProgsExcersicesSlice/userProgsExercises';
 import userSchedule from './userScheduleSlice/userSchedule';
 import userProgIdForMonth from './userProgIdForMonth/userProgIdForMonth';
-import allRecipiesSlice from './allRecipies/allRecipies'
+import allRecipiesSlice from './allRecipies/allRecipies';
+import messageSlice from './messageSlice/messageSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
+    messages: messageSlice,
     allPrograms: allProgramsSlice,
     userPrograms: myProgramSlice,
     userProgsExercises: userProgsExercises,

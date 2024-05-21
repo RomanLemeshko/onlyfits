@@ -1,19 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+    font-family: 'Bebas Neue', sans-serif;    
+}
+
 .registration-container {
     background-color: #1a1a1a;
-    padding: 50px;
+    padding: 70px;
     border-radius: 8px;
-    width: 400px;
+    width: 600px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border: 2px solid #FFA500; 
+    border: 2px solid #FFA500;
+    animation: fadeIn 1s ease-in-out;
 }
 
-.logo {
-    margin-bottom: 20px;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.logo img {
-    max-width: 100px;
+.logo.registration-logo {
+    margin-bottom: 30px;
+}
+
+.logo.registration-logo img {
+    max-width: 240px;
+    transition: transform 0.3s ease;
+}
+
+.logo.registration-logo img:hover {
+    transform: scale(1.1);
 }
 
 .custom-register-button {
@@ -22,36 +45,396 @@
     font-weight: bold;
     text-transform: uppercase;
     border: none;
-    padding: 10px 20px;
+    padding: 25px 50px;
     transform: skewX(-15deg);
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
     margin: 0 auto;
+    font-size: 26px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
 }
 
 .custom-register-button:hover {
-    background: linear-gradient(90deg, #FFA500, #FF6F00);
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    color: #000000 !important;
 }
 
 .custom-register-button:focus {
     background: linear-gradient(90deg, #FF6F00, #FFA500);
     color: #FFFFFF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 165, 0, 0.4);
+}
+
+.custom-register-button:active {
+    animation: pulse 0.3s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 .additional-links {
-    margin-top: 20px;
+    margin-top: 30px;
+    opacity: 0;
+    animation: fadeInLinks 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeInLinks {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .link {
     color: #FFA500;
     text-decoration: none;
-    display: block; 
-    margin-top: 10px; 
+    display: block;
+    margin-top: 20px;
+    font-size: 22px;
+    transition: color 0.3s ease;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
 }
 
 .link:hover {
-    text-decoration: underline; 
+    text-decoration: underline;@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+    body {
+      background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9d');
+      background-size: cover;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      background-position: center;
+      background-attachment: fixed;
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+    .card {
+      background: rgba(43, 43, 43, 0.9);
+      border: 1px solid #ff6600;
+      color: #ff6600;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 0 auto;
+      max-width: 1400px;
+    }
+    
+    .ant-card-head-wrapper,
+    .ant-card-body,
+    .ant-card-head {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    
+    .ant-card-head {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .ant-card-head-title {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .carousel {
+      margin-bottom: 16px;
+    }
+    
+    .exerciseCard {
+      background: rgba(31, 31, 31, 0.9);
+      border: none;
+      color: #ff6600;
+      border-radius: 8px;
+      overflow: hidden;
+      padding: 5px;
+      text-align: center;
+    }
+    
+    .ant-typography.exerciseTitle.css-dev-only-do-not-override-1okl62o {
+      background: linear-gradient(90deg, #FF6F00, #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 24px;
+      text-align: center;  
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.02em;
+      margin-bottom: 5px;
+    }
+    
+    .exerciseImageContainer {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    
+    .exerciseImage {
+      max-width: 100%;
+      max-height: 300px;
+      width: auto;
+      height: auto;
+    }
+    
+    .exerciseDetails {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+    
+    .ant-card-body .ant-typography.css-dev-only-do-not-override-1okl62o {
+      background: linear-gradient(90deg, #FF6F00, #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 30px;
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+    
+    .timerText {
+      background: linear-gradient(90deg, #FF6F00, #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.02em;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    
+    .controlButtons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    
+    .progressBar {
+      margin-top: 8px;
+      height: 8px;
+    }
+    
+    .orangeTitle {
+      background: linear-gradient(90deg, #FF6F00, #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .custom-button {
+      background: linear-gradient(90deg, #FF6F00, #FFA500);
+      color: #FFFFFF;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      padding: 25px 50px;
+      transform: skewX(-15deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+      margin: 0 auto;
+      font-size: 26px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.2em;
+    }
+    
+    .custom-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+      color: #000000 !important;
+    }
+    
+    .custom-button:focus {
+      background: linear-gradient(90deg, #FF6F00, #FFA500);
+      color: #FFFFFF;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 165, 0, 0.4);
+    }
+    
+    .custom-button:active {
+      animation: pulse 0.3s;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .ant-progress-text {
+      color: #FFA500 !important;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    
+    .loadingContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    
+    .morningWorkoutTitle {
+      background: linear-gradient(90deg, #FF6F00, #FFA500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 60px;  
+      font-family: 'Bebas Neue', sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.02em;
+    }
+    
+    .controlContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    color: #FF6F00;
+}
+
+.error-message {
+    color: #ff4d4f;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 22px;
+    animation: shake 0.5s;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.ant-input, .ant-input-password, .ant-input-affix-wrapper {
+    font-size: 18px;
+    padding: 15px;
+    background-color: #333333 !important;
+    color: #FFA500 !important;
+    border-color: #444444 !important;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.07em;
+}
+
+.ant-input-affix-wrapper .ant-input {
+    background-color: #333333 !important;
+    color: #FFA500 !important;
+    border-color: #444444 !important;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.ant-input:hover, .ant-input:focus, .ant-input-password:hover, .ant-input-password:focus, .ant-input-affix-wrapper:hover, .ant-input-affix-wrapper:focus {
+    background-color: #333333 !important;
+    color: #FFA500 !important;
+    border-color: #FFA500 !important;
+}
+
+/* Переопределение цвета плейсхолдера */
+.ant-input::placeholder, .ant-input-password::placeholder, .ant-input-affix-wrapper::placeholder {
+    color: #FFA500 !important;
+}
+
+/* Заголовок с градиентом */
+.title-gradient {
+    background: -webkit-linear-gradient(90deg, #FF6F00, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+.ant-form-item-explain, .ant-form-item-explain-error {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    color: #ff4d4f;
+}
+
+/* Стили для автозаполнения */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #333333 inset !important;
+    -webkit-text-fill-color: #FFA500 !important;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .registration-container {
+        width: 90%;
+        padding: 40px;
+    }
+
+    .logo.registration-logo img {
+        max-width: 200px;
+    }
+
+    .custom-register-button {
+        padding: 15px 30px;
+        font-size: 20px;
+    }
+
+    .link {
+        font-size: 18px;
+    }
+
+    .error-message {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .registration-container {
+        width: 95%;
+        padding: 30px;
+    }
+
+    .logo.registration-logo img {
+        max-width: 150px;
+    }
+
+    .custom-register-button {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+
+    .link {
+        font-size: 16px;
+    }
+
+    .error-message {
+        font-size: 16px;
+    }
 }

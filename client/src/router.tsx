@@ -35,6 +35,8 @@ const WorkoutExercisePage = lazy(
 const MorningRoutineExercisePage = lazy(
   () => import('./components/exercisePage/MorningRoutineExercisePage')
 );
+const ChatComponent = lazy(() => import('./components/ChatComponent/ChatComponent')
+);
 
 const RouterComponent = () => (
   <Suspense fallback={null}>
@@ -77,6 +79,7 @@ const RouterComponent = () => (
           element={<MorningRoutineExercisePage />}
         />
       </Route>
+      <Route path="/chat" element={<ChatComponent />}></Route>
     </Routes>
   </Suspense>
 );

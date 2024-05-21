@@ -138,9 +138,10 @@ useEffect(() => {
           </div>
           <div className="profile-block">
             <h3>Select your exercise schedule:</h3>
-            <div id="exercise-schedule">
-              <label htmlFor="schedule">
+            <div id="exercise-schedule" className="schedule-selector">
+              <label htmlFor="scheduleTwo" className={`schedule-button ${scheduleToWork === 'two' ? 'selected' : ''}`}>
                 <input
+                  id="scheduleTwo"
                   type="radio"
                   name="schedule"
                   value="two"
@@ -148,8 +149,9 @@ useEffect(() => {
                   onChange={scheduleHandler}
                 />{' '}Two
               </label>
-              <label htmlFor="schedule">
+              <label htmlFor="scheduleFour" className={`schedule-button ${scheduleToWork === 'four' ? 'selected' : ''}`}>
                 <input
+                  id="scheduleFour"
                   type="radio"
                   name="schedule"
                   value="four"
@@ -158,10 +160,14 @@ useEffect(() => {
                 />{' '}Four
               </label>
             </div>
-            <div id="all-picked-program-container">
+            <div id="all-picked-program-container" className="program-selector">
               {progs && progs.length > 0 ? (
                 progs.map((eachProgram) => (
                   <div className="program-radio" key={eachProgram.id}>
+                    <label
+                      htmlFor={`program${eachProgram.id}`}
+                      className={`program-button ${programToWork === eachProgram.id.toString() ? 'selected' : ''}`}
+                    >
                     <div className="picked-program-container">
                       <Link to={`/view-profile/program/${eachProgram.id}`}>
                         <h3>{eachProgram.program_title}</h3>
@@ -169,12 +175,14 @@ useEffect(() => {
                       </Link>
                     </div>
                     <input
+                      id={`program${eachProgram.id}`}
                       type="radio"
                       name="program"
                       value={eachProgram.id}
                       checked={programToWork === eachProgram.id.toString()}
                       onChange={programForMonthHandler}
                     />
+                    </label>
                   </div>
                 ))
               ) : (

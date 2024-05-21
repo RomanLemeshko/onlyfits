@@ -1,4 +1,4 @@
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import './ChartsPieProgram.css'
@@ -31,9 +31,16 @@ const ChartsPieProgram = () => {
 
   return (
     <PieChart
-      series={[{ data: chartDataArray }]} // Передача преобразованных данных в PieChart
+      colors={['#ffa500', '#ff6f00', '#ff4500']}
+      series={[{ data: chartDataArray, arcLabel: (item) => `${item.value} %`, }]} // Передача преобразованных данных в PieChart
       width={400}
       height={200}
+      sx={{
+        [`& .${pieArcLabelClasses.root}`]: {
+          fill: 'white',
+          fontWeight: 'bold',
+        },
+      }}
     />
   );
 };

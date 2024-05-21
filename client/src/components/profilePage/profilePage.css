@@ -24,6 +24,8 @@ body {
 
 .profile-block {
   display: flex;
+  flex: 0 0 calc(33.33% - 20px); /* Ширина блока - 33.33% с учетом отступов между блоками */
+  /* margin-bottom: 20px; Отступ между строками */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -33,7 +35,8 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border: 2px solid #ffa500;
   flex: 1;
-  min-width: 300px;
+  min-width: 450px;
+  /* max-width: 2500px; */
 }
 
 h2,
@@ -138,4 +141,75 @@ p {
 .button-primary:focus {
   background: linear-gradient(90deg, #ff6f00, #ffa500);
   color: #ffffff;
+}
+
+
+/* Стили для выбора кол-ва занятий в неделю */
+.schedule-selector {
+  display: flex;
+  gap: 10px;
+}
+
+.schedule-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid rgb(51, 51, 51);
+  border-radius: 5px;
+  background-color: rgb(51, 51, 51);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.schedule-button.selected {
+  background-color: #ffa500;
+  border-color: #ffa500;
+}
+
+.schedule-button input {
+  display: none;
+}
+
+/* Стили для выбранного занятия */
+.program-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.program-radio {
+  display: flex;
+  align-items: center;
+}
+
+.program-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px solid rgb(51, 51, 51);
+  border-radius: 5px;
+  background-color: rgb(51, 51, 51);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 100%;
+  text-align: left;
+}
+
+.program-button.selected {
+  background-color: #ffa500;
+  border-color: #ffa500;
+}
+
+.program-button input {
+  display: none;
+}
+
+.picked-program-container a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.picked-program-container h3,
+.picked-program-container h4 {
+  margin: 0;
 }

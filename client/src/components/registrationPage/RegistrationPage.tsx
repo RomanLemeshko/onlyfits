@@ -12,6 +12,7 @@ const RegistrationPage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const dispatch = useAppDispatch(); 
   const navigate = useNavigate();
 
@@ -19,25 +20,31 @@ const RegistrationPage = () => {
     try {
       await dispatch(register({ username, email, password })).unwrap();
       navigate('/login'); 
-    } catch (error) {
-      console.error('Failed to register:', error);
+    } catch (err) {
+      if (err.message.includes('Email already used')) {
+        setError('User with this email already exists');
+      } else {
+        setError('Failed to register');
+      }
+      console.error('Failed to register:', err);
     }
   };
 
   return (
-    <Layout style={{ minHeight: '100vh', backgroundColor: '#000000' }}>
-      <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Layout style={{ minHeight: '100vh', backgroundColor: '#000000', fontFamily: 'Bebas Neue, sans-serif' }}>
+      <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'Bebas Neue, sans-serif' }}>
         <div className="registration-container">
-          <div className="logo">
+          <div className="logo registration-logo">
             <img src="https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/onlyfits_logotype.png?alt=media&token=3e929633-b844-48cd-9158-1a8a2581c6de" alt="onlyfits_logo" />
           </div>
-
-          <Title level={1} style={{ color: '#FFFFFF', textTransform: 'uppercase', fontWeight: 'bold' }}>SIGN UP</Title>
+  
+          <Title level={1} className="title-gradient">SIGN UP</Title>
+          {error && <div className="error-message">{error}</div>}
           <Form
             name="register"
             initialValues={{ remember: true }}
             onFinish={handleRegister}
-            style={{ width: '100%' }}
+            style={{ width: '100%', fontFamily: 'Bebas Neue, sans-serif', letterSpacing: '0.05em' }}
           >
             <Form.Item
               name="username"
@@ -48,7 +55,6 @@ const RegistrationPage = () => {
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 placeholder="Username"
-                style={{ backgroundColor: '#333333', color: '#FFFFFF', borderColor: '#444444' }}
               />
             </Form.Item>
             <Form.Item
@@ -60,7 +66,6 @@ const RegistrationPage = () => {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="Email"
-                style={{ backgroundColor: '#333333', color: '#FFFFFF', borderColor: '#444444' }}
               />
             </Form.Item>
             <Form.Item
@@ -71,7 +76,6 @@ const RegistrationPage = () => {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Password"
-                style={{ backgroundColor: '#333333', color: '#FFFFFF', borderColor: '#444444' }}
               />
             </Form.Item>
             <Form.Item>
