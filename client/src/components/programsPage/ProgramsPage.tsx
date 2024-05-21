@@ -40,9 +40,9 @@ const ProgramsPage = (): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className="background-program-page">
       <Header />
-      <div className="programs-container">
+      <div className="programs-container-program-page">
         {progs &&
           progs.map((eachProgram) => (
             <div key={eachProgram.id} className="card-container">
