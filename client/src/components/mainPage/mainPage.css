@@ -12,14 +12,7 @@ body {
   display: flex;
 }
 
-/* .programs-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap:5px;
-  margin: auto;
-} */
+
 
 .programs-container {
   display: flex;
@@ -102,9 +95,12 @@ body {
   color: black;
   font-weight: 600;
   border: solid 1px black;
-  height: 32px;
+  height: 40px;
   border-radius: 6px;
   padding: 4px 15px;
+  margin-left: 440px ;
+  font-size: larger;
+  width: 165px;
 
 }
 
