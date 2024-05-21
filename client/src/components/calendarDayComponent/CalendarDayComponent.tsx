@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { useRef, useState, useMemo} from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { Button, DayProps, useDayRender } from 'react-day-picker';
 import DayPlanPage from '../dayPlanPage/DayPlanPage';
 import { useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ function CalendarDayComponent(props: DayProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dayRender = useDayRender(props.date, props.displayMonth, buttonRef);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const excercises = useSelector(
+  const exercises = useSelector(
     (state: RootState) => state.userProgsExercises
   );
   const userProgIdForMonth = useSelector(
@@ -30,30 +30,41 @@ function CalendarDayComponent(props: DayProps) {
 
   const exercisesData = useMemo(() => {
     if (userProgIdForMonth.progId > 0) {
-      const relevantExecises = [];
-      for (const eachProgram of excercises) {
+      const relevantExercises: ExerciseData[] = [];
+      for (const eachProgram of exercises) {
         for (const each of eachProgram) {
           if (each.program_id !== Number(userProgIdForMonth.progId)) {
             continue;
           } else {
-            relevantExecises.push(each);
+            relevantExercises.push(each);
           }
         }
       }
-      const random = [];
-      for (let i = 0; i < 12; i++) {
-        const number = Math.floor(Math.random() * relevantExecises.length);
-        const exerciseData = relevantExecises[number];
-        random.push(exerciseData);
+
+      const uniqueExerciseTitles = new Set<string>();
+      const morningExercises: ExerciseData[] = [];
+      const eveningExercises: ExerciseData[] = [];
+
+      while (morningExercises.length < 6 || eveningExercises.length < 6) {
+        const randomIndex = Math.floor(Math.random() * relevantExercises.length);
+        const selectedExercise = relevantExercises[randomIndex];
+
+        if (!uniqueExerciseTitles.has(selectedExercise.exercise_title)) {
+          uniqueExerciseTitles.add(selectedExercise.exercise_title);
+          if (morningExercises.length < 6) {
+            morningExercises.push(selectedExercise);
+          } else if (eveningExercises.length < 6) {
+            eveningExercises.push(selectedExercise);
+          }
+        }
       }
-      const morningExercises = random.slice(0, 6);
-      const eveningExercises = random.slice(6, 12);
-      localStorage.setItem('dailyExercises', JSON.stringify({morning: morningExercises, evening: eveningExercises}))
+
+      localStorage.setItem('dailyExercises', JSON.stringify({ morning: morningExercises, evening: eveningExercises }));
       return { morning: morningExercises, evening: eveningExercises };
     } else {
       return null;
     }
-  }, [userProgIdForMonth.progId, excercises]);
+  }, [userProgIdForMonth.progId, exercises]);
 
   const showModal = () => {
     setIsModalOpen(true);
