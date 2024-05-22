@@ -2,24 +2,29 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './dropDownFilterComponent.css';
 
+interface DropdownMenuProps {
+  styleName: string;
+  listOfOptions: { id: string, name: string }[];
+  setProgramFilter: (filter: string) => void;
+  initialMenuMessage: string;
+}
+
 const DropdownMenu = ({
   styleName,
   listOfOptions,
   setProgramFilter,
   initialMenuMessage,
-}) => {
-  const dropdownRef = useRef(null);
+}: DropdownMenuProps): JSX.Element => {
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(
-    initialMenuMessage ? initialMenuMessage : null
-  );
+  const [selectedOption, setSelectedOption] = useState<string | null>(initialMenuMessage || null);
 
   function toggleMenuHandler() {
     setIsMenuActive(!isMenuActive);
   }
 
-  function clickOutside(e) {
-    if (!dropdownRef.current.contains(e.target)) {
+  function clickOutside(e: MouseEvent) {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
       setIsMenuActive(false);
     }
   }
@@ -33,7 +38,7 @@ const DropdownMenu = ({
     <div className='daddy'>
       <div className={`dropdown-container-${styleName}`}>
         <div className="dropdown-arrow-items" ref={dropdownRef}>
-          <div className="selected-arrow" onClick={toggleMenuHandler} name={`${styleName}-selected`}>
+          <div className="selected-arrow" onClick={toggleMenuHandler}>
             <div className='default-pick drop-text'>{selectedOption}</div>
             <img
               className={`dropdown-arrow ${isMenuActive ? 'open' : ''}`}
