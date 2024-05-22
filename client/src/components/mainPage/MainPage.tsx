@@ -28,17 +28,17 @@ export type ProgramType = {
 };
 
 const listOfOptionsLevel = [
-  { id: 1, name: 'all' },
-  { id: 2, name: 'beginner' },
-  { id: 3, name: 'medium' },
-  { id: 4, name: 'professional' },
+  { id: "1", name: 'all' },
+  { id: "2", name: 'beginner' },
+  { id: "3", name: 'medium' },
+  { id: "4", name: 'professional' },
 ];
 
 const listOfOptionsType = [
-  { id: 1, name: 'all' },
-  { id: 2, name: 'cardio' },
-  { id: 3, name: 'strength' },
-  { id: 4, name: 'stretching' },
+  { id: "1", name: 'all' },
+  { id: "2", name: 'cardio' },
+  { id: "3", name: 'strength' },
+  { id: "4", name: 'stretching' },
 ];
 
 const MainPage = () => {
