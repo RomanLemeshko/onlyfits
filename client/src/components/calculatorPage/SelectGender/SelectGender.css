@@ -3,6 +3,7 @@
     background: rgb(51, 51, 51);
     color: white;
     border: none;
+    font-family: "Bebas Neue", sans-serif;
 }
 
 :where(.css-dev-only-do-not-override-1okl62o)[class^="ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class*=" ant-select"] [class^="ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class^="ant-select"] [class*=" ant-select"], :where(.css-dev-only-do-not-override-1okl62o)[class*=" ant-select"] [class*=" ant-select"] {

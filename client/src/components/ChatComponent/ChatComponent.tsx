@@ -6,7 +6,7 @@ import { RootState, AppDispatch } from '../../store';
 import { fetchMessages, addMessage, setMessages, clearMessagesState } from '../../store/messageSlice/messageSlice';
 import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
-import styles from './ChatComponent.module.css';
+import './ChatComponent.css';
 import Header from '../header/Header';
 
 const { TextArea } = Input;
@@ -134,55 +134,55 @@ const ChatComponent = () => {
 
   return (
     <>
-    <Header/>
-    <div className={styles.chatContainer} onClick={() => setShowEmojiPicker(false)}>
-      <Title level={2} className={styles.chatTitle}>Chat</Title>
-      <div ref={chatMessagesRef} className={styles.chatMessages}>
-        {messages.length > 0 ? (
-          <List
-            bordered
-            dataSource={messages}
-            renderItem={(item) => (
-              <List.Item
-                className={`${styles.chatMessage} ${item.username === user?.name ? styles.chatMessageRight : styles.chatMessageLeft}`}
-              >
-                <span style={{ color: getUserColor(item.username) }} className={styles.userName}>
-                  {item.username}:
-                </span>
-                <span className={styles.messageText}>
-                  {item.text}
-                </span>
-              </List.Item>
-            )}
+      <Header />
+      <div className="chatContainer" onClick={() => setShowEmojiPicker(false)}>
+        <Title level={2} className="chatTitle">Chat</Title>
+        <div ref={chatMessagesRef} className="chatMessages">
+          {messages.length > 0 ? (
+            <List
+              bordered
+              dataSource={messages}
+              renderItem={(item) => (
+                <List.Item
+                  className={`chatMessage ${item.username === user?.name ? 'chatMessageRight' : 'chatMessageLeft'}`}
+                >
+                  <span style={{ color: getUserColor(item.username) }} className="userName">
+                    {item.username}:
+                  </span>
+                  <span className="messageText">
+                    {item.text}
+                  </span>
+                </List.Item>
+              )}
+            />
+          ) : null}
+          <div ref={messagesEndRef} />
+        </div>
+        <form onSubmit={(e) => e.preventDefault()} className="chatForm">
+          <TextArea
+            rows={2}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type a message"
+            className="customChatInput"
           />
-        ) : null}
-        <div ref={messagesEndRef} />
+          <Button type="primary" onClick={sendMessage} className="customChatButton antButtonOverride">
+            Send
+          </Button>
+          <Button type="default" onClick={toggleEmojiPicker} className="customChatButton antButtonOverride">
+            😀
+          </Button>
+          <Button type="danger" onClick={clearChat} className="customChatButton">
+            Clear
+          </Button>
+          {showEmojiPicker && (
+            <div className="emojiPickerReact" ref={emojiPickerRef} onClick={(e) => e.stopPropagation()}>
+              <Picker data={data} onEmojiSelect={handleEmojiSelect} />
+            </div>
+          )}
+        </form>
       </div>
-      <form onSubmit={(e) => e.preventDefault()} className={styles.chatForm}>
-        <TextArea
-          rows={2}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Type a message"
-          className={styles.customChatInput}
-        />
-        <Button type="primary" onClick={sendMessage} className={`${styles.customChatButton} ${styles.antButtonOverride}`}>
-          Send
-        </Button>
-        <Button type="default" onClick={toggleEmojiPicker} className={`${styles.customChatButton} ${styles.antButtonOverride}`}>
-          😀
-        </Button>
-        <Button type="danger" onClick={clearChat} className={styles.customChatButton}>
-          Clear
-        </Button>
-        {showEmojiPicker && (
-          <div className={styles.emojiPickerReact} ref={emojiPickerRef} onClick={(e) => e.stopPropagation()}>
-            <Picker data={data} onEmojiSelect={handleEmojiSelect} />
-          </div>
-        )}
-      </form>
-    </div>
     </>
   );
 };

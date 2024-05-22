@@ -61,12 +61,12 @@ const DayPlanPage = React.memo(({ data }: { data: DayPlan | null }) => {
                 <Link to={`/view-profile/day-plan/eat/${eachMeal.id}` }>
                   <div className="day-meal-container">
                     <div className='meal-description'>
-                    <h4 className='meal-complexity'>easy to cook</h4>
+                    <h6 className='meal-complexity meal-title-consistensy'>easy to cook</h6>
 
-                      <h4>{eachMeal.title}</h4>
-                      <h4>
+                      <h6 className='meal-title-consistensy'>{eachMeal.title}</h6>
+                      <h6 className='meal-title-consistensy'>
                         {eachMeal.time} : {eachMeal.kcal}
-                      </h4>
+                      </h6>
                     </div>
                     <img className="meal-pic" src={eachMeal.url} alt="meal-picture" />
                   </div>

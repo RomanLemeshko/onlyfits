@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 body {
   background-image: url('https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/photo_2024-05-15_16-49-04.jpg?alt=media&token=cd1aa805-3f82-4f8a-98ee-9141d23beb9dkground.jpg');
   background-size: cover;
@@ -8,6 +10,7 @@ body {
   font-style: normal;
   text-decoration: none;
   box-sizing: border-box;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .chatContainer {
@@ -28,12 +31,14 @@ body {
   margin-bottom: 20px;
   color: #ff6600 !important;
   text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .chatMessages {
-  width: 98.5%;
+  max-width: 100%;
   flex-grow: 1;
   overflow-y: auto;
+  overflow-x: hidden; /* Добавляем скрытие горизонтальной прокрутки */
   margin-bottom: 20px;
   background-color: #2e2e2e;
   padding: 10px;
@@ -64,10 +69,14 @@ body {
   padding: 10px;
   border-bottom: 1px solid #444444;
   display: inline-block;
+  min-width: 200px;
   max-width: 80%;
   border-radius: 5px;
   color: #ffffff;
   word-wrap: break-word;
+  white-space: pre-wrap; /* Перенос текста на новый ряд */
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
 }
 
 .chatMessageLeft {
@@ -90,6 +99,19 @@ body {
 
 .userName {
   font-weight: bold;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: #ffffff; /* Белый цвет для имени пользователя */
+  margin-right: 5px; /* Добавление отступа после имени пользователя */
+}
+
+.messageText {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: #ffffff; /* Белый цвет для текста сообщений */
+  word-wrap: break-word;
+  white-space: pre-wrap; /* Перенос текста на новый ряд */
+  overflow-wrap: break-word;
 }
 
 .chatForm {
@@ -109,10 +131,11 @@ body {
   color: #ffffff !important;
   border: 1px solid #ff6600 !important;
   border-radius: 5px !important;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .customChatButton {
-  background: linear-gradient(90deg, #ff6f00, #ffa500);
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
   color: #FFFFFF;
   font-weight: bold;
   text-transform: uppercase;
@@ -123,14 +146,42 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
   width: 100px;
   flex-shrink: 0;
+  font-size: 26px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.2em;
+  margin: 0 auto;
 }
 
 .customChatButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  color: #000000 !important;
+}
+
+.customChatButton:focus {
+  background: linear-gradient(90deg, #FF6F00, #FFA500);
+  color: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 165, 0, 0.4);
+}
+
+.customChatButton:active {
+  animation: pulse 0.3s;
+}
+
+.ant-btn-danger.customChatButton:hover {
   background: #FFFFFF !important;
   color: #000000 !important;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 .emojiPickerReact {
@@ -177,4 +228,12 @@ body {
 .antButtonOverride:hover {
   background: #FFFFFF !important;
   color: #000000 !important;
+}
+
+.ant-list.ant-list-split.ant-list-bordered.css-dev-only-do-not-override-1okl62o {
+  border: none !important;
+}
+
+.ant-list.ant-list-split.ant-list-bordered.css-dev-only-do-not-override-1okl62o .ant-list-item {
+  border-bottom: none !important;
 }
