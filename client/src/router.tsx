@@ -29,12 +29,7 @@ const CalculatorPage = lazy(
   () => import('./components/calculatorPage/CalculatorPage')
 );
 const Recipe = lazy(() => import('./components/recipePage/Recipe'));
-const WorkoutExercisePage = lazy(
-  () => import('./components/exercisePage/WorkOutExercisePage')
-);
-const MorningRoutineExercisePage = lazy(
-  () => import('./components/exercisePage/MorningRoutineExercisePage')
-);
+
 const ChatComponent = lazy(() => import('./components/ChatComponent/ChatComponent')
 );
 
@@ -70,14 +65,6 @@ const RouterComponent = () => (
           element={<CalculatorPage />}
         />
         <Route path="/view-profile/day-plan/eat/:id" element={<Recipe />} />
-        <Route
-          path="/view-profile/day-plan/workout/start/"
-          element={<WorkoutExercisePage />}
-        />
-        <Route
-          path="/view-profile/day-plan/morning-routine/start/"
-          element={<MorningRoutineExercisePage />}
-        />
       </Route>
       <Route path="/chat" element={<ChatComponent />}></Route>
     </Routes>
