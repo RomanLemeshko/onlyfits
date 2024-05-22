@@ -120,7 +120,7 @@ const MorningRoutinePage = () => {
   };
 
   if (!imagesLoaded) {
-    return <div className="loadingContainer">
+    return <div className="loading-container">
       <BeatLoader color="#ff6600" size={15} />
     </div>;
   }
@@ -128,28 +128,28 @@ const MorningRoutinePage = () => {
   return (
     <>
       <Header />
-      <Card title={<span className="morningWorkoutTitle">Morning workout</span>} bordered={false} className="card ant-card css-dev-only-do-not-override-1okl62o">
+      <Card title={<span className="morning-workout-title">Morning workout</span>} bordered={false} className="exercise-container">
         <AntdCarousel autoplay={false} ref={carouselRef} dots={false} draggable={false} className="carousel">
           {exercises.map((exercise, index) => (
             <div key={index}>
               <Card
                 bordered={false}
                 type="inner"
-                className="exerciseCard"
+                className="exercise-card"
               >
-                <Title level={4} className="ant-typography exerciseTitle css-dev-only-do-not-override-1okl62o">{exercise.name.toUpperCase()}</Title>
-                <div className="exerciseImageContainer">
-                  <img src={exercise.gifUrl} alt={exercise.name} className="exerciseImage" />
+                <Title level={4} className="ant-typography exercise-title">{exercise.name.toUpperCase()}</Title>
+                <div className="exercise-image-container">
+                  <img src={exercise.gifUrl} alt={exercise.name} className="exercise-image" />
                 </div>
-                <div className="exerciseDetails">
-                  <Text className="ant-typography css-dev-only-do-not-override-1okl62o">{exercise.bodyPart.toUpperCase()}</Text>
-                  <Text className="timerText">{isResting ? 'Rest time' : 'Time remaining'}: {timeLeft} seconds</Text>
+                <div className="exercise-details">
+                  <Text className="ant-typography">{exercise.bodyPart.toUpperCase()}</Text>
+                  <Text className="timer-text">{isResting ? 'Rest time' : 'Time remaining'}: {timeLeft} seconds</Text>
                 </div>
                 <Progress
                   percent={Math.round((timeLeft / 5) * 100)}
                   status={isResting ? 'success' : 'active'}
                   strokeColor={isResting ? '#52c41a' : '#ff6600'}
-                  className="progressBar"
+                  className="progress-bar"
                   strokeWidth={12}
                 />
               </Card>
@@ -157,9 +157,9 @@ const MorningRoutinePage = () => {
           ))}
         </AntdCarousel>
         {isFinished ? (
-          <Text className="timerText">Congratulations, workout is done!</Text>
+          <Text className="timer-text">Congratulations, workout is done!</Text>
         ) : (
-          <div className="controlButtons">
+          <div className="control-buttons">
             {!isPaused ? (
               <Button className="custom-button" onClick={pauseTimer} disabled={isResting}>
                 Pause
