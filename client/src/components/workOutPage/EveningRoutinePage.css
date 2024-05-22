@@ -12,48 +12,39 @@ body {
   font-style: normal;
 }
 
-.card {
-  background: rgba(43, 43, 43, 0.9);
+.exercise-container {
+  background: #2b2b2b !important;
   border: 1px solid #ff6600;
   color: #ff6600;
   padding: 16px;
   border-radius: 8px;
   margin: 0 auto;
   max-width: 1400px;
+  transition: none !important;
 }
 
-.ant-card-head-wrapper,
-.ant-card-body,
-.ant-card-head {
-  border: none !important;
-  box-shadow: none !important;
+.exercise-container:hover {
+  transform: none !important;
+  background: #2b2b2b !important;
 }
 
-.ant-card-head {
-  display: flex;
-  justify-content: center;
-}
-
-.ant-card-head-title {
-  width: 100%;
-  text-align: center;
-}
-
-.carousel {
-  margin-bottom: 16px;
-}
-
-.exerciseCard {
-  background: rgba(31, 31, 31, 0.9);
+.exercise-card {
+  background: #1f1f1f !important;
   border: none;
   color: #ff6600;
   border-radius: 8px;
   overflow: hidden;
   padding: 5px;
   text-align: center;
+  transition: none !important;
 }
 
-.ant-typography.exerciseTitle.css-dev-only-do-not-override-1okl62o {
+.exercise-card:hover {
+  transform: none !important;
+  background: #1f1f1f !important;
+}
+
+.ant-typography.exercise-title {
   background: linear-gradient(90deg, #FF6F00, #FFA500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -66,27 +57,27 @@ body {
   margin-bottom: 5px;
 }
 
-.exerciseImageContainer {
+.exercise-image-container {
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
 }
 
-.exerciseImage {
+.exercise-image {
   max-width: 100%;
   max-height: 300px;
   width: auto;
   height: auto;
 }
 
-.exerciseDetails {
+.exercise-details {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 5px;
 }
 
-.ant-card-body .ant-typography.css-dev-only-do-not-override-1okl62o {
+.ant-card-body .ant-typography {
   background: linear-gradient(90deg, #FF6F00, #FFA500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -99,7 +90,7 @@ body {
   margin-bottom: 8px;
 }
 
-.timerText {
+.timer-text {
   background: linear-gradient(90deg, #FF6F00, #FFA500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -111,19 +102,19 @@ body {
   margin-bottom: 5px;
 }
 
-.controlButtons {
+.control-buttons {
   display: flex;
   justify-content: center;
   gap: 16px;
   margin-top: 16px;
 }
 
-.progressBar {
+.progress-bar {
   margin-top: 8px;
   height: 8px;
 }
 
-.orangeTitle {
+.orange-title {
   background: linear-gradient(90deg, #FF6F00, #FFA500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -181,14 +172,14 @@ body {
   letter-spacing: 0.02em;
 }
 
-.loadingContainer {
+.loading-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
 
-.eveningWorkoutTitle {
+.evening-workout-title {
   background: linear-gradient(90deg, #FF6F00, #FFA500);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -199,7 +190,7 @@ body {
   letter-spacing: 0.02em;
 }
 
-.controlContainer {
+.control-container {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -69,10 +69,7 @@ body {
   color: #ffa500;
 }
 
-h2,
-h3,
-h4,
-p {
+.text-styles{
   color: #ffffff;
   /* font-family: 'Arial', sans-serif; */
   font-family: "Bebas Neue", sans-serif;
