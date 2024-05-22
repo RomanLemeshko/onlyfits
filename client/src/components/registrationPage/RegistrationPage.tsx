@@ -21,7 +21,8 @@ const RegistrationPage = () => {
       await dispatch(register({ username, email, password })).unwrap();
       navigate('/login'); 
     } catch (err) {
-      if (err.message.includes('Email already used')) {
+      const errorMessage = (err as Error).message;
+      if (errorMessage.includes('Email already used')) {
         setError('User with this email already exists');
       } else {
         setError('Failed to register');

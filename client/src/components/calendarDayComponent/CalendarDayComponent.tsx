@@ -22,19 +22,36 @@ function CalendarDayComponent(props: DayProps) {
   const dayRender = useDayRender(props.date, props.displayMonth, buttonRef);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const exercises = useSelector((state: RootState) => state.userProgsExercises);
-  const userProgIdForMonth = useSelector((state: RootState) => state.userProgIdForMonth);
+  const userProgIdForMonth = useSelector(
+    (state: RootState) => state.userProgIdForMonth
+  );
 
   const exercisesData = useMemo(() => {
     if (userProgIdForMonth.progId > 0) {
-      const relevantExercises = exercises.flat().filter(each => each.program_id === Number(userProgIdForMonth.progId));
-      const uniqueExercises = Array.from(new Set(relevantExercises.map(ex => ex.exercise_title)))
-        .map(title => relevantExercises.find(ex => ex.exercise_title === title));
+      const relevantExercises = exercises
+        .flat()
+        .filter(
+          (each) => each.program_id === Number(userProgIdForMonth.progId)
+        );
+      const uniqueExercises = Array.from(
+        new Set(relevantExercises.map((ex) => ex.exercise_title))
+      ).map((title) =>
+        relevantExercises.find((ex) => ex.exercise_title === title)
+      );
 
       const shuffledExercises = uniqueExercises.sort(() => 0.5 - Math.random());
-      const morningExercises = shuffledExercises.slice(0, 6);
-      const eveningExercises = shuffledExercises.slice(6, 12);
+      const morningExercises = shuffledExercises
+        .slice(0, 6)
+        .filter((ex) => ex) as ExerciseData[];
+      const eveningExercises = shuffledExercises
+        .slice(6, 12)
+        .filter((ex) => ex) as ExerciseData[];
 
-      localStorage.setItem('dailyExercises', JSON.stringify({ morning: morningExercises, evening: eveningExercises }));
+      localStorage.setItem(
+        'dailyExercises',
+        JSON.stringify({ morning: morningExercises, evening: eveningExercises })
+      );
+
       return { morning: morningExercises, evening: eveningExercises };
     } else {
       return null;

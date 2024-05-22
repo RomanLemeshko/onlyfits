@@ -5,7 +5,6 @@ import { AppDispatch, RootState } from '../../store';
 import Header from '../header/Header';
 import { getAllProgramsThunky } from '../../store/allProgramSlice/allProgramsSlice';
 import { useEffect } from 'react';
-import { getUserProgramsThunky } from '../../store/myProgramSlice/userProgramSlice';
 
 const CertainProgramPage = () => {
   const { id } = useParams();

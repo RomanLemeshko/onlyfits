@@ -26,6 +26,7 @@ const ProgramsPage = (): JSX.Element => {
   }
 
   const deleteProgram = ( programId: number ) => {
+    if (user?.user?.id) {
       dispatch(
         deleteUserProgramsThunky({
           user_id: user?.user?.id,
@@ -37,7 +38,8 @@ const ProgramsPage = (): JSX.Element => {
           dispatch(getUserProgramsThunky(Number(user?.user?.id)));
         });
     
-  };
+  }
+};
 
   return (
     <div className="background-program-page">
