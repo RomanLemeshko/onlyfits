@@ -118,26 +118,26 @@ useEffect(() => {
           <div className="profile-block">
             {latestMacros ? (
               <>
-                <p>Current goal: <span className='currentGoal'>{latestMacros.purpose}</span></p>
-                <p>Required indicators:</p>
+                <p className='text-styles'>Current goal: <span className='currentGoal'>{latestMacros.purpose}</span></p>
+                <p className='text-styles'>Required indicators:</p>
                 <div className="calculatorPage__result">
-                  <h3>{`${latestMacros.kilocalories} kcal`}</h3>
+                  <h3 className='text-styles'>{`${latestMacros.kilocalories} kcal`}</h3>
                   <div className="calculatorPage__macros">
-                    <p>Proteins: {`${latestMacros.proteins} gr.`}</p>
-                    <p>Fats: {`${latestMacros.fats} gr.`}</p>
-                    <p>Carbs: {`${latestMacros.carbohydrates} gr.`}</p>
+                    <p className='text-styles'>Proteins: {`${latestMacros.proteins} gr.`}</p>
+                    <p className='text-styles'>Fats: {`${latestMacros.fats} gr.`}</p>
+                    <p className='text-styles'>Carbs: {`${latestMacros.carbohydrates} gr.`}</p>
                   </div>
                 </div>
               </>
             ) : (
-              <p>You haven’t calculated your target yet.</p>
+              <p className='text-styles'>You haven’t calculated your target yet.</p>
             )}
             <Button className="button-primary" onClick={showModal}>
               Calorie calculator
             </Button>
           </div>
           <div className="profile-block">
-            <h3>Select your exercise schedule:</h3>
+            <h3 className='text-styles'>Select your exercise schedule:</h3>
             <div id="exercise-schedule" className="schedule-selector">
               <label htmlFor="scheduleTwo" className={`schedule-button ${scheduleToWork === 'two' ? 'selected' : ''}`}>
                 <input
@@ -170,8 +170,8 @@ useEffect(() => {
                     >
                     <div className="picked-program-container">
                       <Link to={`/view-profile/program/${eachProgram.id}`}>
-                        <h3>{eachProgram.program_title}</h3>
-                        <h4>{eachProgram.program_type}</h4>
+                        <h3 className='text-styles'>{eachProgram.program_title}</h3>
+                        <h4 className='text-styles'>{eachProgram.program_type}</h4>
                       </Link>
                     </div>
                     <input
@@ -191,15 +191,15 @@ useEffect(() => {
             </div>
           </div>
           <div className="profile-block">
-            <h2>My schedule</h2>
+            <h2 className='text-styles'>My schedule</h2>
             <CalendarPage />
           </div>
           <div className="profile-block">
-            <h2>Macros:</h2>
+            <h2 className='text-styles'>Macros:</h2>
             <ChartsPieMacros latestMacros={latestMacros}/>
           </div>
           <div className="profile-block">
-            <h2>Programs:</h2>
+            <h2 className='text-styles'>Programs:</h2>
             <ChartsPieProgram />
           </div>
           <Modal
