@@ -15,15 +15,14 @@ body {
 .programs-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
-  margin: auto;
-  width: fit-content;
+  gap: 15px;
+  /* width: fit-content; */
   flex-wrap: wrap; /* Добавлено для переноса элементов на следующую строку */
-  justify-content: space-around; /* Для выравнивания блоков в центре горизонтально */
+  justify-content: center;
   gap: 10px; /* Добавлен отступ между блоками */
   margin: auto; /* Центрирование контейнера */
-  /* width: 1200px; Ширина контейнера, чтобы ограничить количество блоков в строке */
+  width: 1300px;
+  height: 950px;
   background-color:rgb(26, 26,26, 0.5);
   padding: 30px;
   border-radius: 8px
@@ -49,6 +48,7 @@ body {
   width: 340px;
   text-align: center;
   color: white;
+  font-family: none;
 }
 
 .ant-card-body {
@@ -93,3 +93,5 @@ body {
   font-size: larger;
   width: 165px;
 }
+
+
