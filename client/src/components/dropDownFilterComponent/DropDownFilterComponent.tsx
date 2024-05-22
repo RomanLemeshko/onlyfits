@@ -1,7 +1,6 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './dropDownFilterComponent.css';
-import { useSearchParams } from 'react-router-dom';
 
 const DropdownMenu = ({
   styleName,

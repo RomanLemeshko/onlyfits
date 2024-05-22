@@ -44,7 +44,7 @@ const allRecipiesSlice = createSlice({
     },
   extraReducers: (builder) => {
     builder.addCase(getAllRecipiesThunky.fulfilled, (state, action) => {
-      return state = action.payload; 
+      state.recipies = action.payload;
     });
   }
 });

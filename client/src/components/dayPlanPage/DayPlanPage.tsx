@@ -12,7 +12,7 @@ import {
 const DayPlanPage = React.memo(({ data }: { data: DayPlan | null }) => {
   console.log('DATA SET', data);
   const mealArr: Recipe[] = useSelector(
-    (state: RootState) => state.allRecipies
+    (state: RootState) => state.allRecipies.recipies
   );
   const dispatch = useDispatch<AppDispatch>();
 

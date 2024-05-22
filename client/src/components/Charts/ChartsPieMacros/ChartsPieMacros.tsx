@@ -1,6 +1,6 @@
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 
-const ChartsPieMacros = ({latestMacros}) => {
+const ChartsPieMacros = ({latestMacros}: any) => {
 
     // Проверяем, существует ли latestMacros и не является ли он пустым
     if (!latestMacros || Object.keys(latestMacros).length === 0) {

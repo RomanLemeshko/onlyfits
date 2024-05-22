@@ -1,4 +1,3 @@
-import { RecipeType, mealArr } from '../dayPlanPage/DayPlanPage';
 import { useParams } from 'react-router-dom';
 import './recipes.css';
 import { useDispatch } from 'react-redux';

@@ -173,7 +173,7 @@ const ChatComponent = () => {
           <Button type="default" onClick={toggleEmojiPicker} className="customChatButton antButtonOverride">
             😀
           </Button>
-          <Button type="danger" onClick={clearChat} className="customChatButton">
+          <Button type="default" onClick={clearChat} className="customChatButton">
             Clear
           </Button>
           {showEmojiPicker && (
