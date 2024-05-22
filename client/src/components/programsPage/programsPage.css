@@ -22,7 +22,7 @@ body {
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  gap:5px;
+  gap:10px;
   margin: auto;
   width: fit-content;
   background-color:rgb(26, 26,26, 0.5);
