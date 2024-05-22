@@ -97,3 +97,13 @@
   transform: rotate(180deg);
   margin-right: 5px;
 }
+
+
+
+.drop-text{
+  /* color: #ffffff; */
+  /* font-family: 'Arial', sans-serif; */
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+}

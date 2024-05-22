@@ -35,7 +35,7 @@ const DropdownMenu = ({
       <div className={`dropdown-container-${styleName}`}>
         <div className="dropdown-arrow-items" ref={dropdownRef}>
           <div className="selected-arrow" onClick={toggleMenuHandler} name={`${styleName}-selected`}>
-            <div className='default-pick'>{selectedOption}</div>
+            <div className='default-pick drop-text'>{selectedOption}</div>
             <img
               className={`dropdown-arrow ${isMenuActive ? 'open' : ''}`}
               src={`${'\\dropdown_arrow\\icons8-dropdown-arrow-48.png'}`}
@@ -47,14 +47,14 @@ const DropdownMenu = ({
               <li
                 key={uuidv4()}
                 id={element.id}
-                className={`dropdown-${styleName}__item items`}
+                className={`dropdown-${styleName}__item items drop-text`}
                 onClick={() => {
                   setSelectedOption(element.name);
                   setIsMenuActive(false);
                   setProgramFilter(element.name);
                 }}
               >
-                <div>{element.name}</div>
+                <div className='drop-text'>{element.name}</div>
               </li>
             ))}
           </ul>
