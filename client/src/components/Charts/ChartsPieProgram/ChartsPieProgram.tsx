@@ -14,13 +14,13 @@ const ChartsPieProgram = () => {
   const totalPrograms = progs.length;
 
   // Группировка программ по типу и вычисление процентов с округлением
-  const chartData = progs.reduce((acc, program) => {
+  const chartData = progs.reduce((acc: Record<string, number>, program) => {
     const percent = Math.round(
       (acc[program.program_type] || 0) + (1 / totalPrograms) * 100
     );
     acc[program.program_type] = percent;
     return acc;
-  }, {});
+  }, {} as Record<string, number>);
 
   // Преобразование данных в массив для PieChart
   const chartDataArray = Object.keys(chartData).map((programType) => ({
