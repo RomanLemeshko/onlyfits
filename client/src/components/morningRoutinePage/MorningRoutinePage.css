@@ -20,6 +20,7 @@ body {
   border-radius: 8px;
   margin: 0 auto;
   max-width: 1400px;
+  transition: none !important; /* Убираем анимацию */
 }
 
 .ant-card-head-wrapper,

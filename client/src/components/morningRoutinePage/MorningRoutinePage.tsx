@@ -128,7 +128,7 @@ const MorningRoutinePage = () => {
   return (
     <>
       <Header />
-      <Card title={<span className="morningWorkoutTitle">Morning workout</span>} bordered={false} className="card">
+      <Card title={<span className="morningWorkoutTitle">Morning workout</span>} bordered={false} className="card ant-card css-dev-only-do-not-override-1okl62o">
         <AntdCarousel autoplay={false} ref={carouselRef} dots={false} draggable={false} className="carousel">
           {exercises.map((exercise, index) => (
             <div key={index}>
