@@ -26,9 +26,13 @@
   }
 
   text{
-    color:white
+    color:white;
   }
 
   tspan {
     fill: #ffffff;
   }
+
+  .css-1daenge-MuiChartsSurface-root .MuiPieArcLabel-root {
+    font-weight: 400;
+}

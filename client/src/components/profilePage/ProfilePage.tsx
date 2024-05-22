@@ -128,9 +128,13 @@ useEffect(() => {
                     <p className='text-styles'>Carbs: {`${latestMacros.carbohydrates} gr.`}</p>
                   </div>
                 </div>
+                <img src="https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/love-sport.png?alt=media&token=a8255325-9666-471e-92d0-7ae47e714f3e" alt="" width={'175px'}/>
               </>
             ) : (
+              <>
               <p className='text-styles'>You haven’t calculated your target yet.</p>
+              <img src="https://firebasestorage.googleapis.com/v0/b/onlyfits-1ba90.appspot.com/o/without-sport.png?alt=media&token=22699ed8-80ba-4f35-b1bf-fcf68be850f2" alt="" width={'175px'}/>
+              </>
             )}
             <Button className="button-primary" onClick={showModal}>
               Calorie calculator
